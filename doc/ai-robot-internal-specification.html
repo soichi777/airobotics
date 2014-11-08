@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Artificial Intelligence robot 内部仕様</title>
+<!-- 2014-11-08 Sat 13:38 -->
+<meta  charset="utf-8">
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="Soichi Ishida">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Artificial Intelligence robot 内部仕様</h1>
+<nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 概要</a></li>
+<li><a href="#sec-2">2. 動作とUI</a>
+<ul>
+<li><a href="#sec-2-1">2.1. ドメインロジック</a></li>
+<li><a href="#sec-2-2">2.2. ロボット本体</a>
+<ul>
+<li><a href="#sec-2-2-1">2.2.1. <span class="todo TODO">TODO</span> 基本動作</a></li>
+<li><a href="#sec-2-2-2">2.2.2. 状態表示</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-3">3. 人工知能について</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Particle Filter</a></li>
+<li><a href="#sec-3-2">3.2. Hidden Markov Model</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. ハードウエア</a>
+<ul>
+<li><a href="#sec-4-1">4.1. 物理的サイズ</a></li>
+<li><a href="#sec-4-2">4.2. モジュール</a>
+<ul>
+<li><a href="#sec-4-2-1">4.2.1. マイコン</a></li>
+<li><a href="#sec-4-2-2">4.2.2. バッテリー</a></li>
+<li><a href="#sec-4-2-3">4.2.3. モーター</a></li>
+<li><a href="#sec-4-2-4">4.2.4. モータードライバ</a></li>
+<li><a href="#sec-4-2-5">4.2.5. 超音波距離センサ</a></li>
+<li><a href="#sec-4-2-6">4.2.6. 無線モジュール</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-3">4.3. 回路</a>
+<ul>
+<li><a href="#sec-4-3-1">4.3.1. 電源回路</a></li>
+<li><a href="#sec-4-3-2">4.3.2. モーター回路</a></li>
+<li><a href="#sec-4-3-3">4.3.3. 無線回路</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-5">5. ソフトウエア</a>
+<ul>
+<li><a href="#sec-5-1">5.1. レイヤー構造</a>
+<ul>
+<li><a href="#sec-5-1-1">5.1.1. UI層</a></li>
+<li><a href="#sec-5-1-2">5.1.2. サービス層</a></li>
+<li><a href="#sec-5-1-3">5.1.3. AI層</a></li>
+<li><a href="#sec-5-1-4">5.1.4. モニターとマニュアルコントロール</a></li>
+<li><a href="#sec-5-1-5">5.1.5. シミュレータ</a></li>
+<li><a href="#sec-5-1-6">5.1.6. 等価Pythonコード</a></li>
+<li><a href="#sec-5-1-7">5.1.7. ロボット本体側：モジュール別</a></li>
+<li><a href="#sec-5-1-8">5.1.8. PC側</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-6">6. diagram example</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 概要</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>本プログラムは、人工知能を持つロボットのプログラムである
+</li>
+<li>ロボットは超音波センサーによって周囲の障害物を検知し、自ら周囲の地図を作成する
+</li>
+<li>一旦地図のデータを手に入れたロボットは、現在位置を忘れた後、再度その地図のどこかに配置されると自ら地図上の位置を割り出す
+</li>
+<li>ロボットの現在位置ならびに地図データは、無線により遠隔のパソコンにリアルタイムに送られる
+</li>
+<li>複数の動作モードを持ち、マニュアルモードでは遠隔のパソコンから操作できる
+</li>
+<li>ハードウエアのロボットの代わりに、ソフトウエアシミュレーターに置き換えることができ、サービス層以下のロジックはそのまま使用できる
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 動作とUI</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> ドメインロジック</h3>
+<div class="outline-text-3" id="text-2-1">
+
+<figure>
+<p><img src="./images/domain_logic.png" alt="domain_logic.png">
+</p>
+</figure>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> ロボット本体</h3>
+<div class="outline-text-3" id="text-2-2">
+</div><div id="outline-container-sec-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> <span class="todo TODO">TODO</span> 基本動作</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<ul class="org-ul">
+<li>main関数に無限ループを置き、システムに異常が起こらない限り、その無限ループを抜けることはない
+</li>
+</ul>
+
+<figure>
+<p><img src="./images/main_activity-flow_chart.png" alt="main_activity-flow_chart.png">
+</p>
+</figure>
+
+
+<figure>
+<p><img src="./images/action-flow.png" alt="action-flow.png">
+</p>
+</figure>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> 状態表示</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+チップLEDによる状態表示
+</p>
+<ul class="org-ul">
+<li>高輝度青色チップＬＥＤ　２０１２サイズ　L-C170LBCT
+</li>
+</ul>
+<p>
+<a href="http://akizukidenshi.com/catalog/g/gI-00697/">http://akizukidenshi.com/catalog/g/gI-00697/</a>
+</p>
+
+<ul class="org-ul">
+<li>赤色チップＬＥＤ　OSHR1608　３５ｍｃｄ
+</li>
+</ul>
+<p>
+<a href="http://akizukidenshi.com/catalog/g/gI-03978/">http://akizukidenshi.com/catalog/g/gI-03978/</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> 人工知能について</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>本プロジェクトは、人工知能（Artificial Intelligence: 以下、AI）に重点が置かれる
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Particle Filter</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Particle Filter（<a href="http://ja.wikipedia.org/wiki/%E7%B2%92%E5%AD%90%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF">粒子フィルタ Wikipedia</a>）
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Hidden Markov Model</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+<a href="http://en.wikipedia.org/wiki/Hidden_Markov_model">Hidden Markov Model</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> ハードウエア</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> 物理的サイズ</h3>
+</div>
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> モジュール</h3>
+<div class="outline-text-3" id="text-4-2">
+</div><div id="outline-container-sec-4-2-1" class="outline-4">
+<h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> マイコン</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<ul class="org-ul">
+<li><a href="https://mbed.org">mbed</a> を使用する
+</li>
+</ul>
+<p>
+mbed <a href="http://developer.mbed.org/platforms/mbed-LPC1768/">LP1768</a> を使用
+</p>
+</div>
+<ol class="org-ol"><li><span class="todo TODO">TODO</span> 特徴<br ></li>
+<li><span class="todo TODO">TODO</span> スペック<br ></li></ol>
+</div>
+
+<div id="outline-container-sec-4-2-2" class="outline-4">
+<h4 id="sec-4-2-2"><span class="section-number-4">4.2.2</span> バッテリー</h4>
+</div>
+<div id="outline-container-sec-4-2-3" class="outline-4">
+<h4 id="sec-4-2-3"><span class="section-number-4">4.2.3</span> モーター</h4>
+</div>
+<div id="outline-container-sec-4-2-4" class="outline-4">
+<h4 id="sec-4-2-4"><span class="section-number-4">4.2.4</span> モータードライバ</h4>
+<div class="outline-text-4" id="text-4-2-4">
+<p>
+<a href="http://akizukidenshi.com/catalog/g/gI-05087/">フルブリッジドライバ 7V BD6211F-E2</a>
+<img src="http://akizukidenshi.com/img/goods/C/I-05087.jpg" alt="I-05087.jpg">
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4-2-5" class="outline-4">
+<h4 id="sec-4-2-5"><span class="section-number-4">4.2.5</span> 超音波距離センサ</h4>
+<div class="outline-text-4" id="text-4-2-5">
+<p>
+<a href="http://akizukidenshi.com/catalog/g/gM-05400/">パララックス社超音波距離センサーモジュール</a>
+<img src="http://akizukidenshi.com/img/goods/C/M-05400.jpg" alt="M-05400.jpg">
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4-2-6" class="outline-4">
+<h4 id="sec-4-2-6"><span class="section-number-4">4.2.6</span> 無線モジュール</h4>
+<div class="outline-text-4" id="text-4-2-6">
+<p>
+<a href="http://akizukidenshi.com/catalog/g/gM-06195/">XBee series2</a>
+<img src="http://akizukidenshi.com/img/goods/C/M-06195.jpg" alt="M-06195.jpg">
+<a href="http://akizukidenshi.com/catalog/g/gK-06188/">XBee USBインターフェースボード</a>
+<img src="http://akizukidenshi.com/img/goods/C/K-06188.jpg" alt="K-06188.jpg">
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> 回路</h3>
+<div class="outline-text-3" id="text-4-3">
+</div><div id="outline-container-sec-4-3-1" class="outline-4">
+<h4 id="sec-4-3-1"><span class="section-number-4">4.3.1</span> 電源回路</h4>
+</div>
+<div id="outline-container-sec-4-3-2" class="outline-4">
+<h4 id="sec-4-3-2"><span class="section-number-4">4.3.2</span> モーター回路</h4>
+</div>
+<div id="outline-container-sec-4-3-3" class="outline-4">
+<h4 id="sec-4-3-3"><span class="section-number-4">4.3.3</span> 無線回路</h4>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> ソフトウエア</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> レイヤー構造</h3>
+<div class="outline-text-3" id="text-5-1">
+
+<figure>
+<p><img src="./images/layered-architecture.png" alt="layered-architecture.png">
+</p>
+</figure>
+</div>
+
+<div id="outline-container-sec-5-1-1" class="outline-4">
+<h4 id="sec-5-1-1"><span class="section-number-4">5.1.1</span> UI層</h4>
+</div>
+<div id="outline-container-sec-5-1-2" class="outline-4">
+<h4 id="sec-5-1-2"><span class="section-number-4">5.1.2</span> サービス層</h4>
+</div>
+<div id="outline-container-sec-5-1-3" class="outline-4">
+<h4 id="sec-5-1-3"><span class="section-number-4">5.1.3</span> AI層</h4>
+</div>
+
+<div id="outline-container-sec-5-1-4" class="outline-4">
+<h4 id="sec-5-1-4"><span class="section-number-4">5.1.4</span> モニターとマニュアルコントロール</h4>
+</div>
+<div id="outline-container-sec-5-1-5" class="outline-4">
+<h4 id="sec-5-1-5"><span class="section-number-4">5.1.5</span> シミュレータ</h4>
+</div>
+<div id="outline-container-sec-5-1-6" class="outline-4">
+<h4 id="sec-5-1-6"><span class="section-number-4">5.1.6</span> 等価Pythonコード</h4>
+<div class="outline-text-4" id="text-5-1-6">
+<ul class="org-ul">
+<li>同じAIロジックをPythonコードで実現する
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-5-1-7" class="outline-4">
+<h4 id="sec-5-1-7"><span class="section-number-4">5.1.7</span> ロボット本体側：モジュール別</h4>
+<div class="outline-text-4" id="text-5-1-7">
+</div><ol class="org-ol"><li>XBee 無線制御部<br ><ol class="org-ol"><li>XBee API mode<br ><div class="outline-text-6" id="text-5-1-7-1-1">
+<ul class="org-ul">
+<li>0x10=パケット送信
+</li>
+<li>0x90=パケット受信
+</li>
+<li>0x8B=パケット送信の成否
+</li>
+</ul>
+</div>
+</li>
+
+<li>無線通信フロー<br ><ol class="org-ol"><li>障害物センサーデータ<br ><div class="outline-text-7" id="text-5-1-7-1-2-1">
+<p>
+ロボット本体が回転し、同時にデータを収集しながら送信する。
+</p>
+<ul class="org-ul">
+<li>通常時
+</li>
+</ul>
+
+<figure>
+<p><img src="./images/wireless_communication-flow_chart.png" alt="wireless_communication-flow_chart.png">
+</p>
+</figure>
+
+<ul class="org-ul">
+<li>エラー時
+</li>
+</ul>
+
+<figure>
+<p><img src="./images/wireless_communication-flow_chart-error.png" alt="wireless_communication-flow_chart-error.png">
+</p>
+</figure>
+</div>
+</li>
+
+<li><span class="todo TODO">TODO</span> マニュアルコントロール<br ></li></ol>
+</li>
+
+<li>libxbee<br ><div class="outline-text-6" id="text-5-1-7-1-3">
+<p>
+PC側（?）ライブラリ
+<a href="https://github.com/thomasgubler/libxbee">https://github.com/thomasgubler/libxbee</a>
+</p>
+
+<pre class="example">
+#include &lt;iostream&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+
+#include &lt;xbeep.h&gt;
+
+#define LOCAL_CONNECTION
+#define USE_CALLBACKS
+
+#ifdef USE_CALLBACKS
+
+/* ========================================================================== */
+
+class myConnection: public libxbee::ConCallback {
+	public:
+		explicit myConnection(libxbee::XBee &amp;parent, std::string type, struct xbee_conAddress *address = NULL): libxbee::ConCallback(parent, type, address) {};
+		void xbee_conCallback(libxbee::Pkt **pkt);
+		std::string myData;
+};
+
+void myConnection::xbee_conCallback(libxbee::Pkt **pkt) {
+	std::cout &lt;&lt; "Callback!!\n";
+	int i;
+	for (i = 0; i &lt; (*pkt)-&gt;size(); i++) {
+		std::cout &lt;&lt; (**pkt)[i];
+	}
+	std::cout &lt;&lt; "\n";
+
+	std::cout &lt;&lt; myData;
+
+	/* if you want to keep the packet, then you MUST do the following:
+	      libxbee::Pkt *myhandle = *pkt;
+	      *pkt = NULL;
+	   and then later, you MUST delete the packet to free up the memory:
+	      delete myhandle;
+
+	   if you do not want to keep the packet, then just leave everything as-is, and it will be free'd for you */
+}
+#endif /* USE_CALLBACKS */
+
+/* ========================================================================== */
+
+int main(int argc, char *argv[]) {
+	int i;
+
+	/* get available libxbee modes */
+	try {
+		std::list&lt;std::string&gt; modes = libxbee::getModes();
+		std::list&lt;std::string&gt;::iterator i;
+		
+		std::cout &lt;&lt; "Available libxbee modes:\n";
+		for (i = modes.begin(); i != modes.end(); i++) {
+			std::cout &lt;&lt; "  " &lt;&lt; *i;
+		}
+		std::cout &lt;&lt; "\n";
+	} catch (xbee_err ret) {
+		std::cout &lt;&lt; "Error while retrieving libxbee modes...\n";
+	}
+
+
+	try {
+
+		/* setup libxbee */
+		libxbee::XBee xbee("xbee1", "/dev/ttyUSB0", 57600);
+		std::cout &lt;&lt; "Running libxbee in mode '" &lt;&lt; xbee.mode() &lt;&lt; "'\n";
+
+		
+		/* get available connection types */
+		try {
+			std::list&lt;std::string&gt; types = xbee.getConTypes();
+			std::list&lt;std::string&gt;::iterator i;
+			
+			std::cout &lt;&lt; "Available connection types:\n";
+			for (i = types.begin(); i != types.end(); i++) {
+				std::cout &lt;&lt; "  " &lt;&lt; *i;
+			}
+			std::cout &lt;&lt; "\n";
+		} catch (xbee_err ret) {
+			std::cout &lt;&lt; "Error while retrieving connection types...\n";
+		}
+
+		
+		/* make a connection */
+#ifdef LOCAL_CONNECTION
+  #ifdef USE_CALLBACKS
+		myConnection con(xbee, "Local AT"); /* with a callback */
+		con.myData = "Testing, 1... 2... 3...\n";
+  #else
+		libxbee::Con con(xbee, "Local AT"); /* without a callback */
+  #endif
+#else /* LOCAL_CONNECTION */
+		struct xbee_conAddress addr;
+		memset(&amp;addr, 0, sizeof(addr));
+		addr.addr64_enabled = 1;
+		addr.addr64[0] = 0x00;
+		addr.addr64[1] = 0x13;
+		addr.addr64[2] = 0xA2;
+		addr.addr64[3] = 0x00;
+		addr.addr64[4] = 0x40;
+		addr.addr64[5] = 0x33;
+		addr.addr64[6] = 0xCA;
+		addr.addr64[7] = 0xCB;
+  #ifdef USE_CALLBACKS
+		myConnection con(xbee, "Remote AT", &amp;addr); /* with a callback */
+		con.myData = "Testing, 1... 2... 3...\n";
+  #else
+		libxbee::Con con(xbee, "Remote AT", &amp;addr); /* without a callback */
+  #endif
+#endif /* LOCAL_CONNECTION */
+
+
+		/* send data */
+		//con.Tx("NI"); /* like this */
+		con &lt;&lt; "NI";    /* or like this */
+		usleep(1000000);
+
+
+#ifndef USE_CALLBACKS
+		libxbee::Pkt pkt;
+
+		try {
+			//con &gt;&gt; pkt; /* like this */
+			pkt &lt;&lt; con;   /* or this */
+		} catch (xbee_err err) {
+			std::cout &lt;&lt; "Error on Rx! " &lt;&lt; err &lt;&lt; "\n";
+			return 1;
+		}
+
+		try {
+			std::cout &lt;&lt; "Packet length: " &lt;&lt; pkt.size() &lt;&lt; "\n";
+			for (i = 0; i &lt; pkt.size(); i++) {
+				std::cout &lt;&lt; "  " &lt;&lt; i &lt;&lt; " " &lt;&lt; pkt[i] &lt;&lt; "\n";
+			}
+		} catch (xbee_err err) {
+			std::cout &lt;&lt; "Error accessing packet! " &lt;&lt; err &lt;&lt; "\n";
+			return 1;
+		}
+
+		usleep(1000000);
+#endif /* !USE_CALLBACKS */
+	} catch (xbee_err err) {
+		std::cout &lt;&lt; "Error " &lt;&lt; err &lt;&lt; "\n";
+	}
+	
+	return 0;
+}
+</pre>
+
+
+<figure>
+<p><img src="./images/libxbee_class_diagram.png" alt="libxbee_class_diagram.png">
+</p>
+</figure>
+
+<p>
+大きすぎるため、これを参考にし自作を心がける。
+</p>
+</div>
+</li>
+<li>XBee SmartLabXBeeAPI library<br ><div class="outline-text-6" id="text-5-1-7-1-4">
+<p>
+mbed側のライブラリ。必要でないものも多いので、自作を心がける。
+</p>
+</div>
+<ol class="org-ol"><li>Class diagram<br ><div class="outline-text-7" id="text-5-1-7-1-4-1">
+
+<figure>
+<p><img src="./images/smart_lab_xbee_api_class_diagram.png" alt="smart_lab_xbee_api_class_diagram.png">
+</p>
+</figure>
+</div>
+</li></ol>
+</li></ol>
+</li>
+
+<li>Ping 超音波センサー部<br ></li>
+<li>状態インジケータ部<br ></li>
+<li>モータードライバ部<br ></li></ol>
+</div>
+<div id="outline-container-sec-5-1-8" class="outline-4">
+<h4 id="sec-5-1-8"><span class="section-number-4">5.1.8</span> PC側</h4>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> diagram example</h2>
+<div class="outline-text-2" id="text-6">
+
+<figure>
+<p><img src="./images/class_diagram.png" alt="class_diagram.png">
+</p>
+</figure>
+
+<style>
+@import url(http://fonts.googleapis.com/css?family=Inconsolata);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700);
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary {
+  display: block;
+}
+audio,
+canvas,
+video {
+  display: inline-block;
+}
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+[hidden] {
+  display: none;
+}
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+}
+a:focus {
+  outline: thin dotted;
+}
+a:active,
+a:hover {
+  outline: 0;
+}
+h1 {
+  font-size: 2em;
+}
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+b,
+strong {
+  font-weight: bold;
+}
+dfn {
+  font-style: italic;
+}
+mark {
+  background: #ff0;
+  color: #000;
+}
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  font-size: 1em;
+}
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+q {
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+small {
+  font-size: 80%;
+}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+img {
+  border: 0;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+figure {
+  margin: 0;
+}
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+legend {
+  border: 0;
+  padding: 0;
+}
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0;
+}
+button,
+input {
+  line-height: normal;
+}
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+button[disabled],
+input[disabled] {
+  cursor: default;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+html {
+  font-family: 'PT Sans', sans-serif;
+}
+pre,
+code {
+  font-family: 'Inconsolata', sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 700;
+}
+html {
+  background-color: #eee8d5;
+  color: #657b83;
+  margin: 1em;
+}
+body {
+  background-color: #fdf6e3;
+  margin: 0 auto;
+  border: 1pt solid #93a1a1;
+  padding: 1em;
+}
+code {
+  background-color: #eee8d5;
+  padding: 2px;
+}
+a {
+  color: #b58900;
+}
+a:visited {
+  color: #cb4b16;
+}
+a:hover {
+  color: #cb4b16;
+}
+h1 {
+  color: #d33682;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #859900;
+}
+pre {
+  background-color: #fdf6e3;
+  color: #657b83;
+  border: 1pt solid #93a1a1;
+  padding: 1em;
+  box-shadow: 5pt 5pt 8pt #eee8d5;
+}
+pre code {
+  background-color: #fdf6e3;
+}
+h1 {
+  font-size: 2.8em;
+}
+h2 {
+  font-size: 2.4em;
+}
+h3 {
+  font-size: 1.8em;
+}
+h4 {
+  font-size: 1.4em;
+}
+h5 {
+  font-size: 1.3em;
+}
+h6 {
+  font-size: 1.15em;
+}
+.tag {
+  background-color: #eee8d5;
+  color: #d33682;
+  padding: 0 0.2em;
+}
+.todo,
+.next,
+.done {
+  color: #fdf6e3;
+  background-color: #dc322f;
+  padding: 0 0.2em;
+}
+.tag {
+  -webkit-border-radius: 0.35em;
+  -moz-border-radius: 0.35em;
+  border-radius: 0.35em;
+}
+.TODO {
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  background-color: #2aa198;
+}
+.NEXT {
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  background-color: #268bd2;
+}
+.ACTIVE {
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  background-color: #268bd2;
+}
+.DONE {
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  background-color: #859900;
+}
+.WAITING {
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  background-color: #cb4b16;
+}
+.HOLD {
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  background-color: #d33682;
+}
+.NOTE {
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  background-color: #d33682;
+}
+.CANCELLED {
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  background-color: #859900;
+}
+</style>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Soichi Ishida (<a href="mailto:soichi@soichi-2.local">soichi@soichi-2.local</a>)</p>
+<p class="date">Date: 2014-10-27 20:45:22 Monday</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.6)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

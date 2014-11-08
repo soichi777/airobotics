@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI robot 外部仕様</title>
+<!-- 2014-11-01 Sat 13:20 -->
+<meta  charset="utf-8">
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="Soichi Ishida">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://thomasf.github.io/solarized-css/solarized-light.min.css" />
+</head>
+<body>
+<div id="content">
+<h1 class="title">AI robot 外部仕様</h1>
+<nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 概要</a></li>
+<li><a href="#sec-2">2. 目的</a>
+<ul>
+<li><a href="#sec-2-1">2.1. 自分の目的</a>
+<ul>
+<li><a href="#sec-2-1-1">2.1.1. Artificial Intelligence 人工知能</a></li>
+<li><a href="#sec-2-1-2">2.1.2. Robotics</a></li>
+<li><a href="#sec-2-1-3">2.1.3. mbed</a></li>
+<li><a href="#sec-2-1-4">2.1.4. Domain Driven Development</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-2">2.2. 教育の機会を人に提供する</a>
+<ul>
+<li><a href="#sec-2-2-1">2.2.1. Artificial Intelligence 人工知能</a></li>
+<li><a href="#sec-2-2-2">2.2.2. Robotics</a></li>
+<li><a href="#sec-2-2-3">2.2.3. mbed</a></li>
+<li><a href="#sec-2-2-4">2.2.4. Domain Driven Development</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-3">3. サイズ</a></li>
+<li><a href="#sec-4">4. 機能</a>
+<ul>
+<li><a href="#sec-4-1">4.1. 一連の動作</a>
+<ul>
+<li><a href="#sec-4-1-1">4.1.1. 動作条件</a></li>
+<li><a href="#sec-4-1-2">4.1.2. 動作状態の確認</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-2">4.2. 設定</a></li>
+<li><a href="#sec-4-3">4.3. シミュレーション</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 概要</h2>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 目的</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> 自分の目的</h3>
+<div class="outline-text-3" id="text-2-1">
+</div><div id="outline-container-sec-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> Artificial Intelligence 人工知能</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<ul class="org-ul">
+<li>人工知能を実際に実装して理解を深める
+</li>
+</ul>
+</div>
+<ol class="org-ol"><li>Particle Filter<br ></li></ol>
+</div>
+
+<div id="outline-container-sec-2-1-2" class="outline-4">
+<h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> Robotics</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<ul class="org-ul">
+<li>ロボットの設計から実装までをやりとげる
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2-1-3" class="outline-4">
+<h4 id="sec-2-1-3"><span class="section-number-4">2.1.3</span> mbed</h4>
+<div class="outline-text-4" id="text-2-1-3">
+<ul class="org-ul">
+<li>今活発に発展を続けるマイコンを使用する
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2-1-4" class="outline-4">
+<h4 id="sec-2-1-4"><span class="section-number-4">2.1.4</span> Domain Driven Development</h4>
+<div class="outline-text-4" id="text-2-1-4">
+<ul class="org-ul">
+<li>仕事にも活用できる知識を身につける
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> 教育の機会を人に提供する</h3>
+<div class="outline-text-3" id="text-2-2">
+</div><div id="outline-container-sec-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> Artificial Intelligence 人工知能</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<ul class="org-ul">
+<li>Bayes統計の理解
+</li>
+<li>人工知能の理解
+</li>
+</ul>
+</div>
+<ol class="org-ol"><li>Particle Filter<br ></li></ol>
+</div>
+
+<div id="outline-container-sec-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> Robotics</h4>
+</div>
+<div id="outline-container-sec-2-2-3" class="outline-4">
+<h4 id="sec-2-2-3"><span class="section-number-4">2.2.3</span> mbed</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<ul class="org-ul">
+<li>mbed の発展に貢献
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2-2-4" class="outline-4">
+<h4 id="sec-2-2-4"><span class="section-number-4">2.2.4</span> Domain Driven Development</h4>
+<div class="outline-text-4" id="text-2-2-4">
+<ul class="org-ul">
+<li>ソフトウエアのモジュール化
+</li>
+<li>人工知能のモジュール化(?)
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> サイズ</h2>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 機能</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> 一連の動作</h3>
+<div class="outline-text-3" id="text-4-1">
+
+<figure>
+<p><img src="../images/external-action-flow.png" alt="external-action-flow.png">
+</p>
+</figure>
+</div>
+
+<div id="outline-container-sec-4-1-1" class="outline-4">
+<h4 id="sec-4-1-1"><span class="section-number-4">4.1.1</span> 動作条件</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<ul class="org-ul">
+<li>平らな場所
+</li>
+<li>PC(Mac)でモニターアプリケーションをインストール
+</li>
+<li>PC(Mac)に通信用XBeeモジュールをUSB接続
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-4-1-2" class="outline-4">
+<h4 id="sec-4-1-2"><span class="section-number-4">4.1.2</span> 動作状態の確認</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+Robotに状態を視覚的に確認するLED
+</p>
+
+<p>
+状態とは
+</p>
+
+<ul class="org-ul">
+<li>Ready : 準備OK （PCコントローラとの通信確立）
+</li>
+</ul>
+<p>
+青点灯
+</p>
+<ul class="org-ul">
+<li>Waiting : マニュアル操作待ち （できることはすべて完了し、次の動作指示を待つ）
+</li>
+</ul>
+<p>
+青点滅
+</p>
+<ul class="org-ul">
+<li>Disconnected : 通信に異常
+</li>
+</ul>
+<p>
+赤点灯
+</p>
+<ul class="org-ul">
+<li>Low Battery : 要充電
+</li>
+</ul>
+<p>
+赤点滅（?）
+</p>
+<ul class="org-ul">
+<li>System Error : システムに異常
+</li>
+</ul>
+<p>
+赤点滅
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> 設定</h3>
+</div>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> シミュレーション</h3>
+<div class="outline-text-3" id="text-4-3">
+
+<figure>
+<p><img src="ditaa-seqboxes.png" alt="ditaa-seqboxes.png">
+</p>
+</figure>
+
+
+<figure>
+<p><img src="sequence_diagram.png" alt="sequence_diagram.png">
+</p>
+</figure>
+
+
+<figure>
+<p><img src="../images/somefile.png" alt="somefile.png">
+</p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Soichi Ishida (<a href="mailto:soichi@soichi-2.local">soichi@soichi-2.local</a>)</p>
+<p class="date">Date: 2014-10-18 11:47:58 Saturday</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.6)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

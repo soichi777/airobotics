@@ -1,0 +1,3305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>artificial-intelligence-a-modern-approach</title>
+<!-- 2014-11-08 Sat 13:35 -->
+<meta  charset="utf-8">
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="Soichi Ishida">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+</head>
+<body>
+<div id="content">
+<h1 class="title">artificial-intelligence-a-modern-approach</h1>
+<nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction &#x2026; 1</a>
+<ul>
+<li><a href="#sec-1-1">1.1. What Is AI? &#x2026; 1</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Acting humanly: The Turing Test approach &#x2026; 2</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Thinking humanly: The cognitive modeling approach &#x2026; 3</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Thinking rationally: The ``laws of thought'' approach &#x2026; 4</a></li>
+<li><a href="#sec-1-1-4">1.1.4. Acting rationally: The rational agent approach &#x2026; 4</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. The Foundations of Artificial Intelligence &#x2026; 5</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1. Philosophy &#x2026; 5</a></li>
+<li><a href="#sec-1-2-2">1.2.2. Mathematics &#x2026; 7</a></li>
+<li><a href="#sec-1-2-3">1.2.3. Economics &#x2026; 9</a></li>
+<li><a href="#sec-1-2-4">1.2.4. Neuroscience &#x2026; 10</a></li>
+<li><a href="#sec-1-2-5">1.2.5. Psychology &#x2026; 12</a></li>
+<li><a href="#sec-1-2-6">1.2.6. Computer engineering &#x2026; 13</a></li>
+<li><a href="#sec-1-2-7">1.2.7. Control theory and cybernetics &#x2026; 15</a></li>
+<li><a href="#sec-1-2-8">1.2.8. Linguistics &#x2026; 15</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-3">1.3. The History of Artificial Intelligence &#x2026; 16</a>
+<ul>
+<li><a href="#sec-1-3-1">1.3.1. The gestation of artificial intelligence (1943&#x2013;1955) &#x2026; 16</a></li>
+<li><a href="#sec-1-3-2">1.3.2. The birth of artificial intelligence (1956) &#x2026; 17</a></li>
+<li><a href="#sec-1-3-3">1.3.3. Early enthusiasm, great expectations (1952&#x2013;1969) &#x2026; 18</a></li>
+<li><a href="#sec-1-3-4">1.3.4. A dose of reality (1966&#x2013;1973) &#x2026; 20</a></li>
+<li><a href="#sec-1-3-5">1.3.5. Knowledge-based systems: The key to power? (1969&#x2013;1979) &#x2026; 22</a></li>
+<li><a href="#sec-1-3-6">1.3.6. AI becomes an industry (1980&#x2013;present) &#x2026; 24</a></li>
+<li><a href="#sec-1-3-7">1.3.7. The return of neural networks (1986&#x2013;present) &#x2026; 24</a></li>
+<li><a href="#sec-1-3-8">1.3.8. AI adopts the scientific method (1987&#x2013;present) &#x2026; 25</a></li>
+<li><a href="#sec-1-3-9">1.3.9. The emergence of intelligent agents (1995&#x2013;present) &#x2026; 26</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-4">1.4. The State of the Art &#x2026; 28</a></li>
+<li><a href="#sec-1-5">1.5. Summary &#x2026; 29</a></li>
+<li><a href="#sec-1-6">1.6. Bibliographical and Historical Notes &#x2026; 30</a></li>
+<li><a href="#sec-1-7">1.7. Exercises &#x2026; 31</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Intelligent Agents &#x2026; 34</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Agents and Environments &#x2026; 34</a></li>
+<li><a href="#sec-2-2">2.2. Good Behavior: The Concept of Rationality &#x2026; 36</a>
+<ul>
+<li><a href="#sec-2-2-1">2.2.1. Rationality &#x2026; 37</a></li>
+<li><a href="#sec-2-2-2">2.2.2. Omniscience, learning, and autonomy &#x2026; 38</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-3">2.3. The Nature of Environments &#x2026; 40</a>
+<ul>
+<li><a href="#sec-2-3-1">2.3.1. Specifying the task environment &#x2026; 40</a></li>
+<li><a href="#sec-2-3-2">2.3.2. Properties of task environments &#x2026; 41</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-4">2.4. The Structure of Agents &#x2026; 46</a>
+<ul>
+<li><a href="#sec-2-4-1">2.4.1. Agent programs &#x2026; 46</a></li>
+<li><a href="#sec-2-4-2">2.4.2. Simple reflex agents &#x2026; 48</a></li>
+<li><a href="#sec-2-4-3">2.4.3. Model-based reflex agents &#x2026; 50</a></li>
+<li><a href="#sec-2-4-4">2.4.4. Goal-based agents &#x2026; 52</a></li>
+<li><a href="#sec-2-4-5">2.4.5. Utility-based agents &#x2026; 53</a></li>
+<li><a href="#sec-2-4-6">2.4.6. Learning agents &#x2026; 54</a></li>
+<li><a href="#sec-2-4-7">2.4.7. How the components of agent programs work &#x2026; 57</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-5">2.5. Summary &#x2026; 59</a></li>
+<li><a href="#sec-2-6">2.6. Bibliographical and Historical Notes &#x2026; 59</a></li>
+<li><a href="#sec-2-7">2.7. Exercises &#x2026; 61</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Solving Problems by Searching &#x2026; 64</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Problem-Solving Agents &#x2026; 64</a>
+<ul>
+<li><a href="#sec-3-1-1">3.1.1. Well-defined problems and solutions &#x2026; 66</a></li>
+<li><a href="#sec-3-1-2">3.1.2. Formulating problems &#x2026; 68</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-2">3.2. Example Problems &#x2026; 69</a>
+<ul>
+<li><a href="#sec-3-2-1">3.2.1. Toy problems &#x2026; 70</a></li>
+<li><a href="#sec-3-2-2">3.2.2. Real-world problems &#x2026; 73</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-3">3.3. Searching for Solutions &#x2026; 75</a>
+<ul>
+<li><a href="#sec-3-3-1">3.3.1. Infrastructure for search algorithms &#x2026; 78</a></li>
+<li><a href="#sec-3-3-2">3.3.2. Measuring problem-solving performance &#x2026; 80</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-4">3.4. Uninformed Search Strategies &#x2026; 81</a>
+<ul>
+<li><a href="#sec-3-4-1">3.4.1. Breadth-first search &#x2026; 81</a></li>
+<li><a href="#sec-3-4-2">3.4.2. Uniform-cost search &#x2026; 83</a></li>
+<li><a href="#sec-3-4-3">3.4.3. Depth-first search &#x2026; 85</a></li>
+<li><a href="#sec-3-4-4">3.4.4. Depth-limited search &#x2026; 87</a></li>
+<li><a href="#sec-3-4-5">3.4.5. Iterative deepening depth-first search &#x2026; 88</a></li>
+<li><a href="#sec-3-4-6">3.4.6. Bidirectional search &#x2026; 90</a></li>
+<li><a href="#sec-3-4-7">3.4.7. Comparing uninformed search strategies &#x2026; 91</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-5">3.5. Informed (Heuristic) Search Strategies &#x2026; 92</a>
+<ul>
+<li><a href="#sec-3-5-1">3.5.1. Greedy best-first search &#x2026; 92</a></li>
+<li><a href="#sec-3-5-2">3.5.2. A* search: Minimizing the total estimated solution cost &#x2026; 93</a></li>
+<li><a href="#sec-3-5-3">3.5.3. Memory-bounded heuristic search &#x2026; 99</a></li>
+<li><a href="#sec-3-5-4">3.5.4. Learning to search better &#x2026; 102</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-6">3.6. Heuristic Functions &#x2026; 102</a>
+<ul>
+<li><a href="#sec-3-6-1">3.6.1. The effect of heuristic accuracy on performance &#x2026; 103</a></li>
+<li><a href="#sec-3-6-2">3.6.2. Generating admissible heuristics from relaxed problems &#x2026; 104</a></li>
+<li><a href="#sec-3-6-3">3.6.3. Generating admissible heuristics from subproblems: Pattern databases &#x2026; 106</a></li>
+<li><a href="#sec-3-6-4">3.6.4. Learning heuristics from experience &#x2026; 107</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-7">3.7. Summary &#x2026; 108</a></li>
+<li><a href="#sec-3-8">3.8. Bibliographical and Historical Notes &#x2026; 109</a></li>
+<li><a href="#sec-3-9">3.9. Exercises &#x2026; 112</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Beyond Classical Search &#x2026; 120</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Local Search Algorithms and Optimization Problems &#x2026; 120</a>
+<ul>
+<li><a href="#sec-4-1-1">4.1.1. Hill-climbing search &#x2026; 122</a></li>
+<li><a href="#sec-4-1-2">4.1.2. Simulated annealing &#x2026; 125</a></li>
+<li><a href="#sec-4-1-3">4.1.3. Local beam search &#x2026; 125</a></li>
+<li><a href="#sec-4-1-4">4.1.4. Genetic algorithms &#x2026; 126</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-2">4.2. Local Search in Continuous Spaces &#x2026; 129</a></li>
+<li><a href="#sec-4-3">4.3. Searching with Nondeterministic Actions &#x2026; 133</a>
+<ul>
+<li><a href="#sec-4-3-1">4.3.1. The erratic vacuum world &#x2026; 133</a></li>
+<li><a href="#sec-4-3-2">4.3.2. Try, try again &#x2026; 137</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-4">4.4. Searching with Partial Observations &#x2026; 138</a>
+<ul>
+<li><a href="#sec-4-4-1">4.4.1. Searching with no observation &#x2026; 138</a></li>
+<li><a href="#sec-4-4-2">4.4.2. Searching with observations &#x2026; 142</a></li>
+<li><a href="#sec-4-4-3">4.4.3. Solving partially observable problems &#x2026; 143</a></li>
+<li><a href="#sec-4-4-4">4.4.4. An agent for partially observable environments &#x2026; 144</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-5">4.5. Online Search Agents and Unknown Environments &#x2026; 147</a>
+<ul>
+<li><a href="#sec-4-5-1">4.5.1. Online search problems &#x2026; 147</a></li>
+<li><a href="#sec-4-5-2">4.5.2. Online search agents &#x2026; 149</a></li>
+<li><a href="#sec-4-5-3">4.5.3. Online local search &#x2026; 150</a></li>
+<li><a href="#sec-4-5-4">4.5.4. Learning in online search &#x2026; 153</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-6">4.6. Summary &#x2026; 153</a></li>
+<li><a href="#sec-4-7">4.7. Bibliographical and Historical Notes &#x2026; 154</a></li>
+<li><a href="#sec-4-8">4.8. Exercises &#x2026; 157</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Adversarial Search &#x2026; 161</a>
+<ul>
+<li><a href="#sec-5-1">5.1. Games &#x2026; 161</a></li>
+<li><a href="#sec-5-2">5.2. Optimal Decisions in Games &#x2026; 163</a>
+<ul>
+<li><a href="#sec-5-2-1">5.2.1. The minimax algorithm &#x2026; 165</a></li>
+<li><a href="#sec-5-2-2">5.2.2. Optimal decisions in multiplayer games &#x2026; 165</a></li>
+</ul>
+</li>
+<li><a href="#sec-5-3">5.3. Alpha&#x2013;Beta Pruning &#x2026; 167</a>
+<ul>
+<li><a href="#sec-5-3-1">5.3.1. Move ordering &#x2026; 169</a></li>
+</ul>
+</li>
+<li><a href="#sec-5-4">5.4. Imperfect Real-Time Decisions &#x2026; 171</a>
+<ul>
+<li><a href="#sec-5-4-1">5.4.1. Evaluation functions &#x2026; 171</a></li>
+<li><a href="#sec-5-4-2">5.4.2. Cutting off search &#x2026; 173</a></li>
+<li><a href="#sec-5-4-3">5.4.3. Forward pruning &#x2026; 174</a></li>
+<li><a href="#sec-5-4-4">5.4.4. Search versus lookup &#x2026; 176</a></li>
+</ul>
+</li>
+<li><a href="#sec-5-5">5.5. Stochastic Games &#x2026; 177</a>
+<ul>
+<li><a href="#sec-5-5-1">5.5.1. Evaluation functions for games of chance &#x2026; 178</a></li>
+</ul>
+</li>
+<li><a href="#sec-5-6">5.6. Partially Observable Games &#x2026; 180</a>
+<ul>
+<li><a href="#sec-5-6-1">5.6.1. Kriegspiel: Partially observable chess &#x2026; 180</a></li>
+<li><a href="#sec-5-6-2">5.6.2. Card games &#x2026; 183</a></li>
+</ul>
+</li>
+<li><a href="#sec-5-7">5.7. State-of-the-Art Game Programs &#x2026; 185</a></li>
+<li><a href="#sec-5-8">5.8. Alternative Approaches &#x2026; 187</a></li>
+<li><a href="#sec-5-9">5.9. Summary &#x2026; 189</a></li>
+<li><a href="#sec-5-10">5.10. Bibliographical and Historical Notes &#x2026; 190</a></li>
+<li><a href="#sec-5-11">5.11. Exercises &#x2026; 195</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6. Constraint Satisfaction Problems &#x2026; 202</a>
+<ul>
+<li><a href="#sec-6-1">6.1. Defining Constraint Satisfaction Problems &#x2026; 202</a>
+<ul>
+<li><a href="#sec-6-1-1">6.1.1. Example problem: Map coloring &#x2026; 203</a></li>
+<li><a href="#sec-6-1-2">6.1.2. Example problem: Job-shop scheduling &#x2026; 204</a></li>
+<li><a href="#sec-6-1-3">6.1.3. Variations on the CSP formalism &#x2026; 205</a></li>
+</ul>
+</li>
+<li><a href="#sec-6-2">6.2. Constraint Propagation: Inference in CSPs &#x2026; 208</a>
+<ul>
+<li><a href="#sec-6-2-1">6.2.1. Node consistency &#x2026; 208</a></li>
+<li><a href="#sec-6-2-2">6.2.2. Arc consistency &#x2026; 208</a></li>
+<li><a href="#sec-6-2-3">6.2.3. Path consistency &#x2026; 210</a></li>
+<li><a href="#sec-6-2-4">6.2.4. K-consistency. &#x2026; 211</a></li>
+<li><a href="#sec-6-2-5">6.2.5. Global constraints &#x2026; 211</a></li>
+<li><a href="#sec-6-2-6">6.2.6. Sudoku example &#x2026; 212</a></li>
+</ul>
+</li>
+<li><a href="#sec-6-3">6.3. Backtracking Search for CSPs &#x2026; 214</a>
+<ul>
+<li><a href="#sec-6-3-1">6.3.1. Variable and value ordering &#x2026; 216</a></li>
+<li><a href="#sec-6-3-2">6.3.2. Interleaving search and inference &#x2026; 217</a></li>
+<li><a href="#sec-6-3-3">6.3.3. Intelligent backtracking: Looking backward &#x2026; 218</a></li>
+</ul>
+</li>
+<li><a href="#sec-6-4">6.4. Local Search for CSPs &#x2026; 220</a></li>
+<li><a href="#sec-6-5">6.5. The Structure of Problems &#x2026; 222</a></li>
+<li><a href="#sec-6-6">6.6. Summary &#x2026; 227</a></li>
+<li><a href="#sec-6-7">6.7. Bibliographical and Historical Notes &#x2026; 227</a></li>
+<li><a href="#sec-6-8">6.8. Exercises &#x2026; 230</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7. Logical Agents &#x2026; 234</a>
+<ul>
+<li><a href="#sec-7-1">7.1. Knowledge-Based Agents &#x2026; 235</a></li>
+<li><a href="#sec-7-2">7.2. The Wumpus World &#x2026; 236</a></li>
+<li><a href="#sec-7-3">7.3. Logic &#x2026; 240</a></li>
+<li><a href="#sec-7-4">7.4. Propositional Logic: A Very Simple Logic &#x2026; 243</a>
+<ul>
+<li><a href="#sec-7-4-1">7.4.1. Syntax &#x2026; 244</a></li>
+<li><a href="#sec-7-4-2">7.4.2. Semantics &#x2026; 245</a></li>
+<li><a href="#sec-7-4-3">7.4.3. A simple knowledge base &#x2026; 246</a></li>
+<li><a href="#sec-7-4-4">7.4.4. A simple inference procedure &#x2026; 247</a></li>
+</ul>
+</li>
+<li><a href="#sec-7-5">7.5. Propositional Theorem Proving &#x2026; 249</a>
+<ul>
+<li><a href="#sec-7-5-1">7.5.1. Inference and proofs &#x2026; 250</a></li>
+<li><a href="#sec-7-5-2">7.5.2. Proof by resolution &#x2026; 252</a></li>
+<li><a href="#sec-7-5-3">7.5.3. Horn clauses and definite clauses &#x2026; 256</a></li>
+<li><a href="#sec-7-5-4">7.5.4. Forward and backward chaining &#x2026; 257</a></li>
+</ul>
+</li>
+<li><a href="#sec-7-6">7.6. Effective Propositional Model Checking &#x2026; 259</a>
+<ul>
+<li><a href="#sec-7-6-1">7.6.1. A complete backtracking algorithm &#x2026; 260</a></li>
+<li><a href="#sec-7-6-2">7.6.2. Local search algorithms &#x2026; 262</a></li>
+<li><a href="#sec-7-6-3">7.6.3. The landscape of random SAT problems &#x2026; 263</a></li>
+</ul>
+</li>
+<li><a href="#sec-7-7">7.7. Agents Based on Propositional Logic &#x2026; 265</a>
+<ul>
+<li><a href="#sec-7-7-1">7.7.1. The current state of the world &#x2026; 265</a></li>
+<li><a href="#sec-7-7-2">7.7.2. A hybrid agent &#x2026; 268</a></li>
+<li><a href="#sec-7-7-3">7.7.3. Logical state estimation &#x2026; 269</a></li>
+<li><a href="#sec-7-7-4">7.7.4. Making plans by propositional inference &#x2026; 271</a></li>
+</ul>
+</li>
+<li><a href="#sec-7-8">7.8. Summary &#x2026; 274</a></li>
+<li><a href="#sec-7-9">7.9. Bibliographical and Historical Notes &#x2026; 275</a></li>
+<li><a href="#sec-7-10">7.10. Exercises &#x2026; 279</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">8. First-Order Logic &#x2026; 285</a>
+<ul>
+<li><a href="#sec-8-1">8.1. Representation Revisited &#x2026; 285</a>
+<ul>
+<li><a href="#sec-8-1-1">8.1.1. The language of thought &#x2026; 286</a></li>
+<li><a href="#sec-8-1-2">8.1.2. Combining the best of formal and natural languages &#x2026; 288</a></li>
+</ul>
+</li>
+<li><a href="#sec-8-2">8.2. Syntax and Semantics of First-Order Logic &#x2026; 290</a>
+<ul>
+<li><a href="#sec-8-2-1">8.2.1. Models for first-order logic &#x2026; 290</a></li>
+<li><a href="#sec-8-2-2">8.2.2. Symbols and interpretations &#x2026; 292</a></li>
+<li><a href="#sec-8-2-3">8.2.3. Terms &#x2026; 294</a></li>
+<li><a href="#sec-8-2-4">8.2.4. Atomic sentences &#x2026; 294</a></li>
+<li><a href="#sec-8-2-5">8.2.5. Complex sentences &#x2026; 295</a></li>
+<li><a href="#sec-8-2-6">8.2.6. Quantifiers &#x2026; 295</a></li>
+<li><a href="#sec-8-2-7">8.2.7. Equality &#x2026; 299</a></li>
+<li><a href="#sec-8-2-8">8.2.8. An alternative semantics? &#x2026; 299</a></li>
+</ul>
+</li>
+<li><a href="#sec-8-3">8.3. Using First-Order Logic &#x2026; 300</a>
+<ul>
+<li><a href="#sec-8-3-1">8.3.1. Assertions and queries in first-order logic &#x2026; 301</a></li>
+<li><a href="#sec-8-3-2">8.3.2. The kinship domain &#x2026; 301</a></li>
+<li><a href="#sec-8-3-3">8.3.3. Numbers, sets, and lists &#x2026; 303</a></li>
+<li><a href="#sec-8-3-4">8.3.4. The wumpus world &#x2026; 305</a></li>
+</ul>
+</li>
+<li><a href="#sec-8-4">8.4. Knowledge Engineering in First-Order Logic &#x2026; 307</a>
+<ul>
+<li><a href="#sec-8-4-1">8.4.1. The knowledge-engineering process &#x2026; 307</a></li>
+<li><a href="#sec-8-4-2">8.4.2. The electronic circuits domain &#x2026; 309</a></li>
+</ul>
+</li>
+<li><a href="#sec-8-5">8.5. Summary &#x2026; 313</a></li>
+<li><a href="#sec-8-6">8.6. Bibliographical and Historical Notes &#x2026; 313</a></li>
+<li><a href="#sec-8-7">8.7. Exercises &#x2026; 315</a></li>
+</ul>
+</li>
+<li><a href="#sec-9">9. Inference in First-Order Logic &#x2026; 322</a>
+<ul>
+<li><a href="#sec-9-1">9.1. Propositional vs. First-Order Inference &#x2026; 322</a>
+<ul>
+<li><a href="#sec-9-1-1">9.1.1. Inference rules for quantifiers &#x2026; 322</a></li>
+<li><a href="#sec-9-1-2">9.1.2. Reduction to propositional inference &#x2026; 324</a></li>
+</ul>
+</li>
+<li><a href="#sec-9-2">9.2. Unification and Lifting &#x2026; 325</a>
+<ul>
+<li><a href="#sec-9-2-1">9.2.1. A first-order inference rule &#x2026; 325</a></li>
+<li><a href="#sec-9-2-2">9.2.2. Unification &#x2026; 326</a></li>
+<li><a href="#sec-9-2-3">9.2.3. Storage and retrieval &#x2026; 327</a></li>
+</ul>
+</li>
+<li><a href="#sec-9-3">9.3. Forward Chaining &#x2026; 330</a>
+<ul>
+<li><a href="#sec-9-3-1">9.3.1. First-order definite clauses &#x2026; 330</a></li>
+<li><a href="#sec-9-3-2">9.3.2. A simple forward-chaining algorithm &#x2026; 331</a></li>
+<li><a href="#sec-9-3-3">9.3.3. Efficient forward chaining &#x2026; 333</a></li>
+</ul>
+</li>
+<li><a href="#sec-9-4">9.4. Backward Chaining &#x2026; 337</a>
+<ul>
+<li><a href="#sec-9-4-1">9.4.1. A backward-chaining algorithm &#x2026; 337</a></li>
+<li><a href="#sec-9-4-2">9.4.2. Logic programming &#x2026; 339</a></li>
+<li><a href="#sec-9-4-3">9.4.3. Efficient implementation of logic programs &#x2026; 340</a></li>
+<li><a href="#sec-9-4-4">9.4.4. Redundant inference and infinite loops &#x2026; 342</a></li>
+<li><a href="#sec-9-4-5">9.4.5. Database semantics of Prolog &#x2026; 343</a></li>
+<li><a href="#sec-9-4-6">9.4.6. Constraint logic programming &#x2026; 344</a></li>
+</ul>
+</li>
+<li><a href="#sec-9-5">9.5. Resolution &#x2026; 345</a>
+<ul>
+<li><a href="#sec-9-5-1">9.5.1. Conjunctive normal form for first-order logic &#x2026; 345</a></li>
+<li><a href="#sec-9-5-2">9.5.2. The resolution inference rule &#x2026; 347</a></li>
+<li><a href="#sec-9-5-3">9.5.3. Example proofs &#x2026; 347</a></li>
+<li><a href="#sec-9-5-4">9.5.4. Completeness of resolution &#x2026; 350</a></li>
+<li><a href="#sec-9-5-5">9.5.5. Equality &#x2026; 353</a></li>
+<li><a href="#sec-9-5-6">9.5.6. Resolution strategies &#x2026; 355</a></li>
+</ul>
+</li>
+<li><a href="#sec-9-6">9.6. Summary &#x2026; 357</a></li>
+<li><a href="#sec-9-7">9.7. Bibliographical and Historical Notes &#x2026; 357</a></li>
+<li><a href="#sec-9-8">9.8. Exercises &#x2026; 360</a></li>
+</ul>
+</li>
+<li><a href="#sec-10">10. Chapter 10: Classical Planning &#x2026; 366</a>
+<ul>
+<li><a href="#sec-10-1">10.1. Definition of Classical Planning &#x2026; 366</a>
+<ul>
+<li><a href="#sec-10-1-1">10.1.1. Example: Air cargo transport &#x2026; 369</a></li>
+<li><a href="#sec-10-1-2">10.1.2. Example: The spare tire problem &#x2026; 370</a></li>
+<li><a href="#sec-10-1-3">10.1.3. Example: The blocks world &#x2026; 370</a></li>
+<li><a href="#sec-10-1-4">10.1.4. The complexity of classical planning &#x2026; 372</a></li>
+</ul>
+</li>
+<li><a href="#sec-10-2">10.2. Algorithms for Planning as State-Space Search &#x2026; 373</a>
+<ul>
+<li><a href="#sec-10-2-1">10.2.1. Forward (progression) state-space search &#x2026; 373</a></li>
+<li><a href="#sec-10-2-2">10.2.2. Backward (regression) relevant-states search &#x2026; 374</a></li>
+<li><a href="#sec-10-2-3">10.2.3. Heuristics for planning &#x2026; 376</a></li>
+</ul>
+</li>
+<li><a href="#sec-10-3">10.3. Planning Graphs &#x2026; 379</a>
+<ul>
+<li><a href="#sec-10-3-1">10.3.1. Planning graphs for heuristic estimation &#x2026; 381</a></li>
+<li><a href="#sec-10-3-2">10.3.2. The Graphplan algorithm &#x2026; 383</a></li>
+<li><a href="#sec-10-3-3">10.3.3. Termination of Graphplan &#x2026; 385</a></li>
+</ul>
+</li>
+<li><a href="#sec-10-4">10.4. Other Classical Planning Approaches &#x2026; 387</a>
+<ul>
+<li><a href="#sec-10-4-1">10.4.1. Classical planning as Boolean satisfiability &#x2026; 387</a></li>
+<li><a href="#sec-10-4-2">10.4.2. Planning as first-order logical deduction: Situation calculus &#x2026; 388</a></li>
+<li><a href="#sec-10-4-3">10.4.3. Planning as constraint satisfaction &#x2026; 390</a></li>
+<li><a href="#sec-10-4-4">10.4.4. Planning as refinement of partially ordered plans &#x2026; 390</a></li>
+</ul>
+</li>
+<li><a href="#sec-10-5">10.5. Analysis of Planning Approaches &#x2026; 392</a></li>
+<li><a href="#sec-10-6">10.6. Summary &#x2026; 393</a></li>
+<li><a href="#sec-10-7">10.7. Bibliographical and Historical Notes &#x2026; 393</a></li>
+<li><a href="#sec-10-8">10.8. Exercises &#x2026; 396</a></li>
+</ul>
+</li>
+<li><a href="#sec-11">11. Planning and Acting in the Real World &#x2026; 401</a>
+<ul>
+<li><a href="#sec-11-1">11.1. Time, Schedules, and Resources &#x2026; 401</a>
+<ul>
+<li><a href="#sec-11-1-1">11.1.1. Representing temporal and resource constraints &#x2026; 402</a></li>
+<li><a href="#sec-11-1-2">11.1.2. Solving scheduling problems &#x2026; 403</a></li>
+</ul>
+</li>
+<li><a href="#sec-11-2">11.2. Hierarchical Planning &#x2026; 406</a>
+<ul>
+<li><a href="#sec-11-2-1">11.2.1. High-level actions &#x2026; 406</a></li>
+<li><a href="#sec-11-2-2">11.2.2. Searching for primitive solutions &#x2026; 408</a></li>
+<li><a href="#sec-11-2-3">11.2.3. Searching for abstract solutions &#x2026; 410</a></li>
+</ul>
+</li>
+<li><a href="#sec-11-3">11.3. Planning and Acting in Nondeterministic Domains &#x2026; 415</a>
+<ul>
+<li><a href="#sec-11-3-1">11.3.1. Sensorless planning &#x2026; 417</a></li>
+<li><a href="#sec-11-3-2">11.3.2. Contingent planning &#x2026; 421</a></li>
+<li><a href="#sec-11-3-3">11.3.3. Online replanning &#x2026; 422</a></li>
+</ul>
+</li>
+<li><a href="#sec-11-4">11.4. Multiagent Planning &#x2026; 425</a>
+<ul>
+<li><a href="#sec-11-4-1">11.4.1. Planning with multiple simultaneous actions &#x2026; 426</a></li>
+<li><a href="#sec-11-4-2">11.4.2. Planning with multiple agents: Cooperation and coordination &#x2026; 428</a></li>
+</ul>
+</li>
+<li><a href="#sec-11-5">11.5. Summary &#x2026; 430</a></li>
+<li><a href="#sec-11-6">11.6. Bibliographical and Historical Notes &#x2026; 431</a></li>
+<li><a href="#sec-11-7">11.7. Exercises &#x2026; 435</a></li>
+</ul>
+</li>
+<li><a href="#sec-12">12. Knowledge Representation &#x2026; 437</a>
+<ul>
+<li><a href="#sec-12-1">12.1. Ontological Engineering &#x2026; 437</a></li>
+<li><a href="#sec-12-2">12.2. Categories and Objects &#x2026; 440</a>
+<ul>
+<li><a href="#sec-12-2-1">12.2.1. Physical composition &#x2026; 441</a></li>
+<li><a href="#sec-12-2-2">12.2.2. Measurements &#x2026; 444</a></li>
+<li><a href="#sec-12-2-3">12.2.3. Objects: Things and stuff &#x2026; 445</a></li>
+</ul>
+</li>
+<li><a href="#sec-12-3">12.3. Events &#x2026; 446</a>
+<ul>
+<li><a href="#sec-12-3-1">12.3.1. Processes &#x2026; 447</a></li>
+<li><a href="#sec-12-3-2">12.3.2. Time intervals &#x2026; 448</a></li>
+<li><a href="#sec-12-3-3">12.3.3. Fluents and objects &#x2026; 449</a></li>
+</ul>
+</li>
+<li><a href="#sec-12-4">12.4. Mental Events and Mental Objects &#x2026; 450</a></li>
+<li><a href="#sec-12-5">12.5. Reasoning Systems for Categories &#x2026; 453</a>
+<ul>
+<li><a href="#sec-12-5-1">12.5.1. Semantic networks &#x2026; 454</a></li>
+<li><a href="#sec-12-5-2">12.5.2. Description logics &#x2026; 456</a></li>
+</ul>
+</li>
+<li><a href="#sec-12-6">12.6. Reasoning with Default Information &#x2026; 458</a>
+<ul>
+<li><a href="#sec-12-6-1">12.6.1. Circumscription and default logic &#x2026; 458</a></li>
+<li><a href="#sec-12-6-2">12.6.2. Truth maintenance systems &#x2026; 460</a></li>
+</ul>
+</li>
+<li><a href="#sec-12-7">12.7. The Internet Shopping World &#x2026; 462</a>
+<ul>
+<li><a href="#sec-12-7-1">12.7.1. Following links &#x2026; 464</a></li>
+<li><a href="#sec-12-7-2">12.7.2. Comparing offers &#x2026; 466</a></li>
+</ul>
+</li>
+<li><a href="#sec-12-8">12.8. Summary &#x2026; 467</a></li>
+<li><a href="#sec-12-9">12.9. Bibliographical and Historical Notes &#x2026; 468</a></li>
+<li><a href="#sec-12-10">12.10. Exercises &#x2026; 473</a></li>
+</ul>
+</li>
+<li><a href="#sec-13">13. Quantifying Uncertainty &#x2026; 480</a>
+<ul>
+<li><a href="#sec-13-1">13.1. Acting under Uncertainty &#x2026; 480</a>
+<ul>
+<li><a href="#sec-13-1-1">13.1.1. Summarizing uncertainty &#x2026; 481</a></li>
+<li><a href="#sec-13-1-2">13.1.2. Uncertainty and rational decisions &#x2026; 482</a></li>
+</ul>
+</li>
+<li><a href="#sec-13-2">13.2. Basic Probability Notation &#x2026; 483</a>
+<ul>
+<li><a href="#sec-13-2-1">13.2.1. What probabilities are about &#x2026; 484</a></li>
+<li><a href="#sec-13-2-2">13.2.2. The language of propositions in probability assertions &#x2026; 486</a></li>
+<li><a href="#sec-13-2-3">13.2.3. Probability axioms and their reasonableness &#x2026; 488</a></li>
+</ul>
+</li>
+<li><a href="#sec-13-3">13.3. Inference Using Full Joint Distributions &#x2026; 490</a></li>
+<li><a href="#sec-13-4">13.4. Independence &#x2026; 494</a></li>
+<li><a href="#sec-13-5">13.5. Bayes' Rule and Its Use &#x2026; 495</a>
+<ul>
+<li><a href="#sec-13-5-1">13.5.1. Applying Bayes' rule: The simple case &#x2026; 496</a></li>
+<li><a href="#sec-13-5-2">13.5.2. Using Bayes' rule: Combining evidence &#x2026; 497</a></li>
+</ul>
+</li>
+<li><a href="#sec-13-6">13.6. The Wumpus World Revisited &#x2026; 499</a></li>
+<li><a href="#sec-13-7">13.7. Summary &#x2026; 503</a></li>
+<li><a href="#sec-13-8">13.8. Bibliographical and Historical Notes &#x2026; 503</a></li>
+<li><a href="#sec-13-9">13.9. Exercises &#x2026; 506</a></li>
+</ul>
+</li>
+<li><a href="#sec-14">14. Probabilistic Reasoning &#x2026; 510</a>
+<ul>
+<li><a href="#sec-14-1">14.1. Representing Knowledge in an Uncertain Domain &#x2026; 510</a></li>
+<li><a href="#sec-14-2">14.2. The Semantics of Bayesian Networks &#x2026; 513</a>
+<ul>
+<li><a href="#sec-14-2-1">14.2.1. Representing the full joint distribution &#x2026; 513</a></li>
+<li><a href="#sec-14-2-2">14.2.2. Conditional independence relations in Bayesian networks &#x2026; 517</a></li>
+</ul>
+</li>
+<li><a href="#sec-14-3">14.3. Efficient Representation of Conditional Distributions &#x2026; 518</a></li>
+<li><a href="#sec-14-4">14.4. Exact Inference in Bayesian Networks &#x2026; 522</a>
+<ul>
+<li><a href="#sec-14-4-1">14.4.1. Inference by enumeration &#x2026; 523</a></li>
+<li><a href="#sec-14-4-2">14.4.2. The variable elimination algorithm &#x2026; 524</a></li>
+<li><a href="#sec-14-4-3">14.4.3. The complexity of exact inference &#x2026; 528</a></li>
+<li><a href="#sec-14-4-4">14.4.4. Clustering algorithms &#x2026; 529</a></li>
+</ul>
+</li>
+<li><a href="#sec-14-5">14.5. Approximate Inference in Bayesian Networks &#x2026; 530</a>
+<ul>
+<li><a href="#sec-14-5-1">14.5.1. Direct sampling methods &#x2026; 530</a></li>
+<li><a href="#sec-14-5-2">14.5.2. Inference by Markov chain simulation &#x2026; 535</a></li>
+</ul>
+</li>
+<li><a href="#sec-14-6">14.6. Relational and First-Order Probability Models &#x2026; 539</a>
+<ul>
+<li><a href="#sec-14-6-1">14.6.1. Possible worlds &#x2026; 540</a></li>
+<li><a href="#sec-14-6-2">14.6.2. Relational probability models &#x2026; 542</a></li>
+<li><a href="#sec-14-6-3">14.6.3. Open-universe probability models &#x2026; 544</a></li>
+</ul>
+</li>
+<li><a href="#sec-14-7">14.7. Other Approaches to Uncertain Reasoning &#x2026; 546</a>
+<ul>
+<li><a href="#sec-14-7-1">14.7.1. Rule-based methods for uncertain reasoning &#x2026; 547</a></li>
+<li><a href="#sec-14-7-2">14.7.2. Representing ignorance: Dempster&#x2013;Shafer theory &#x2026; 549</a></li>
+<li><a href="#sec-14-7-3">14.7.3. Representing vagueness: Fuzzy sets and fuzzy logic &#x2026; 550</a></li>
+</ul>
+</li>
+<li><a href="#sec-14-8">14.8. Summary &#x2026; 551</a></li>
+<li><a href="#sec-14-9">14.9. Bibliographical and Historical Notes &#x2026; 552</a></li>
+<li><a href="#sec-14-10">14.10. Exercises &#x2026; 558</a></li>
+</ul>
+</li>
+<li><a href="#sec-15">15. Probabilistic Reasoning over Time &#x2026; 566</a>
+<ul>
+<li><a href="#sec-15-1">15.1. Time and Uncertainty &#x2026; 566</a>
+<ul>
+<li><a href="#sec-15-1-1">15.1.1. States and observations &#x2026; 567</a></li>
+<li><a href="#sec-15-1-2">15.1.2. Transition and sensor models &#x2026; 568</a></li>
+</ul>
+</li>
+<li><a href="#sec-15-2">15.2. Inference in Temporal Models &#x2026; 570</a>
+<ul>
+<li><a href="#sec-15-2-1">15.2.1. Filtering and prediction &#x2026; 571</a></li>
+<li><a href="#sec-15-2-2">15.2.2. Smoothing &#x2026; 574</a></li>
+<li><a href="#sec-15-2-3">15.2.3. Finding the most likely sequence &#x2026; 576</a></li>
+</ul>
+</li>
+<li><a href="#sec-15-3">15.3. Hidden Markov Models &#x2026; 578</a>
+<ul>
+<li><a href="#sec-15-3-1">15.3.1. Simplified matrix algorithms &#x2026; 579</a></li>
+<li><a href="#sec-15-3-2">15.3.2. Hidden Markov model example: Localization &#x2026; 581</a></li>
+</ul>
+</li>
+<li><a href="#sec-15-4">15.4. Kalman Filters &#x2026; 584</a>
+<ul>
+<li><a href="#sec-15-4-1">15.4.1. Updating Gaussian distributions &#x2026; 584</a></li>
+<li><a href="#sec-15-4-2">15.4.2. A simple one-dimensional example &#x2026; 585</a></li>
+<li><a href="#sec-15-4-3">15.4.3. The general case &#x2026; 587</a></li>
+<li><a href="#sec-15-4-4">15.4.4. Applicability of Kalman filtering &#x2026; 588</a></li>
+</ul>
+</li>
+<li><a href="#sec-15-5">15.5. Dynamic Bayesian Networks &#x2026; 590</a>
+<ul>
+<li><a href="#sec-15-5-1">15.5.1. Constructing DBNs &#x2026; 591</a></li>
+<li><a href="#sec-15-5-2">15.5.2. Exact inference in DBNs &#x2026; 595</a></li>
+<li><a href="#sec-15-5-3">15.5.3. Approximate inference in DBNs &#x2026; 596</a></li>
+</ul>
+</li>
+<li><a href="#sec-15-6">15.6. Keeping Track of Many Objects &#x2026; 599</a></li>
+<li><a href="#sec-15-7">15.7. Summary &#x2026; 603</a></li>
+<li><a href="#sec-15-8">15.8. Bibliographical and Historical Notes &#x2026; 603</a></li>
+<li><a href="#sec-15-9">15.9. Exercises &#x2026; 606</a></li>
+</ul>
+</li>
+<li><a href="#sec-16">16. Making Simple Decisions &#x2026; 610</a>
+<ul>
+<li><a href="#sec-16-1">16.1. Combining Beliefs and Desires under Uncertainty &#x2026; 610</a></li>
+<li><a href="#sec-16-2">16.2. The Basis of Utility Theory &#x2026; 611</a>
+<ul>
+<li><a href="#sec-16-2-1">16.2.1. Constraints on rational preferences &#x2026; 612</a></li>
+<li><a href="#sec-16-2-2">16.2.2. Preferences lead to utility &#x2026; 613</a></li>
+</ul>
+</li>
+<li><a href="#sec-16-3">16.3. Utility Functions &#x2026; 615</a>
+<ul>
+<li><a href="#sec-16-3-1">16.3.1. Utility assessment and utility scales &#x2026; 615</a></li>
+<li><a href="#sec-16-3-2">16.3.2. The utility of money &#x2026; 616</a></li>
+<li><a href="#sec-16-3-3">16.3.3. Expected utility and post-decision disappointment &#x2026; 618</a></li>
+<li><a href="#sec-16-3-4">16.3.4. Human judgment and irrationality &#x2026; 619</a></li>
+</ul>
+</li>
+<li><a href="#sec-16-4">16.4. Multiattribute Utility Functions &#x2026; 622</a>
+<ul>
+<li><a href="#sec-16-4-1">16.4.1. Dominance &#x2026; 622</a></li>
+<li><a href="#sec-16-4-2">16.4.2. Preference structure and multiattribute utility &#x2026; 624</a></li>
+</ul>
+</li>
+<li><a href="#sec-16-5">16.5. Decision Networks &#x2026; 626</a>
+<ul>
+<li><a href="#sec-16-5-1">16.5.1. Representing a decision problem with a decision network &#x2026; 626</a></li>
+<li><a href="#sec-16-5-2">16.5.2. Evaluating decision networks &#x2026; 628</a></li>
+</ul>
+</li>
+<li><a href="#sec-16-6">16.6. The Value of Information &#x2026; 628</a>
+<ul>
+<li><a href="#sec-16-6-1">16.6.1. A simple example &#x2026; 629</a></li>
+<li><a href="#sec-16-6-2">16.6.2. A general formula for perfect information &#x2026; 630</a></li>
+<li><a href="#sec-16-6-3">16.6.3. Properties of the value of information &#x2026; 631</a></li>
+<li><a href="#sec-16-6-4">16.6.4. Implementation of an information-gathering agent &#x2026; 632</a></li>
+</ul>
+</li>
+<li><a href="#sec-16-7">16.7. Decision-Theoretic Expert Systems &#x2026; 633</a></li>
+<li><a href="#sec-16-8">16.8. Summary &#x2026; 636</a></li>
+<li><a href="#sec-16-9">16.9. Bibliographical and Historical Notes &#x2026; 636</a></li>
+<li><a href="#sec-16-10">16.10. Exercises &#x2026; 640</a></li>
+</ul>
+</li>
+<li><a href="#sec-17">17. Making Complex Decisions &#x2026; 645</a>
+<ul>
+<li><a href="#sec-17-1">17.1. Sequential Decision Problems &#x2026; 645</a>
+<ul>
+<li><a href="#sec-17-1-1">17.1.1. Utilities over time &#x2026; 648</a></li>
+<li><a href="#sec-17-1-2">17.1.2. Optimal policies and the utilities of states &#x2026; 650</a></li>
+</ul>
+</li>
+<li><a href="#sec-17-2">17.2. Value Iteration &#x2026; 652</a>
+<ul>
+<li><a href="#sec-17-2-1">17.2.1. The Bellman equation for utilities &#x2026; 652</a></li>
+<li><a href="#sec-17-2-2">17.2.2. The value iteration algorithm &#x2026; 652</a></li>
+<li><a href="#sec-17-2-3">17.2.3. Convergence of value iteration &#x2026; 654</a></li>
+</ul>
+</li>
+<li><a href="#sec-17-3">17.3. Policy Iteration &#x2026; 656</a></li>
+<li><a href="#sec-17-4">17.4. Partially Observable MDPs &#x2026; 658</a>
+<ul>
+<li><a href="#sec-17-4-1">17.4.1. Definition of POMDPs &#x2026; 658</a></li>
+<li><a href="#sec-17-4-2">17.4.2. Value iteration for POMDPs &#x2026; 660</a></li>
+<li><a href="#sec-17-4-3">17.4.3. Online agents for POMDPs &#x2026; 664</a></li>
+</ul>
+</li>
+<li><a href="#sec-17-5">17.5. Decisions with Multiple Agents: Game Theory &#x2026; 666</a>
+<ul>
+<li><a href="#sec-17-5-1">17.5.1. Single-move games &#x2026; 667</a></li>
+<li><a href="#sec-17-5-2">17.5.2. Repeated games &#x2026; 673</a></li>
+<li><a href="#sec-17-5-3">17.5.3. Sequential games &#x2026; 674</a></li>
+</ul>
+</li>
+<li><a href="#sec-17-6">17.6. Mechanism Design &#x2026; 679</a>
+<ul>
+<li><a href="#sec-17-6-1">17.6.1. Auctions &#x2026; 679</a></li>
+<li><a href="#sec-17-6-2">17.6.2. Common goods &#x2026; 683</a></li>
+</ul>
+</li>
+<li><a href="#sec-17-7">17.7. Summary &#x2026; 684</a></li>
+<li><a href="#sec-17-8">17.8. Bibliographical and Historical Notes &#x2026; 685</a></li>
+<li><a href="#sec-17-9">17.9. Exercises &#x2026; 688</a></li>
+</ul>
+</li>
+<li><a href="#sec-18">18. Learning from Examples &#x2026; 693</a>
+<ul>
+<li><a href="#sec-18-1">18.1. Forms of Learning &#x2026; 693</a></li>
+<li><a href="#sec-18-2">18.2. Supervised Learning &#x2026; 695</a></li>
+<li><a href="#sec-18-3">18.3. Learning Decision Trees &#x2026; 697</a>
+<ul>
+<li><a href="#sec-18-3-1">18.3.1. The decision tree representation &#x2026; 698</a></li>
+<li><a href="#sec-18-3-2">18.3.2. Expressiveness of decision trees &#x2026; 698</a></li>
+<li><a href="#sec-18-3-3">18.3.3. Inducing decision trees from examples &#x2026; 699</a></li>
+<li><a href="#sec-18-3-4">18.3.4. Choosing attribute tests &#x2026; 703</a></li>
+<li><a href="#sec-18-3-5">18.3.5. Generalization and overfitting &#x2026; 705</a></li>
+<li><a href="#sec-18-3-6">18.3.6. Broadening the applicability of decision trees &#x2026; 706</a></li>
+</ul>
+</li>
+<li><a href="#sec-18-4">18.4. Evaluating and Choosing the Best Hypothesis &#x2026; 708</a>
+<ul>
+<li><a href="#sec-18-4-1">18.4.1. Model selection: Complexity versus goodness of fit &#x2026; 709</a></li>
+<li><a href="#sec-18-4-2">18.4.2. From error rates to loss &#x2026; 710</a></li>
+<li><a href="#sec-18-4-3">18.4.3. Regularization &#x2026; 712</a></li>
+</ul>
+</li>
+<li><a href="#sec-18-5">18.5. The Theory of Learning &#x2026; 713</a>
+<ul>
+<li><a href="#sec-18-5-1">18.5.1. PAC learning example: Learning decision lists &#x2026; 715</a></li>
+</ul>
+</li>
+<li><a href="#sec-18-6">18.6. Regression and Classification with Linear Models &#x2026; 717</a>
+<ul>
+<li><a href="#sec-18-6-1">18.6.1. Univariate linear regression &#x2026; 718</a></li>
+<li><a href="#sec-18-6-2">18.6.2. Multivariate linear regression &#x2026; 720</a></li>
+<li><a href="#sec-18-6-3">18.6.3. Linear classifiers with a hard threshold &#x2026; 723</a></li>
+<li><a href="#sec-18-6-4">18.6.4. Linear classification with logistic regression &#x2026; 725</a></li>
+</ul>
+</li>
+<li><a href="#sec-18-7">18.7. Artificial Neural Networks &#x2026; 727</a>
+<ul>
+<li><a href="#sec-18-7-1">18.7.1. Neural network structures &#x2026; 728</a></li>
+<li><a href="#sec-18-7-2">18.7.2. Single-layer feed-forward neural networks (perceptrons) &#x2026; 729</a></li>
+<li><a href="#sec-18-7-3">18.7.3. Multilayer feed-forward neural networks &#x2026; 731</a></li>
+<li><a href="#sec-18-7-4">18.7.4. Learning in multilayer networks &#x2026; 733</a></li>
+<li><a href="#sec-18-7-5">18.7.5. Learning neural network structures &#x2026; 736</a></li>
+</ul>
+</li>
+<li><a href="#sec-18-8">18.8. Nonparametric Models &#x2026; 737</a>
+<ul>
+<li><a href="#sec-18-8-1">18.8.1. Nearest neighbor models &#x2026; 738</a></li>
+<li><a href="#sec-18-8-2">18.8.2. Finding nearest neighbors with k-d trees &#x2026; 739</a></li>
+<li><a href="#sec-18-8-3">18.8.3. Locality-sensitive hashing &#x2026; 740</a></li>
+<li><a href="#sec-18-8-4">18.8.4. Nonparametric regression &#x2026; 741</a></li>
+</ul>
+</li>
+<li><a href="#sec-18-9">18.9. Support Vector Machines &#x2026; 744</a></li>
+<li><a href="#sec-18-10">18.10. Bibliographical and Historical Notes &#x2026; 758</a></li>
+<li><a href="#sec-18-11">18.11. Exercises &#x2026; 763</a></li>
+</ul>
+</li>
+<li><a href="#sec-19">19. Knowledge in Learning &#x2026; 768</a>
+<ul>
+<li><a href="#sec-19-1">19.1. A Logical Formulation of Learning &#x2026; 768</a>
+<ul>
+<li><a href="#sec-19-1-1">19.1.1. Examples and hypotheses &#x2026; 768</a></li>
+<li><a href="#sec-19-1-2">19.1.2. Current-best-hypothesis search &#x2026; 770</a></li>
+<li><a href="#sec-19-1-3">19.1.3. Least-commitment search &#x2026; 773</a></li>
+</ul>
+</li>
+<li><a href="#sec-19-2">19.2. Knowledge in Learning &#x2026; 777</a>
+<ul>
+<li><a href="#sec-19-2-1">19.2.1. Some simple examples &#x2026; 778</a></li>
+<li><a href="#sec-19-2-2">19.2.2. Some general schemes &#x2026; 778</a></li>
+</ul>
+</li>
+<li><a href="#sec-19-3">19.3. Explanation-Based Learning &#x2026; 780</a>
+<ul>
+<li><a href="#sec-19-3-1">19.3.1. Extracting general rules from examples &#x2026; 781</a></li>
+<li><a href="#sec-19-3-2">19.3.2. Improving efficiency &#x2026; 783</a></li>
+</ul>
+</li>
+<li><a href="#sec-19-4">19.4. Learning Using Relevance Information &#x2026; 784</a>
+<ul>
+<li><a href="#sec-19-4-1">19.4.1. Determining the hypothesis space &#x2026; 785</a></li>
+<li><a href="#sec-19-4-2">19.4.2. Learning and using relevance information &#x2026; 785</a></li>
+</ul>
+</li>
+<li><a href="#sec-19-5">19.5. Inductive Logic Programming &#x2026; 788</a>
+<ul>
+<li><a href="#sec-19-5-1">19.5.1. An example &#x2026; 788</a></li>
+<li><a href="#sec-19-5-2">19.5.2. Top-down inductive learning methods &#x2026; 791</a></li>
+<li><a href="#sec-19-5-3">19.5.3. Inductive learning with inverse deduction &#x2026; 794</a></li>
+<li><a href="#sec-19-5-4">19.5.4. Making discoveries with inductive logic programming &#x2026; 796</a></li>
+</ul>
+</li>
+<li><a href="#sec-19-6">19.6. Summary &#x2026; 797</a></li>
+<li><a href="#sec-19-7">19.7. Bibliographical and Historical Notes &#x2026; 798</a></li>
+<li><a href="#sec-19-8">19.8. Exercises &#x2026; 801</a></li>
+</ul>
+</li>
+<li><a href="#sec-20">20. Chapter 20: Learning Probabilistic Models &#x2026; 802</a>
+<ul>
+<li><a href="#sec-20-1">20.1. Statistical Learning &#x2026; 802</a></li>
+<li><a href="#sec-20-2">20.2. Learning with Complete Data &#x2026; 806</a>
+<ul>
+<li><a href="#sec-20-2-1">20.2.1. Maximum-likelihood parameter learning: Discrete models &#x2026; 806</a></li>
+<li><a href="#sec-20-2-2">20.2.2. Naive Bayes models &#x2026; 808</a></li>
+<li><a href="#sec-20-2-3">20.2.3. Maximum-likelihood parameter learning: Continuous models &#x2026; 809</a></li>
+<li><a href="#sec-20-2-4">20.2.4. Bayesian parameter learning &#x2026; 810</a></li>
+<li><a href="#sec-20-2-5">20.2.5. Learning Bayes net structures &#x2026; 813</a></li>
+<li><a href="#sec-20-2-6">20.2.6. Density estimation with nonparametric models &#x2026; 814</a></li>
+</ul>
+</li>
+<li><a href="#sec-20-3">20.3. Learning with Hidden Variables: The EM Algorithm &#x2026; 816</a>
+<ul>
+<li><a href="#sec-20-3-1">20.3.1. Unsupervised clustering: Learning mixtures of Gaussians &#x2026; 817</a></li>
+<li><a href="#sec-20-3-2">20.3.2. Learning Bayesian networks with hidden variables &#x2026; 820</a></li>
+<li><a href="#sec-20-3-3">20.3.3. Learning hidden Markov models &#x2026; 822</a></li>
+<li><a href="#sec-20-3-4">20.3.4. The general form of the EM algorithm &#x2026; 823</a></li>
+<li><a href="#sec-20-3-5">20.3.5. Learning Bayes net structures with hidden variables &#x2026; 824</a></li>
+</ul>
+</li>
+<li><a href="#sec-20-4">20.4. Summary &#x2026; 825</a></li>
+<li><a href="#sec-20-5">20.5. Bibliographical and Historical Notes &#x2026; 825</a></li>
+<li><a href="#sec-20-6">20.6. Exercises &#x2026; 827</a></li>
+</ul>
+</li>
+<li><a href="#sec-21">21. Reinforcement Learning &#x2026; 830</a>
+<ul>
+<li><a href="#sec-21-1">21.1. Introduction &#x2026; 830</a></li>
+<li><a href="#sec-21-2">21.2. Passive Reinforcement Learning &#x2026; 832</a>
+<ul>
+<li><a href="#sec-21-2-1">21.2.1. Direct utility estimation &#x2026; 833</a></li>
+<li><a href="#sec-21-2-2">21.2.2. Adaptive dynamic programming &#x2026; 834</a></li>
+<li><a href="#sec-21-2-3">21.2.3. Temporal-difference learning &#x2026; 836</a></li>
+</ul>
+</li>
+<li><a href="#sec-21-3">21.3. Active Reinforcement Learning &#x2026; 839</a>
+<ul>
+<li><a href="#sec-21-3-1">21.3.1. Exploration &#x2026; 839</a></li>
+<li><a href="#sec-21-3-2">21.3.2. Learning an action-utility function &#x2026; 842</a></li>
+</ul>
+</li>
+<li><a href="#sec-21-4">21.4. Generalization in Reinforcement Learning &#x2026; 845</a></li>
+<li><a href="#sec-21-5">21.5. Policy Search &#x2026; 848</a></li>
+<li><a href="#sec-21-6">21.6. Applications of Reinforcement Learning &#x2026; 850</a>
+<ul>
+<li><a href="#sec-21-6-1">21.6.1. Applications to game playing &#x2026; 850</a></li>
+<li><a href="#sec-21-6-2">21.6.2. Application to robot control &#x2026; 851</a></li>
+</ul>
+</li>
+<li><a href="#sec-21-7">21.7. Summary &#x2026; 853</a></li>
+<li><a href="#sec-21-8">21.8. Bibliographical and Historical Notes &#x2026; 854</a></li>
+<li><a href="#sec-21-9">21.9. Exercises &#x2026; 858</a></li>
+</ul>
+</li>
+<li><a href="#sec-22">22. Natural Language Processing &#x2026; 860</a>
+<ul>
+<li><a href="#sec-22-1">22.1. Language Models &#x2026; 860</a>
+<ul>
+<li><a href="#sec-22-1-1">22.1.1. Smoothing n-gram models &#x2026; 862</a></li>
+<li><a href="#sec-22-1-2">22.1.2. Model evaluation &#x2026; 863</a></li>
+</ul>
+</li>
+<li><a href="#sec-22-2">22.2. Text Classification &#x2026; 865</a>
+<ul>
+<li><a href="#sec-22-2-1">22.2.1. Classification by data compression &#x2026; 866</a></li>
+</ul>
+</li>
+<li><a href="#sec-22-3">22.3. Information Retrieval &#x2026; 867</a>
+<ul>
+<li><a href="#sec-22-3-1">22.3.1. IR scoring functions &#x2026; 868</a></li>
+<li><a href="#sec-22-3-2">22.3.2. IR system evaluation &#x2026; 869</a></li>
+<li><a href="#sec-22-3-3">22.3.3. IR refinements &#x2026; 869</a></li>
+<li><a href="#sec-22-3-4">22.3.4. The PageRank algorithm &#x2026; 870</a></li>
+<li><a href="#sec-22-3-5">22.3.5. The HITS algorithm &#x2026; 872</a></li>
+<li><a href="#sec-22-3-6">22.3.6. Question answering &#x2026; 872</a></li>
+</ul>
+</li>
+<li><a href="#sec-22-4">22.4. Information Extraction &#x2026; 873</a>
+<ul>
+<li><a href="#sec-22-4-1">22.4.1. Finite-state automata for information extraction &#x2026; 874</a></li>
+<li><a href="#sec-22-4-2">22.4.2. Probabilistic models for information extraction &#x2026; 876</a></li>
+<li><a href="#sec-22-4-3">22.4.3. Conditional random fields for information extraction &#x2026; 878</a></li>
+<li><a href="#sec-22-4-4">22.4.4. Ontology extraction from large corpora &#x2026; 879</a></li>
+<li><a href="#sec-22-4-5">22.4.5. Automated template construction &#x2026; 880</a></li>
+<li><a href="#sec-22-4-6">22.4.6. Machine reading &#x2026; 881</a></li>
+</ul>
+</li>
+<li><a href="#sec-22-5">22.5. Summary &#x2026; 882</a></li>
+<li><a href="#sec-22-6">22.6. Bibliographical and Historical Notes &#x2026; 883</a></li>
+<li><a href="#sec-22-7">22.7. Exercises &#x2026; 885</a></li>
+</ul>
+</li>
+<li><a href="#sec-23">23. Natural Language for Communication &#x2026; 888</a>
+<ul>
+<li><a href="#sec-23-1">23.1. Phrase Structure Grammars &#x2026; 888</a>
+<ul>
+<li><a href="#sec-23-1-1">23.1.1. The lexicon of E0 &#x2026; 890</a></li>
+<li><a href="#sec-23-1-2">23.1.2. The Grammar of E0 &#x2026; 890</a></li>
+</ul>
+</li>
+<li><a href="#sec-23-2">23.2. Syntactic Analysis (Parsing) &#x2026; 892</a>
+<ul>
+<li><a href="#sec-23-2-1">23.2.1. Learning probabilities for PCFGs &#x2026; 895</a></li>
+<li><a href="#sec-23-2-2">23.2.2. Comparing context-free and Markov models &#x2026; 896</a></li>
+</ul>
+</li>
+<li><a href="#sec-23-3">23.3. Augmented Grammars and Semantic Interpretation &#x2026; 897</a>
+<ul>
+<li><a href="#sec-23-3-1">23.3.1. Lexicalized PCFGs &#x2026; 897</a></li>
+<li><a href="#sec-23-3-2">23.3.2. Formal definition of augmented grammar rules &#x2026; 898</a></li>
+<li><a href="#sec-23-3-3">23.3.3. Case agreement and subject&#x2013;verb agreement &#x2026; 899</a></li>
+<li><a href="#sec-23-3-4">23.3.4. Semantic interpretation &#x2026; 900</a></li>
+<li><a href="#sec-23-3-5">23.3.5. Complications &#x2026; 902</a></li>
+</ul>
+</li>
+<li><a href="#sec-23-4">23.4. Machine Translation &#x2026; 907</a>
+<ul>
+<li><a href="#sec-23-4-1">23.4.1. Machine translation systems &#x2026; 908</a></li>
+<li><a href="#sec-23-4-2">23.4.2. Statistical machine translation &#x2026; 909</a></li>
+</ul>
+</li>
+<li><a href="#sec-23-5">23.5. Speech Recognition &#x2026; 912</a>
+<ul>
+<li><a href="#sec-23-5-1">23.5.1. Acoustic model &#x2026; 914</a></li>
+<li><a href="#sec-23-5-2">23.5.2. Language model &#x2026; 917</a></li>
+<li><a href="#sec-23-5-3">23.5.3. Building a speech recognizer &#x2026; 917</a></li>
+</ul>
+</li>
+<li><a href="#sec-23-6">23.6. Summary &#x2026; 918</a></li>
+<li><a href="#sec-23-7">23.7. Bibliographical and Historical Notes &#x2026; 919</a></li>
+<li><a href="#sec-23-8">23.8. Exercises &#x2026; 923</a></li>
+</ul>
+</li>
+<li><a href="#sec-24">24. Perception &#x2026; 928</a>
+<ul>
+<li><a href="#sec-24-1">24.1. Image Formation &#x2026; 929</a>
+<ul>
+<li><a href="#sec-24-1-1">24.1.1. Images without lenses: The pinhole camera &#x2026; 929</a></li>
+<li><a href="#sec-24-1-2">24.1.2. Lens systems &#x2026; 931</a></li>
+<li><a href="#sec-24-1-3">24.1.3. Scaled orthographic projection &#x2026; 932</a></li>
+<li><a href="#sec-24-1-4">24.1.4. Light and shading &#x2026; 932</a></li>
+<li><a href="#sec-24-1-5">24.1.5. Color &#x2026; 935</a></li>
+</ul>
+</li>
+<li><a href="#sec-24-2">24.2. Early Image-Processing Operations &#x2026; 935</a>
+<ul>
+<li><a href="#sec-24-2-1">24.2.1. Edge detection &#x2026; 936</a></li>
+<li><a href="#sec-24-2-2">24.2.2. Texture &#x2026; 939</a></li>
+<li><a href="#sec-24-2-3">24.2.3. Optical flow &#x2026; 939</a></li>
+<li><a href="#sec-24-2-4">24.2.4. Segmentation of images &#x2026; 941</a></li>
+</ul>
+</li>
+<li><a href="#sec-24-3">24.3. Object Recognition by Appearance &#x2026; 942</a>
+<ul>
+<li><a href="#sec-24-3-1">24.3.1. Complex appearance and pattern elements &#x2026; 944</a></li>
+<li><a href="#sec-24-3-2">24.3.2. Pedestrian detection with HOG features &#x2026; 945</a></li>
+</ul>
+</li>
+<li><a href="#sec-24-4">24.4. Reconstructing the 3D World &#x2026; 947</a>
+<ul>
+<li><a href="#sec-24-4-1">24.4.1. Motion parallax &#x2026; 948</a></li>
+<li><a href="#sec-24-4-2">24.4.2. Binocular stereopsis &#x2026; 949</a></li>
+<li><a href="#sec-24-4-3">24.4.3. Multiple views &#x2026; 951</a></li>
+<li><a href="#sec-24-4-4">24.4.4. Texture &#x2026; 951</a></li>
+<li><a href="#sec-24-4-5">24.4.5. Shading &#x2026; 952</a></li>
+<li><a href="#sec-24-4-6">24.4.6. Contour &#x2026; 953</a></li>
+<li><a href="#sec-24-4-7">24.4.7. Objects and the geometric structure of scenes &#x2026; 954</a></li>
+</ul>
+</li>
+<li><a href="#sec-24-5">24.5. Object Recognition from Structural Information &#x2026; 957</a>
+<ul>
+<li><a href="#sec-24-5-1">24.5.1. The geometry of bodies: Finding arms and legs &#x2026; 958</a></li>
+<li><a href="#sec-24-5-2">24.5.2. Coherent appearance: Tracking people in video &#x2026; 959</a></li>
+</ul>
+</li>
+<li><a href="#sec-24-6">24.6. Using Vision &#x2026; 961</a>
+<ul>
+<li><a href="#sec-24-6-1">24.6.1. Words and pictures &#x2026; 962</a></li>
+<li><a href="#sec-24-6-2">24.6.2. Reconstruction from many views &#x2026; 962</a></li>
+<li><a href="#sec-24-6-3">24.6.3. Using vision for controlling movement &#x2026; 963</a></li>
+</ul>
+</li>
+<li><a href="#sec-24-7">24.7. Summary &#x2026; 965</a></li>
+<li><a href="#sec-24-8">24.8. Bibliographical and Historical Notes &#x2026; 966</a></li>
+<li><a href="#sec-24-9">24.9. Exercises &#x2026; 969</a></li>
+</ul>
+</li>
+<li><a href="#sec-25">25. Robotics &#x2026; 971</a>
+<ul>
+<li><a href="#sec-25-1">25.1. Introduction &#x2026; 971</a></li>
+<li><a href="#sec-25-2">25.2. Robot Hardware &#x2026; 973</a>
+<ul>
+<li><a href="#sec-25-2-1">25.2.1. Sensors &#x2026; 973</a></li>
+<li><a href="#sec-25-2-2">25.2.2. Effectors &#x2026; 975</a></li>
+</ul>
+</li>
+<li><a href="#sec-25-3">25.3. Robotic Perception &#x2026; 978</a>
+<ul>
+<li><a href="#sec-25-3-1">25.3.1. Localization and mapping &#x2026; 979</a></li>
+<li><a href="#sec-25-3-2">25.3.2. Other types of perception &#x2026; 984</a></li>
+<li><a href="#sec-25-3-3">25.3.3. Machine learning in robot perception &#x2026; 985</a></li>
+</ul>
+</li>
+<li><a href="#sec-25-4">25.4. Planning to Move &#x2026; 986</a>
+<ul>
+<li><a href="#sec-25-4-1">25.4.1. Configuration space &#x2026; 986</a></li>
+<li><a href="#sec-25-4-2">25.4.2. Cell decomposition methods &#x2026; 989</a></li>
+<li><a href="#sec-25-4-3">25.4.3. Modified cost functions &#x2026; 991</a></li>
+<li><a href="#sec-25-4-4">25.4.4. Skeletonization methods &#x2026; 991</a></li>
+</ul>
+</li>
+<li><a href="#sec-25-5">25.5. Planning Uncertain Movements &#x2026; 993</a>
+<ul>
+<li><a href="#sec-25-5-1">25.5.1. Robust methods &#x2026; 994</a></li>
+</ul>
+</li>
+<li><a href="#sec-25-6">25.6. Moving &#x2026; 997</a>
+<ul>
+<li><a href="#sec-25-6-1">25.6.1. Dynamics and control &#x2026; 997</a></li>
+<li><a href="#sec-25-6-2">25.6.2. Potential-field control &#x2026; 999</a></li>
+<li><a href="#sec-25-6-3">25.6.3. Reactive control &#x2026; 1001</a></li>
+<li><a href="#sec-25-6-4">25.6.4. Reinforcement learning control &#x2026; 1002</a></li>
+</ul>
+</li>
+<li><a href="#sec-25-7">25.7. Robotic Software Architectures &#x2026; 1003</a>
+<ul>
+<li><a href="#sec-25-7-1">25.7.1. Subsumption architecture &#x2026; 1003</a></li>
+<li><a href="#sec-25-7-2">25.7.2. Three-layer architecture &#x2026; 1004</a></li>
+<li><a href="#sec-25-7-3">25.7.3. Pipeline architecture &#x2026; 1005</a></li>
+</ul>
+</li>
+<li><a href="#sec-25-8">25.8. Application Domains &#x2026; 1006</a></li>
+<li><a href="#sec-25-9">25.9. Summary &#x2026; 1010</a></li>
+<li><a href="#sec-25-10">25.10. Bibliographical and Historical Notes &#x2026; 1011</a></li>
+<li><a href="#sec-25-11">25.11. Exercises &#x2026; 1014</a></li>
+</ul>
+</li>
+<li><a href="#sec-26">26. Philosophical Foundations &#x2026; 1020</a>
+<ul>
+<li><a href="#sec-26-1">26.1. Weak AI: Can Machines Act Intelligently? &#x2026; 1020</a>
+<ul>
+<li><a href="#sec-26-1-1">26.1.1. The argument from disability &#x2026; 1021</a></li>
+<li><a href="#sec-26-1-2">26.1.2. The mathematical objection &#x2026; 1022</a></li>
+<li><a href="#sec-26-1-3">26.1.3. The argument from informality &#x2026; 1024</a></li>
+</ul>
+</li>
+<li><a href="#sec-26-2">26.2. Strong AI: Can Machines Really Think? &#x2026; 1026</a>
+<ul>
+<li><a href="#sec-26-2-1">26.2.1. Mental states and the brain in a vat &#x2026; 1028</a></li>
+<li><a href="#sec-26-2-2">26.2.2. Functionalism and the brain replacement experiment &#x2026; 1029</a></li>
+<li><a href="#sec-26-2-3">26.2.3. Biological naturalism and the Chinese Room &#x2026; 1031</a></li>
+<li><a href="#sec-26-2-4">26.2.4. Consciousness, qualia, and the explanatory gap &#x2026; 1033</a></li>
+</ul>
+</li>
+<li><a href="#sec-26-3">26.3. The Ethics and Risks of Developing Artificial Intelligence &#x2026; 1034</a></li>
+<li><a href="#sec-26-4">26.4. Summary &#x2026; 1040</a></li>
+<li><a href="#sec-26-5">26.5. Bibliographical and Historical Notes &#x2026; 1040</a></li>
+<li><a href="#sec-26-6">26.6. Exercises &#x2026; 1043</a></li>
+</ul>
+</li>
+<li><a href="#sec-27">27. AI: The Present and Future &#x2026; 1044</a>
+<ul>
+<li><a href="#sec-27-1">27.1. Agent Components &#x2026; 1044</a></li>
+<li><a href="#sec-27-2">27.2. Agent Architectures &#x2026; 1047</a></li>
+<li><a href="#sec-27-3">27.3. Are We Going in the Right Direction? &#x2026; 1049</a></li>
+<li><a href="#sec-27-4">27.4. What If AI Does Succeed? &#x2026; 1051</a></li>
+<li><a href="#sec-27-5">27.5. Bibliographical and Historical Notes &#x2026; 1059</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction &#x2026; 1</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> What Is AI? &#x2026; 1</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Acting humanly: The Turing Test approach &#x2026; 2</h4>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Thinking humanly: The cognitive modeling approach &#x2026; 3</h4>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Thinking rationally: The ``laws of thought'' approach &#x2026; 4</h4>
+</div>
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Acting rationally: The rational agent approach &#x2026; 4</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> The Foundations of Artificial Intelligence &#x2026; 5</h3>
+<div class="outline-text-3" id="text-1-2">
+</div><div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Philosophy &#x2026; 5</h4>
+</div>
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Mathematics &#x2026; 7</h4>
+</div>
+<div id="outline-container-sec-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> Economics &#x2026; 9</h4>
+</div>
+<div id="outline-container-sec-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> Neuroscience &#x2026; 10</h4>
+</div>
+<div id="outline-container-sec-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5"><span class="section-number-4">1.2.5</span> Psychology &#x2026; 12</h4>
+</div>
+<div id="outline-container-sec-1-2-6" class="outline-4">
+<h4 id="sec-1-2-6"><span class="section-number-4">1.2.6</span> Computer engineering &#x2026; 13</h4>
+</div>
+<div id="outline-container-sec-1-2-7" class="outline-4">
+<h4 id="sec-1-2-7"><span class="section-number-4">1.2.7</span> Control theory and cybernetics &#x2026; 15</h4>
+</div>
+<div id="outline-container-sec-1-2-8" class="outline-4">
+<h4 id="sec-1-2-8"><span class="section-number-4">1.2.8</span> Linguistics &#x2026; 15</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> The History of Artificial Intelligence &#x2026; 16</h3>
+<div class="outline-text-3" id="text-1-3">
+</div><div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> The gestation of artificial intelligence (1943&#x2013;1955) &#x2026; 16</h4>
+</div>
+<div id="outline-container-sec-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> The birth of artificial intelligence (1956) &#x2026; 17</h4>
+</div>
+<div id="outline-container-sec-1-3-3" class="outline-4">
+<h4 id="sec-1-3-3"><span class="section-number-4">1.3.3</span> Early enthusiasm, great expectations (1952&#x2013;1969) &#x2026; 18</h4>
+</div>
+<div id="outline-container-sec-1-3-4" class="outline-4">
+<h4 id="sec-1-3-4"><span class="section-number-4">1.3.4</span> A dose of reality (1966&#x2013;1973) &#x2026; 20</h4>
+</div>
+<div id="outline-container-sec-1-3-5" class="outline-4">
+<h4 id="sec-1-3-5"><span class="section-number-4">1.3.5</span> Knowledge-based systems: The key to power? (1969&#x2013;1979) &#x2026; 22</h4>
+</div>
+<div id="outline-container-sec-1-3-6" class="outline-4">
+<h4 id="sec-1-3-6"><span class="section-number-4">1.3.6</span> AI becomes an industry (1980&#x2013;present) &#x2026; 24</h4>
+</div>
+<div id="outline-container-sec-1-3-7" class="outline-4">
+<h4 id="sec-1-3-7"><span class="section-number-4">1.3.7</span> The return of neural networks (1986&#x2013;present) &#x2026; 24</h4>
+</div>
+<div id="outline-container-sec-1-3-8" class="outline-4">
+<h4 id="sec-1-3-8"><span class="section-number-4">1.3.8</span> AI adopts the scientific method (1987&#x2013;present) &#x2026; 25</h4>
+</div>
+<div id="outline-container-sec-1-3-9" class="outline-4">
+<h4 id="sec-1-3-9"><span class="section-number-4">1.3.9</span> The emergence of intelligent agents (1995&#x2013;present) &#x2026; 26</h4>
+<div class="outline-text-4" id="text-1-3-9">
+<p>
+1.3.10. The availability of very large data sets (2001&#x2013;present) &#x2026; 27 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> The State of the Art &#x2026; 28</h3>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Summary &#x2026; 29</h3>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Bibliographical and Historical Notes &#x2026; 30</h3>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Exercises &#x2026; 31</h3>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Intelligent Agents &#x2026; 34</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Agents and Environments &#x2026; 34</h3>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Good Behavior: The Concept of Rationality &#x2026; 36</h3>
+<div class="outline-text-3" id="text-2-2">
+</div><div id="outline-container-sec-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> Rationality &#x2026; 37</h4>
+</div>
+<div id="outline-container-sec-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> Omniscience, learning, and autonomy &#x2026; 38</h4>
+</div>
+</div>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> The Nature of Environments &#x2026; 40</h3>
+<div class="outline-text-3" id="text-2-3">
+</div><div id="outline-container-sec-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> Specifying the task environment &#x2026; 40</h4>
+</div>
+<div id="outline-container-sec-2-3-2" class="outline-4">
+<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> Properties of task environments &#x2026; 41</h4>
+</div>
+</div>
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> The Structure of Agents &#x2026; 46</h3>
+<div class="outline-text-3" id="text-2-4">
+</div><div id="outline-container-sec-2-4-1" class="outline-4">
+<h4 id="sec-2-4-1"><span class="section-number-4">2.4.1</span> Agent programs &#x2026; 46</h4>
+</div>
+<div id="outline-container-sec-2-4-2" class="outline-4">
+<h4 id="sec-2-4-2"><span class="section-number-4">2.4.2</span> Simple reflex agents &#x2026; 48</h4>
+</div>
+<div id="outline-container-sec-2-4-3" class="outline-4">
+<h4 id="sec-2-4-3"><span class="section-number-4">2.4.3</span> Model-based reflex agents &#x2026; 50</h4>
+</div>
+<div id="outline-container-sec-2-4-4" class="outline-4">
+<h4 id="sec-2-4-4"><span class="section-number-4">2.4.4</span> Goal-based agents &#x2026; 52</h4>
+</div>
+<div id="outline-container-sec-2-4-5" class="outline-4">
+<h4 id="sec-2-4-5"><span class="section-number-4">2.4.5</span> Utility-based agents &#x2026; 53</h4>
+</div>
+<div id="outline-container-sec-2-4-6" class="outline-4">
+<h4 id="sec-2-4-6"><span class="section-number-4">2.4.6</span> Learning agents &#x2026; 54</h4>
+</div>
+<div id="outline-container-sec-2-4-7" class="outline-4">
+<h4 id="sec-2-4-7"><span class="section-number-4">2.4.7</span> How the components of agent programs work &#x2026; 57</h4>
+</div>
+</div>
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Summary &#x2026; 59</h3>
+</div>
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Bibliographical and Historical Notes &#x2026; 59</h3>
+</div>
+<div id="outline-container-sec-2-7" class="outline-3">
+<h3 id="sec-2-7"><span class="section-number-3">2.7</span> Exercises &#x2026; 61</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Solving Problems by Searching &#x2026; 64</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Problem-Solving Agents &#x2026; 64</h3>
+<div class="outline-text-3" id="text-3-1">
+</div><div id="outline-container-sec-3-1-1" class="outline-4">
+<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> Well-defined problems and solutions &#x2026; 66</h4>
+</div>
+<div id="outline-container-sec-3-1-2" class="outline-4">
+<h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> Formulating problems &#x2026; 68</h4>
+</div>
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Example Problems &#x2026; 69</h3>
+<div class="outline-text-3" id="text-3-2">
+</div><div id="outline-container-sec-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Toy problems &#x2026; 70</h4>
+</div>
+<div id="outline-container-sec-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> Real-world problems &#x2026; 73</h4>
+</div>
+</div>
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Searching for Solutions &#x2026; 75</h3>
+<div class="outline-text-3" id="text-3-3">
+</div><div id="outline-container-sec-3-3-1" class="outline-4">
+<h4 id="sec-3-3-1"><span class="section-number-4">3.3.1</span> Infrastructure for search algorithms &#x2026; 78</h4>
+</div>
+<div id="outline-container-sec-3-3-2" class="outline-4">
+<h4 id="sec-3-3-2"><span class="section-number-4">3.3.2</span> Measuring problem-solving performance &#x2026; 80</h4>
+</div>
+</div>
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Uninformed Search Strategies &#x2026; 81</h3>
+<div class="outline-text-3" id="text-3-4">
+</div><div id="outline-container-sec-3-4-1" class="outline-4">
+<h4 id="sec-3-4-1"><span class="section-number-4">3.4.1</span> Breadth-first search &#x2026; 81</h4>
+</div>
+<div id="outline-container-sec-3-4-2" class="outline-4">
+<h4 id="sec-3-4-2"><span class="section-number-4">3.4.2</span> Uniform-cost search &#x2026; 83</h4>
+</div>
+<div id="outline-container-sec-3-4-3" class="outline-4">
+<h4 id="sec-3-4-3"><span class="section-number-4">3.4.3</span> Depth-first search &#x2026; 85</h4>
+</div>
+<div id="outline-container-sec-3-4-4" class="outline-4">
+<h4 id="sec-3-4-4"><span class="section-number-4">3.4.4</span> Depth-limited search &#x2026; 87</h4>
+</div>
+<div id="outline-container-sec-3-4-5" class="outline-4">
+<h4 id="sec-3-4-5"><span class="section-number-4">3.4.5</span> Iterative deepening depth-first search &#x2026; 88</h4>
+</div>
+<div id="outline-container-sec-3-4-6" class="outline-4">
+<h4 id="sec-3-4-6"><span class="section-number-4">3.4.6</span> Bidirectional search &#x2026; 90</h4>
+</div>
+<div id="outline-container-sec-3-4-7" class="outline-4">
+<h4 id="sec-3-4-7"><span class="section-number-4">3.4.7</span> Comparing uninformed search strategies &#x2026; 91</h4>
+</div>
+</div>
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Informed (Heuristic) Search Strategies &#x2026; 92</h3>
+<div class="outline-text-3" id="text-3-5">
+</div><div id="outline-container-sec-3-5-1" class="outline-4">
+<h4 id="sec-3-5-1"><span class="section-number-4">3.5.1</span> Greedy best-first search &#x2026; 92</h4>
+</div>
+<div id="outline-container-sec-3-5-2" class="outline-4">
+<h4 id="sec-3-5-2"><span class="section-number-4">3.5.2</span> A* search: Minimizing the total estimated solution cost &#x2026; 93</h4>
+<div class="outline-text-4" id="text-3-5-2">
+<p>
+Conditions for optimality: Admissibility and consistency &#x2026; 94 
+Optimality of A* &#x2026; 95 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-5-3" class="outline-4">
+<h4 id="sec-3-5-3"><span class="section-number-4">3.5.3</span> Memory-bounded heuristic search &#x2026; 99</h4>
+</div>
+<div id="outline-container-sec-3-5-4" class="outline-4">
+<h4 id="sec-3-5-4"><span class="section-number-4">3.5.4</span> Learning to search better &#x2026; 102</h4>
+</div>
+</div>
+<div id="outline-container-sec-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Heuristic Functions &#x2026; 102</h3>
+<div class="outline-text-3" id="text-3-6">
+</div><div id="outline-container-sec-3-6-1" class="outline-4">
+<h4 id="sec-3-6-1"><span class="section-number-4">3.6.1</span> The effect of heuristic accuracy on performance &#x2026; 103</h4>
+</div>
+<div id="outline-container-sec-3-6-2" class="outline-4">
+<h4 id="sec-3-6-2"><span class="section-number-4">3.6.2</span> Generating admissible heuristics from relaxed problems &#x2026; 104</h4>
+</div>
+<div id="outline-container-sec-3-6-3" class="outline-4">
+<h4 id="sec-3-6-3"><span class="section-number-4">3.6.3</span> Generating admissible heuristics from subproblems: Pattern databases &#x2026; 106</h4>
+</div>
+<div id="outline-container-sec-3-6-4" class="outline-4">
+<h4 id="sec-3-6-4"><span class="section-number-4">3.6.4</span> Learning heuristics from experience &#x2026; 107</h4>
+</div>
+</div>
+<div id="outline-container-sec-3-7" class="outline-3">
+<h3 id="sec-3-7"><span class="section-number-3">3.7</span> Summary &#x2026; 108</h3>
+</div>
+<div id="outline-container-sec-3-8" class="outline-3">
+<h3 id="sec-3-8"><span class="section-number-3">3.8</span> Bibliographical and Historical Notes &#x2026; 109</h3>
+</div>
+<div id="outline-container-sec-3-9" class="outline-3">
+<h3 id="sec-3-9"><span class="section-number-3">3.9</span> Exercises &#x2026; 112</h3>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Beyond Classical Search &#x2026; 120</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Local Search Algorithms and Optimization Problems &#x2026; 120</h3>
+<div class="outline-text-3" id="text-4-1">
+</div><div id="outline-container-sec-4-1-1" class="outline-4">
+<h4 id="sec-4-1-1"><span class="section-number-4">4.1.1</span> Hill-climbing search &#x2026; 122</h4>
+</div>
+<div id="outline-container-sec-4-1-2" class="outline-4">
+<h4 id="sec-4-1-2"><span class="section-number-4">4.1.2</span> Simulated annealing &#x2026; 125</h4>
+</div>
+<div id="outline-container-sec-4-1-3" class="outline-4">
+<h4 id="sec-4-1-3"><span class="section-number-4">4.1.3</span> Local beam search &#x2026; 125</h4>
+</div>
+<div id="outline-container-sec-4-1-4" class="outline-4">
+<h4 id="sec-4-1-4"><span class="section-number-4">4.1.4</span> Genetic algorithms &#x2026; 126</h4>
+</div>
+</div>
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Local Search in Continuous Spaces &#x2026; 129</h3>
+</div>
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Searching with Nondeterministic Actions &#x2026; 133</h3>
+<div class="outline-text-3" id="text-4-3">
+</div><div id="outline-container-sec-4-3-1" class="outline-4">
+<h4 id="sec-4-3-1"><span class="section-number-4">4.3.1</span> The erratic vacuum world &#x2026; 133</h4>
+<div class="outline-text-4" id="text-4-3-1">
+<p>
+4.3.2 AND-OR search trees &#x2026; 135 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4-3-2" class="outline-4">
+<h4 id="sec-4-3-2"><span class="section-number-4">4.3.2</span> Try, try again &#x2026; 137</h4>
+</div>
+</div>
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Searching with Partial Observations &#x2026; 138</h3>
+<div class="outline-text-3" id="text-4-4">
+</div><div id="outline-container-sec-4-4-1" class="outline-4">
+<h4 id="sec-4-4-1"><span class="section-number-4">4.4.1</span> Searching with no observation &#x2026; 138</h4>
+</div>
+<div id="outline-container-sec-4-4-2" class="outline-4">
+<h4 id="sec-4-4-2"><span class="section-number-4">4.4.2</span> Searching with observations &#x2026; 142</h4>
+</div>
+<div id="outline-container-sec-4-4-3" class="outline-4">
+<h4 id="sec-4-4-3"><span class="section-number-4">4.4.3</span> Solving partially observable problems &#x2026; 143</h4>
+</div>
+<div id="outline-container-sec-4-4-4" class="outline-4">
+<h4 id="sec-4-4-4"><span class="section-number-4">4.4.4</span> An agent for partially observable environments &#x2026; 144</h4>
+</div>
+</div>
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Online Search Agents and Unknown Environments &#x2026; 147</h3>
+<div class="outline-text-3" id="text-4-5">
+</div><div id="outline-container-sec-4-5-1" class="outline-4">
+<h4 id="sec-4-5-1"><span class="section-number-4">4.5.1</span> Online search problems &#x2026; 147</h4>
+</div>
+<div id="outline-container-sec-4-5-2" class="outline-4">
+<h4 id="sec-4-5-2"><span class="section-number-4">4.5.2</span> Online search agents &#x2026; 149</h4>
+</div>
+<div id="outline-container-sec-4-5-3" class="outline-4">
+<h4 id="sec-4-5-3"><span class="section-number-4">4.5.3</span> Online local search &#x2026; 150</h4>
+</div>
+<div id="outline-container-sec-4-5-4" class="outline-4">
+<h4 id="sec-4-5-4"><span class="section-number-4">4.5.4</span> Learning in online search &#x2026; 153</h4>
+</div>
+</div>
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Summary &#x2026; 153</h3>
+</div>
+<div id="outline-container-sec-4-7" class="outline-3">
+<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Bibliographical and Historical Notes &#x2026; 154</h3>
+</div>
+<div id="outline-container-sec-4-8" class="outline-3">
+<h3 id="sec-4-8"><span class="section-number-3">4.8</span> Exercises &#x2026; 157</h3>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Adversarial Search &#x2026; 161</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Games &#x2026; 161</h3>
+</div>
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Optimal Decisions in Games &#x2026; 163</h3>
+<div class="outline-text-3" id="text-5-2">
+</div><div id="outline-container-sec-5-2-1" class="outline-4">
+<h4 id="sec-5-2-1"><span class="section-number-4">5.2.1</span> The minimax algorithm &#x2026; 165</h4>
+</div>
+<div id="outline-container-sec-5-2-2" class="outline-4">
+<h4 id="sec-5-2-2"><span class="section-number-4">5.2.2</span> Optimal decisions in multiplayer games &#x2026; 165</h4>
+</div>
+</div>
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Alpha&#x2013;Beta Pruning &#x2026; 167</h3>
+<div class="outline-text-3" id="text-5-3">
+</div><div id="outline-container-sec-5-3-1" class="outline-4">
+<h4 id="sec-5-3-1"><span class="section-number-4">5.3.1</span> Move ordering &#x2026; 169</h4>
+</div>
+</div>
+<div id="outline-container-sec-5-4" class="outline-3">
+<h3 id="sec-5-4"><span class="section-number-3">5.4</span> Imperfect Real-Time Decisions &#x2026; 171</h3>
+<div class="outline-text-3" id="text-5-4">
+</div><div id="outline-container-sec-5-4-1" class="outline-4">
+<h4 id="sec-5-4-1"><span class="section-number-4">5.4.1</span> Evaluation functions &#x2026; 171</h4>
+</div>
+<div id="outline-container-sec-5-4-2" class="outline-4">
+<h4 id="sec-5-4-2"><span class="section-number-4">5.4.2</span> Cutting off search &#x2026; 173</h4>
+</div>
+<div id="outline-container-sec-5-4-3" class="outline-4">
+<h4 id="sec-5-4-3"><span class="section-number-4">5.4.3</span> Forward pruning &#x2026; 174</h4>
+</div>
+<div id="outline-container-sec-5-4-4" class="outline-4">
+<h4 id="sec-5-4-4"><span class="section-number-4">5.4.4</span> Search versus lookup &#x2026; 176</h4>
+</div>
+</div>
+<div id="outline-container-sec-5-5" class="outline-3">
+<h3 id="sec-5-5"><span class="section-number-3">5.5</span> Stochastic Games &#x2026; 177</h3>
+<div class="outline-text-3" id="text-5-5">
+</div><div id="outline-container-sec-5-5-1" class="outline-4">
+<h4 id="sec-5-5-1"><span class="section-number-4">5.5.1</span> Evaluation functions for games of chance &#x2026; 178</h4>
+</div>
+</div>
+<div id="outline-container-sec-5-6" class="outline-3">
+<h3 id="sec-5-6"><span class="section-number-3">5.6</span> Partially Observable Games &#x2026; 180</h3>
+<div class="outline-text-3" id="text-5-6">
+</div><div id="outline-container-sec-5-6-1" class="outline-4">
+<h4 id="sec-5-6-1"><span class="section-number-4">5.6.1</span> Kriegspiel: Partially observable chess &#x2026; 180</h4>
+</div>
+<div id="outline-container-sec-5-6-2" class="outline-4">
+<h4 id="sec-5-6-2"><span class="section-number-4">5.6.2</span> Card games &#x2026; 183</h4>
+</div>
+</div>
+<div id="outline-container-sec-5-7" class="outline-3">
+<h3 id="sec-5-7"><span class="section-number-3">5.7</span> State-of-the-Art Game Programs &#x2026; 185</h3>
+</div>
+<div id="outline-container-sec-5-8" class="outline-3">
+<h3 id="sec-5-8"><span class="section-number-3">5.8</span> Alternative Approaches &#x2026; 187</h3>
+</div>
+<div id="outline-container-sec-5-9" class="outline-3">
+<h3 id="sec-5-9"><span class="section-number-3">5.9</span> Summary &#x2026; 189</h3>
+</div>
+<div id="outline-container-sec-5-10" class="outline-3">
+<h3 id="sec-5-10"><span class="section-number-3">5.10</span> Bibliographical and Historical Notes &#x2026; 190</h3>
+</div>
+<div id="outline-container-sec-5-11" class="outline-3">
+<h3 id="sec-5-11"><span class="section-number-3">5.11</span> Exercises &#x2026; 195</h3>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Constraint Satisfaction Problems &#x2026; 202</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Defining Constraint Satisfaction Problems &#x2026; 202</h3>
+<div class="outline-text-3" id="text-6-1">
+</div><div id="outline-container-sec-6-1-1" class="outline-4">
+<h4 id="sec-6-1-1"><span class="section-number-4">6.1.1</span> Example problem: Map coloring &#x2026; 203</h4>
+</div>
+<div id="outline-container-sec-6-1-2" class="outline-4">
+<h4 id="sec-6-1-2"><span class="section-number-4">6.1.2</span> Example problem: Job-shop scheduling &#x2026; 204</h4>
+</div>
+<div id="outline-container-sec-6-1-3" class="outline-4">
+<h4 id="sec-6-1-3"><span class="section-number-4">6.1.3</span> Variations on the CSP formalism &#x2026; 205</h4>
+</div>
+</div>
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> Constraint Propagation: Inference in CSPs &#x2026; 208</h3>
+<div class="outline-text-3" id="text-6-2">
+</div><div id="outline-container-sec-6-2-1" class="outline-4">
+<h4 id="sec-6-2-1"><span class="section-number-4">6.2.1</span> Node consistency &#x2026; 208</h4>
+</div>
+<div id="outline-container-sec-6-2-2" class="outline-4">
+<h4 id="sec-6-2-2"><span class="section-number-4">6.2.2</span> Arc consistency &#x2026; 208</h4>
+</div>
+<div id="outline-container-sec-6-2-3" class="outline-4">
+<h4 id="sec-6-2-3"><span class="section-number-4">6.2.3</span> Path consistency &#x2026; 210</h4>
+</div>
+<div id="outline-container-sec-6-2-4" class="outline-4">
+<h4 id="sec-6-2-4"><span class="section-number-4">6.2.4</span> K-consistency. &#x2026; 211</h4>
+</div>
+<div id="outline-container-sec-6-2-5" class="outline-4">
+<h4 id="sec-6-2-5"><span class="section-number-4">6.2.5</span> Global constraints &#x2026; 211</h4>
+</div>
+<div id="outline-container-sec-6-2-6" class="outline-4">
+<h4 id="sec-6-2-6"><span class="section-number-4">6.2.6</span> Sudoku example &#x2026; 212</h4>
+</div>
+</div>
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3"><span class="section-number-3">6.3</span> Backtracking Search for CSPs &#x2026; 214</h3>
+<div class="outline-text-3" id="text-6-3">
+</div><div id="outline-container-sec-6-3-1" class="outline-4">
+<h4 id="sec-6-3-1"><span class="section-number-4">6.3.1</span> Variable and value ordering &#x2026; 216</h4>
+</div>
+<div id="outline-container-sec-6-3-2" class="outline-4">
+<h4 id="sec-6-3-2"><span class="section-number-4">6.3.2</span> Interleaving search and inference &#x2026; 217</h4>
+</div>
+<div id="outline-container-sec-6-3-3" class="outline-4">
+<h4 id="sec-6-3-3"><span class="section-number-4">6.3.3</span> Intelligent backtracking: Looking backward &#x2026; 218</h4>
+</div>
+</div>
+<div id="outline-container-sec-6-4" class="outline-3">
+<h3 id="sec-6-4"><span class="section-number-3">6.4</span> Local Search for CSPs &#x2026; 220</h3>
+</div>
+<div id="outline-container-sec-6-5" class="outline-3">
+<h3 id="sec-6-5"><span class="section-number-3">6.5</span> The Structure of Problems &#x2026; 222</h3>
+</div>
+<div id="outline-container-sec-6-6" class="outline-3">
+<h3 id="sec-6-6"><span class="section-number-3">6.6</span> Summary &#x2026; 227</h3>
+</div>
+<div id="outline-container-sec-6-7" class="outline-3">
+<h3 id="sec-6-7"><span class="section-number-3">6.7</span> Bibliographical and Historical Notes &#x2026; 227</h3>
+</div>
+<div id="outline-container-sec-6-8" class="outline-3">
+<h3 id="sec-6-8"><span class="section-number-3">6.8</span> Exercises &#x2026; 230</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Logical Agents &#x2026; 234</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> Knowledge-Based Agents &#x2026; 235</h3>
+</div>
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> The Wumpus World &#x2026; 236</h3>
+</div>
+<div id="outline-container-sec-7-3" class="outline-3">
+<h3 id="sec-7-3"><span class="section-number-3">7.3</span> Logic &#x2026; 240</h3>
+</div>
+<div id="outline-container-sec-7-4" class="outline-3">
+<h3 id="sec-7-4"><span class="section-number-3">7.4</span> Propositional Logic: A Very Simple Logic &#x2026; 243</h3>
+<div class="outline-text-3" id="text-7-4">
+</div><div id="outline-container-sec-7-4-1" class="outline-4">
+<h4 id="sec-7-4-1"><span class="section-number-4">7.4.1</span> Syntax &#x2026; 244</h4>
+</div>
+<div id="outline-container-sec-7-4-2" class="outline-4">
+<h4 id="sec-7-4-2"><span class="section-number-4">7.4.2</span> Semantics &#x2026; 245</h4>
+</div>
+<div id="outline-container-sec-7-4-3" class="outline-4">
+<h4 id="sec-7-4-3"><span class="section-number-4">7.4.3</span> A simple knowledge base &#x2026; 246</h4>
+</div>
+<div id="outline-container-sec-7-4-4" class="outline-4">
+<h4 id="sec-7-4-4"><span class="section-number-4">7.4.4</span> A simple inference procedure &#x2026; 247</h4>
+</div>
+</div>
+<div id="outline-container-sec-7-5" class="outline-3">
+<h3 id="sec-7-5"><span class="section-number-3">7.5</span> Propositional Theorem Proving &#x2026; 249</h3>
+<div class="outline-text-3" id="text-7-5">
+</div><div id="outline-container-sec-7-5-1" class="outline-4">
+<h4 id="sec-7-5-1"><span class="section-number-4">7.5.1</span> Inference and proofs &#x2026; 250</h4>
+</div>
+<div id="outline-container-sec-7-5-2" class="outline-4">
+<h4 id="sec-7-5-2"><span class="section-number-4">7.5.2</span> Proof by resolution &#x2026; 252</h4>
+<div class="outline-text-4" id="text-7-5-2">
+<p>
+Conjunctive normal form &#x2026; 253 
+A resolution algorithm &#x2026; 254 
+Completeness of resolution &#x2026; 255 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-7-5-3" class="outline-4">
+<h4 id="sec-7-5-3"><span class="section-number-4">7.5.3</span> Horn clauses and definite clauses &#x2026; 256</h4>
+</div>
+<div id="outline-container-sec-7-5-4" class="outline-4">
+<h4 id="sec-7-5-4"><span class="section-number-4">7.5.4</span> Forward and backward chaining &#x2026; 257</h4>
+</div>
+</div>
+<div id="outline-container-sec-7-6" class="outline-3">
+<h3 id="sec-7-6"><span class="section-number-3">7.6</span> Effective Propositional Model Checking &#x2026; 259</h3>
+<div class="outline-text-3" id="text-7-6">
+</div><div id="outline-container-sec-7-6-1" class="outline-4">
+<h4 id="sec-7-6-1"><span class="section-number-4">7.6.1</span> A complete backtracking algorithm &#x2026; 260</h4>
+</div>
+<div id="outline-container-sec-7-6-2" class="outline-4">
+<h4 id="sec-7-6-2"><span class="section-number-4">7.6.2</span> Local search algorithms &#x2026; 262</h4>
+</div>
+<div id="outline-container-sec-7-6-3" class="outline-4">
+<h4 id="sec-7-6-3"><span class="section-number-4">7.6.3</span> The landscape of random SAT problems &#x2026; 263</h4>
+</div>
+</div>
+<div id="outline-container-sec-7-7" class="outline-3">
+<h3 id="sec-7-7"><span class="section-number-3">7.7</span> Agents Based on Propositional Logic &#x2026; 265</h3>
+<div class="outline-text-3" id="text-7-7">
+</div><div id="outline-container-sec-7-7-1" class="outline-4">
+<h4 id="sec-7-7-1"><span class="section-number-4">7.7.1</span> The current state of the world &#x2026; 265</h4>
+</div>
+<div id="outline-container-sec-7-7-2" class="outline-4">
+<h4 id="sec-7-7-2"><span class="section-number-4">7.7.2</span> A hybrid agent &#x2026; 268</h4>
+</div>
+<div id="outline-container-sec-7-7-3" class="outline-4">
+<h4 id="sec-7-7-3"><span class="section-number-4">7.7.3</span> Logical state estimation &#x2026; 269</h4>
+</div>
+<div id="outline-container-sec-7-7-4" class="outline-4">
+<h4 id="sec-7-7-4"><span class="section-number-4">7.7.4</span> Making plans by propositional inference &#x2026; 271</h4>
+</div>
+</div>
+<div id="outline-container-sec-7-8" class="outline-3">
+<h3 id="sec-7-8"><span class="section-number-3">7.8</span> Summary &#x2026; 274</h3>
+</div>
+<div id="outline-container-sec-7-9" class="outline-3">
+<h3 id="sec-7-9"><span class="section-number-3">7.9</span> Bibliographical and Historical Notes &#x2026; 275</h3>
+</div>
+<div id="outline-container-sec-7-10" class="outline-3">
+<h3 id="sec-7-10"><span class="section-number-3">7.10</span> Exercises &#x2026; 279</h3>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> First-Order Logic &#x2026; 285</h2>
+<div class="outline-text-2" id="text-8">
+</div><div id="outline-container-sec-8-1" class="outline-3">
+<h3 id="sec-8-1"><span class="section-number-3">8.1</span> Representation Revisited &#x2026; 285</h3>
+<div class="outline-text-3" id="text-8-1">
+</div><div id="outline-container-sec-8-1-1" class="outline-4">
+<h4 id="sec-8-1-1"><span class="section-number-4">8.1.1</span> The language of thought &#x2026; 286</h4>
+</div>
+<div id="outline-container-sec-8-1-2" class="outline-4">
+<h4 id="sec-8-1-2"><span class="section-number-4">8.1.2</span> Combining the best of formal and natural languages &#x2026; 288</h4>
+</div>
+</div>
+<div id="outline-container-sec-8-2" class="outline-3">
+<h3 id="sec-8-2"><span class="section-number-3">8.2</span> Syntax and Semantics of First-Order Logic &#x2026; 290</h3>
+<div class="outline-text-3" id="text-8-2">
+</div><div id="outline-container-sec-8-2-1" class="outline-4">
+<h4 id="sec-8-2-1"><span class="section-number-4">8.2.1</span> Models for first-order logic &#x2026; 290</h4>
+</div>
+<div id="outline-container-sec-8-2-2" class="outline-4">
+<h4 id="sec-8-2-2"><span class="section-number-4">8.2.2</span> Symbols and interpretations &#x2026; 292</h4>
+</div>
+<div id="outline-container-sec-8-2-3" class="outline-4">
+<h4 id="sec-8-2-3"><span class="section-number-4">8.2.3</span> Terms &#x2026; 294</h4>
+</div>
+<div id="outline-container-sec-8-2-4" class="outline-4">
+<h4 id="sec-8-2-4"><span class="section-number-4">8.2.4</span> Atomic sentences &#x2026; 294</h4>
+</div>
+<div id="outline-container-sec-8-2-5" class="outline-4">
+<h4 id="sec-8-2-5"><span class="section-number-4">8.2.5</span> Complex sentences &#x2026; 295</h4>
+</div>
+<div id="outline-container-sec-8-2-6" class="outline-4">
+<h4 id="sec-8-2-6"><span class="section-number-4">8.2.6</span> Quantifiers &#x2026; 295</h4>
+<div class="outline-text-4" id="text-8-2-6">
+<p>
+Universal quantification (∀) &#x2026; 295 
+Existential quantification (∃) &#x2026; 297 
+Nested quantifiers &#x2026; 297 
+Connections between ∀ and ∃ &#x2026; 298 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-2-7" class="outline-4">
+<h4 id="sec-8-2-7"><span class="section-number-4">8.2.7</span> Equality &#x2026; 299</h4>
+</div>
+<div id="outline-container-sec-8-2-8" class="outline-4">
+<h4 id="sec-8-2-8"><span class="section-number-4">8.2.8</span> An alternative semantics? &#x2026; 299</h4>
+</div>
+</div>
+<div id="outline-container-sec-8-3" class="outline-3">
+<h3 id="sec-8-3"><span class="section-number-3">8.3</span> Using First-Order Logic &#x2026; 300</h3>
+<div class="outline-text-3" id="text-8-3">
+</div><div id="outline-container-sec-8-3-1" class="outline-4">
+<h4 id="sec-8-3-1"><span class="section-number-4">8.3.1</span> Assertions and queries in first-order logic &#x2026; 301</h4>
+</div>
+<div id="outline-container-sec-8-3-2" class="outline-4">
+<h4 id="sec-8-3-2"><span class="section-number-4">8.3.2</span> The kinship domain &#x2026; 301</h4>
+</div>
+<div id="outline-container-sec-8-3-3" class="outline-4">
+<h4 id="sec-8-3-3"><span class="section-number-4">8.3.3</span> Numbers, sets, and lists &#x2026; 303</h4>
+</div>
+<div id="outline-container-sec-8-3-4" class="outline-4">
+<h4 id="sec-8-3-4"><span class="section-number-4">8.3.4</span> The wumpus world &#x2026; 305</h4>
+</div>
+</div>
+<div id="outline-container-sec-8-4" class="outline-3">
+<h3 id="sec-8-4"><span class="section-number-3">8.4</span> Knowledge Engineering in First-Order Logic &#x2026; 307</h3>
+<div class="outline-text-3" id="text-8-4">
+</div><div id="outline-container-sec-8-4-1" class="outline-4">
+<h4 id="sec-8-4-1"><span class="section-number-4">8.4.1</span> The knowledge-engineering process &#x2026; 307</h4>
+</div>
+<div id="outline-container-sec-8-4-2" class="outline-4">
+<h4 id="sec-8-4-2"><span class="section-number-4">8.4.2</span> The electronic circuits domain &#x2026; 309</h4>
+<div class="outline-text-4" id="text-8-4-2">
+<p>
+Identify the task &#x2026; 309 
+Assemble the relevant knowledge &#x2026; 309 
+Decide on a vocabulary &#x2026; 310 
+Encode general knowledge of the domain &#x2026; 310 
+Encode the specific problem instance &#x2026; 311 
+Pose queries to the inference procedure &#x2026; 312 
+Debug the knowledge base &#x2026; 312 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-5" class="outline-3">
+<h3 id="sec-8-5"><span class="section-number-3">8.5</span> Summary &#x2026; 313</h3>
+</div>
+<div id="outline-container-sec-8-6" class="outline-3">
+<h3 id="sec-8-6"><span class="section-number-3">8.6</span> Bibliographical and Historical Notes &#x2026; 313</h3>
+</div>
+<div id="outline-container-sec-8-7" class="outline-3">
+<h3 id="sec-8-7"><span class="section-number-3">8.7</span> Exercises &#x2026; 315</h3>
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Inference in First-Order Logic &#x2026; 322</h2>
+<div class="outline-text-2" id="text-9">
+</div><div id="outline-container-sec-9-1" class="outline-3">
+<h3 id="sec-9-1"><span class="section-number-3">9.1</span> Propositional vs. First-Order Inference &#x2026; 322</h3>
+<div class="outline-text-3" id="text-9-1">
+</div><div id="outline-container-sec-9-1-1" class="outline-4">
+<h4 id="sec-9-1-1"><span class="section-number-4">9.1.1</span> Inference rules for quantifiers &#x2026; 322</h4>
+</div>
+<div id="outline-container-sec-9-1-2" class="outline-4">
+<h4 id="sec-9-1-2"><span class="section-number-4">9.1.2</span> Reduction to propositional inference &#x2026; 324</h4>
+</div>
+</div>
+<div id="outline-container-sec-9-2" class="outline-3">
+<h3 id="sec-9-2"><span class="section-number-3">9.2</span> Unification and Lifting &#x2026; 325</h3>
+<div class="outline-text-3" id="text-9-2">
+</div><div id="outline-container-sec-9-2-1" class="outline-4">
+<h4 id="sec-9-2-1"><span class="section-number-4">9.2.1</span> A first-order inference rule &#x2026; 325</h4>
+</div>
+<div id="outline-container-sec-9-2-2" class="outline-4">
+<h4 id="sec-9-2-2"><span class="section-number-4">9.2.2</span> Unification &#x2026; 326</h4>
+</div>
+<div id="outline-container-sec-9-2-3" class="outline-4">
+<h4 id="sec-9-2-3"><span class="section-number-4">9.2.3</span> Storage and retrieval &#x2026; 327</h4>
+</div>
+</div>
+<div id="outline-container-sec-9-3" class="outline-3">
+<h3 id="sec-9-3"><span class="section-number-3">9.3</span> Forward Chaining &#x2026; 330</h3>
+<div class="outline-text-3" id="text-9-3">
+</div><div id="outline-container-sec-9-3-1" class="outline-4">
+<h4 id="sec-9-3-1"><span class="section-number-4">9.3.1</span> First-order definite clauses &#x2026; 330</h4>
+</div>
+<div id="outline-container-sec-9-3-2" class="outline-4">
+<h4 id="sec-9-3-2"><span class="section-number-4">9.3.2</span> A simple forward-chaining algorithm &#x2026; 331</h4>
+</div>
+<div id="outline-container-sec-9-3-3" class="outline-4">
+<h4 id="sec-9-3-3"><span class="section-number-4">9.3.3</span> Efficient forward chaining &#x2026; 333</h4>
+<div class="outline-text-4" id="text-9-3-3">
+<p>
+Matching rules against known facts &#x2026; 333 
+Incremental forward chaining &#x2026; 335 
+Irrelevant facts &#x2026; 336 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-9-4" class="outline-3">
+<h3 id="sec-9-4"><span class="section-number-3">9.4</span> Backward Chaining &#x2026; 337</h3>
+<div class="outline-text-3" id="text-9-4">
+</div><div id="outline-container-sec-9-4-1" class="outline-4">
+<h4 id="sec-9-4-1"><span class="section-number-4">9.4.1</span> A backward-chaining algorithm &#x2026; 337</h4>
+</div>
+<div id="outline-container-sec-9-4-2" class="outline-4">
+<h4 id="sec-9-4-2"><span class="section-number-4">9.4.2</span> Logic programming &#x2026; 339</h4>
+</div>
+<div id="outline-container-sec-9-4-3" class="outline-4">
+<h4 id="sec-9-4-3"><span class="section-number-4">9.4.3</span> Efficient implementation of logic programs &#x2026; 340</h4>
+</div>
+<div id="outline-container-sec-9-4-4" class="outline-4">
+<h4 id="sec-9-4-4"><span class="section-number-4">9.4.4</span> Redundant inference and infinite loops &#x2026; 342</h4>
+</div>
+<div id="outline-container-sec-9-4-5" class="outline-4">
+<h4 id="sec-9-4-5"><span class="section-number-4">9.4.5</span> Database semantics of Prolog &#x2026; 343</h4>
+</div>
+<div id="outline-container-sec-9-4-6" class="outline-4">
+<h4 id="sec-9-4-6"><span class="section-number-4">9.4.6</span> Constraint logic programming &#x2026; 344</h4>
+</div>
+</div>
+<div id="outline-container-sec-9-5" class="outline-3">
+<h3 id="sec-9-5"><span class="section-number-3">9.5</span> Resolution &#x2026; 345</h3>
+<div class="outline-text-3" id="text-9-5">
+</div><div id="outline-container-sec-9-5-1" class="outline-4">
+<h4 id="sec-9-5-1"><span class="section-number-4">9.5.1</span> Conjunctive normal form for first-order logic &#x2026; 345</h4>
+</div>
+<div id="outline-container-sec-9-5-2" class="outline-4">
+<h4 id="sec-9-5-2"><span class="section-number-4">9.5.2</span> The resolution inference rule &#x2026; 347</h4>
+</div>
+<div id="outline-container-sec-9-5-3" class="outline-4">
+<h4 id="sec-9-5-3"><span class="section-number-4">9.5.3</span> Example proofs &#x2026; 347</h4>
+</div>
+<div id="outline-container-sec-9-5-4" class="outline-4">
+<h4 id="sec-9-5-4"><span class="section-number-4">9.5.4</span> Completeness of resolution &#x2026; 350</h4>
+</div>
+<div id="outline-container-sec-9-5-5" class="outline-4">
+<h4 id="sec-9-5-5"><span class="section-number-4">9.5.5</span> Equality &#x2026; 353</h4>
+</div>
+<div id="outline-container-sec-9-5-6" class="outline-4">
+<h4 id="sec-9-5-6"><span class="section-number-4">9.5.6</span> Resolution strategies &#x2026; 355</h4>
+<div class="outline-text-4" id="text-9-5-6">
+<p>
+Practical uses of resolution theorem provers &#x2026; 356 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-9-6" class="outline-3">
+<h3 id="sec-9-6"><span class="section-number-3">9.6</span> Summary &#x2026; 357</h3>
+</div>
+<div id="outline-container-sec-9-7" class="outline-3">
+<h3 id="sec-9-7"><span class="section-number-3">9.7</span> Bibliographical and Historical Notes &#x2026; 357</h3>
+</div>
+<div id="outline-container-sec-9-8" class="outline-3">
+<h3 id="sec-9-8"><span class="section-number-3">9.8</span> Exercises &#x2026; 360</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Chapter 10: Classical Planning &#x2026; 366</h2>
+<div class="outline-text-2" id="text-10">
+</div><div id="outline-container-sec-10-1" class="outline-3">
+<h3 id="sec-10-1"><span class="section-number-3">10.1</span> Definition of Classical Planning &#x2026; 366</h3>
+<div class="outline-text-3" id="text-10-1">
+</div><div id="outline-container-sec-10-1-1" class="outline-4">
+<h4 id="sec-10-1-1"><span class="section-number-4">10.1.1</span> Example: Air cargo transport &#x2026; 369</h4>
+</div>
+<div id="outline-container-sec-10-1-2" class="outline-4">
+<h4 id="sec-10-1-2"><span class="section-number-4">10.1.2</span> Example: The spare tire problem &#x2026; 370</h4>
+</div>
+<div id="outline-container-sec-10-1-3" class="outline-4">
+<h4 id="sec-10-1-3"><span class="section-number-4">10.1.3</span> Example: The blocks world &#x2026; 370</h4>
+</div>
+<div id="outline-container-sec-10-1-4" class="outline-4">
+<h4 id="sec-10-1-4"><span class="section-number-4">10.1.4</span> The complexity of classical planning &#x2026; 372</h4>
+</div>
+</div>
+<div id="outline-container-sec-10-2" class="outline-3">
+<h3 id="sec-10-2"><span class="section-number-3">10.2</span> Algorithms for Planning as State-Space Search &#x2026; 373</h3>
+<div class="outline-text-3" id="text-10-2">
+</div><div id="outline-container-sec-10-2-1" class="outline-4">
+<h4 id="sec-10-2-1"><span class="section-number-4">10.2.1</span> Forward (progression) state-space search &#x2026; 373</h4>
+</div>
+<div id="outline-container-sec-10-2-2" class="outline-4">
+<h4 id="sec-10-2-2"><span class="section-number-4">10.2.2</span> Backward (regression) relevant-states search &#x2026; 374</h4>
+</div>
+<div id="outline-container-sec-10-2-3" class="outline-4">
+<h4 id="sec-10-2-3"><span class="section-number-4">10.2.3</span> Heuristics for planning &#x2026; 376</h4>
+</div>
+</div>
+<div id="outline-container-sec-10-3" class="outline-3">
+<h3 id="sec-10-3"><span class="section-number-3">10.3</span> Planning Graphs &#x2026; 379</h3>
+<div class="outline-text-3" id="text-10-3">
+</div><div id="outline-container-sec-10-3-1" class="outline-4">
+<h4 id="sec-10-3-1"><span class="section-number-4">10.3.1</span> Planning graphs for heuristic estimation &#x2026; 381</h4>
+</div>
+<div id="outline-container-sec-10-3-2" class="outline-4">
+<h4 id="sec-10-3-2"><span class="section-number-4">10.3.2</span> The Graphplan algorithm &#x2026; 383</h4>
+</div>
+<div id="outline-container-sec-10-3-3" class="outline-4">
+<h4 id="sec-10-3-3"><span class="section-number-4">10.3.3</span> Termination of Graphplan &#x2026; 385</h4>
+</div>
+</div>
+<div id="outline-container-sec-10-4" class="outline-3">
+<h3 id="sec-10-4"><span class="section-number-3">10.4</span> Other Classical Planning Approaches &#x2026; 387</h3>
+<div class="outline-text-3" id="text-10-4">
+</div><div id="outline-container-sec-10-4-1" class="outline-4">
+<h4 id="sec-10-4-1"><span class="section-number-4">10.4.1</span> Classical planning as Boolean satisfiability &#x2026; 387</h4>
+</div>
+<div id="outline-container-sec-10-4-2" class="outline-4">
+<h4 id="sec-10-4-2"><span class="section-number-4">10.4.2</span> Planning as first-order logical deduction: Situation calculus &#x2026; 388</h4>
+</div>
+<div id="outline-container-sec-10-4-3" class="outline-4">
+<h4 id="sec-10-4-3"><span class="section-number-4">10.4.3</span> Planning as constraint satisfaction &#x2026; 390</h4>
+</div>
+<div id="outline-container-sec-10-4-4" class="outline-4">
+<h4 id="sec-10-4-4"><span class="section-number-4">10.4.4</span> Planning as refinement of partially ordered plans &#x2026; 390</h4>
+</div>
+</div>
+<div id="outline-container-sec-10-5" class="outline-3">
+<h3 id="sec-10-5"><span class="section-number-3">10.5</span> Analysis of Planning Approaches &#x2026; 392</h3>
+</div>
+<div id="outline-container-sec-10-6" class="outline-3">
+<h3 id="sec-10-6"><span class="section-number-3">10.6</span> Summary &#x2026; 393</h3>
+</div>
+<div id="outline-container-sec-10-7" class="outline-3">
+<h3 id="sec-10-7"><span class="section-number-3">10.7</span> Bibliographical and Historical Notes &#x2026; 393</h3>
+</div>
+<div id="outline-container-sec-10-8" class="outline-3">
+<h3 id="sec-10-8"><span class="section-number-3">10.8</span> Exercises &#x2026; 396</h3>
+</div>
+</div>
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Planning and Acting in the Real World &#x2026; 401</h2>
+<div class="outline-text-2" id="text-11">
+</div><div id="outline-container-sec-11-1" class="outline-3">
+<h3 id="sec-11-1"><span class="section-number-3">11.1</span> Time, Schedules, and Resources &#x2026; 401</h3>
+<div class="outline-text-3" id="text-11-1">
+</div><div id="outline-container-sec-11-1-1" class="outline-4">
+<h4 id="sec-11-1-1"><span class="section-number-4">11.1.1</span> Representing temporal and resource constraints &#x2026; 402</h4>
+</div>
+<div id="outline-container-sec-11-1-2" class="outline-4">
+<h4 id="sec-11-1-2"><span class="section-number-4">11.1.2</span> Solving scheduling problems &#x2026; 403</h4>
+</div>
+</div>
+<div id="outline-container-sec-11-2" class="outline-3">
+<h3 id="sec-11-2"><span class="section-number-3">11.2</span> Hierarchical Planning &#x2026; 406</h3>
+<div class="outline-text-3" id="text-11-2">
+</div><div id="outline-container-sec-11-2-1" class="outline-4">
+<h4 id="sec-11-2-1"><span class="section-number-4">11.2.1</span> High-level actions &#x2026; 406</h4>
+</div>
+<div id="outline-container-sec-11-2-2" class="outline-4">
+<h4 id="sec-11-2-2"><span class="section-number-4">11.2.2</span> Searching for primitive solutions &#x2026; 408</h4>
+</div>
+<div id="outline-container-sec-11-2-3" class="outline-4">
+<h4 id="sec-11-2-3"><span class="section-number-4">11.2.3</span> Searching for abstract solutions &#x2026; 410</h4>
+</div>
+</div>
+<div id="outline-container-sec-11-3" class="outline-3">
+<h3 id="sec-11-3"><span class="section-number-3">11.3</span> Planning and Acting in Nondeterministic Domains &#x2026; 415</h3>
+<div class="outline-text-3" id="text-11-3">
+</div><div id="outline-container-sec-11-3-1" class="outline-4">
+<h4 id="sec-11-3-1"><span class="section-number-4">11.3.1</span> Sensorless planning &#x2026; 417</h4>
+</div>
+<div id="outline-container-sec-11-3-2" class="outline-4">
+<h4 id="sec-11-3-2"><span class="section-number-4">11.3.2</span> Contingent planning &#x2026; 421</h4>
+</div>
+<div id="outline-container-sec-11-3-3" class="outline-4">
+<h4 id="sec-11-3-3"><span class="section-number-4">11.3.3</span> Online replanning &#x2026; 422</h4>
+</div>
+</div>
+<div id="outline-container-sec-11-4" class="outline-3">
+<h3 id="sec-11-4"><span class="section-number-3">11.4</span> Multiagent Planning &#x2026; 425</h3>
+<div class="outline-text-3" id="text-11-4">
+</div><div id="outline-container-sec-11-4-1" class="outline-4">
+<h4 id="sec-11-4-1"><span class="section-number-4">11.4.1</span> Planning with multiple simultaneous actions &#x2026; 426</h4>
+</div>
+<div id="outline-container-sec-11-4-2" class="outline-4">
+<h4 id="sec-11-4-2"><span class="section-number-4">11.4.2</span> Planning with multiple agents: Cooperation and coordination &#x2026; 428</h4>
+</div>
+</div>
+<div id="outline-container-sec-11-5" class="outline-3">
+<h3 id="sec-11-5"><span class="section-number-3">11.5</span> Summary &#x2026; 430</h3>
+</div>
+<div id="outline-container-sec-11-6" class="outline-3">
+<h3 id="sec-11-6"><span class="section-number-3">11.6</span> Bibliographical and Historical Notes &#x2026; 431</h3>
+</div>
+<div id="outline-container-sec-11-7" class="outline-3">
+<h3 id="sec-11-7"><span class="section-number-3">11.7</span> Exercises &#x2026; 435</h3>
+</div>
+</div>
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Knowledge Representation &#x2026; 437</h2>
+<div class="outline-text-2" id="text-12">
+</div><div id="outline-container-sec-12-1" class="outline-3">
+<h3 id="sec-12-1"><span class="section-number-3">12.1</span> Ontological Engineering &#x2026; 437</h3>
+</div>
+<div id="outline-container-sec-12-2" class="outline-3">
+<h3 id="sec-12-2"><span class="section-number-3">12.2</span> Categories and Objects &#x2026; 440</h3>
+<div class="outline-text-3" id="text-12-2">
+</div><div id="outline-container-sec-12-2-1" class="outline-4">
+<h4 id="sec-12-2-1"><span class="section-number-4">12.2.1</span> Physical composition &#x2026; 441</h4>
+</div>
+<div id="outline-container-sec-12-2-2" class="outline-4">
+<h4 id="sec-12-2-2"><span class="section-number-4">12.2.2</span> Measurements &#x2026; 444</h4>
+</div>
+<div id="outline-container-sec-12-2-3" class="outline-4">
+<h4 id="sec-12-2-3"><span class="section-number-4">12.2.3</span> Objects: Things and stuff &#x2026; 445</h4>
+</div>
+</div>
+<div id="outline-container-sec-12-3" class="outline-3">
+<h3 id="sec-12-3"><span class="section-number-3">12.3</span> Events &#x2026; 446</h3>
+<div class="outline-text-3" id="text-12-3">
+</div><div id="outline-container-sec-12-3-1" class="outline-4">
+<h4 id="sec-12-3-1"><span class="section-number-4">12.3.1</span> Processes &#x2026; 447</h4>
+</div>
+<div id="outline-container-sec-12-3-2" class="outline-4">
+<h4 id="sec-12-3-2"><span class="section-number-4">12.3.2</span> Time intervals &#x2026; 448</h4>
+</div>
+<div id="outline-container-sec-12-3-3" class="outline-4">
+<h4 id="sec-12-3-3"><span class="section-number-4">12.3.3</span> Fluents and objects &#x2026; 449</h4>
+</div>
+</div>
+<div id="outline-container-sec-12-4" class="outline-3">
+<h3 id="sec-12-4"><span class="section-number-3">12.4</span> Mental Events and Mental Objects &#x2026; 450</h3>
+</div>
+<div id="outline-container-sec-12-5" class="outline-3">
+<h3 id="sec-12-5"><span class="section-number-3">12.5</span> Reasoning Systems for Categories &#x2026; 453</h3>
+<div class="outline-text-3" id="text-12-5">
+</div><div id="outline-container-sec-12-5-1" class="outline-4">
+<h4 id="sec-12-5-1"><span class="section-number-4">12.5.1</span> Semantic networks &#x2026; 454</h4>
+</div>
+<div id="outline-container-sec-12-5-2" class="outline-4">
+<h4 id="sec-12-5-2"><span class="section-number-4">12.5.2</span> Description logics &#x2026; 456</h4>
+</div>
+</div>
+<div id="outline-container-sec-12-6" class="outline-3">
+<h3 id="sec-12-6"><span class="section-number-3">12.6</span> Reasoning with Default Information &#x2026; 458</h3>
+<div class="outline-text-3" id="text-12-6">
+</div><div id="outline-container-sec-12-6-1" class="outline-4">
+<h4 id="sec-12-6-1"><span class="section-number-4">12.6.1</span> Circumscription and default logic &#x2026; 458</h4>
+</div>
+<div id="outline-container-sec-12-6-2" class="outline-4">
+<h4 id="sec-12-6-2"><span class="section-number-4">12.6.2</span> Truth maintenance systems &#x2026; 460</h4>
+</div>
+</div>
+<div id="outline-container-sec-12-7" class="outline-3">
+<h3 id="sec-12-7"><span class="section-number-3">12.7</span> The Internet Shopping World &#x2026; 462</h3>
+<div class="outline-text-3" id="text-12-7">
+</div><div id="outline-container-sec-12-7-1" class="outline-4">
+<h4 id="sec-12-7-1"><span class="section-number-4">12.7.1</span> Following links &#x2026; 464</h4>
+</div>
+<div id="outline-container-sec-12-7-2" class="outline-4">
+<h4 id="sec-12-7-2"><span class="section-number-4">12.7.2</span> Comparing offers &#x2026; 466</h4>
+</div>
+</div>
+<div id="outline-container-sec-12-8" class="outline-3">
+<h3 id="sec-12-8"><span class="section-number-3">12.8</span> Summary &#x2026; 467</h3>
+</div>
+<div id="outline-container-sec-12-9" class="outline-3">
+<h3 id="sec-12-9"><span class="section-number-3">12.9</span> Bibliographical and Historical Notes &#x2026; 468</h3>
+</div>
+<div id="outline-container-sec-12-10" class="outline-3">
+<h3 id="sec-12-10"><span class="section-number-3">12.10</span> Exercises &#x2026; 473</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> Quantifying Uncertainty &#x2026; 480</h2>
+<div class="outline-text-2" id="text-13">
+</div><div id="outline-container-sec-13-1" class="outline-3">
+<h3 id="sec-13-1"><span class="section-number-3">13.1</span> Acting under Uncertainty &#x2026; 480</h3>
+<div class="outline-text-3" id="text-13-1">
+</div><div id="outline-container-sec-13-1-1" class="outline-4">
+<h4 id="sec-13-1-1"><span class="section-number-4">13.1.1</span> Summarizing uncertainty &#x2026; 481</h4>
+</div>
+<div id="outline-container-sec-13-1-2" class="outline-4">
+<h4 id="sec-13-1-2"><span class="section-number-4">13.1.2</span> Uncertainty and rational decisions &#x2026; 482</h4>
+</div>
+</div>
+<div id="outline-container-sec-13-2" class="outline-3">
+<h3 id="sec-13-2"><span class="section-number-3">13.2</span> Basic Probability Notation &#x2026; 483</h3>
+<div class="outline-text-3" id="text-13-2">
+</div><div id="outline-container-sec-13-2-1" class="outline-4">
+<h4 id="sec-13-2-1"><span class="section-number-4">13.2.1</span> What probabilities are about &#x2026; 484</h4>
+</div>
+<div id="outline-container-sec-13-2-2" class="outline-4">
+<h4 id="sec-13-2-2"><span class="section-number-4">13.2.2</span> The language of propositions in probability assertions &#x2026; 486</h4>
+</div>
+<div id="outline-container-sec-13-2-3" class="outline-4">
+<h4 id="sec-13-2-3"><span class="section-number-4">13.2.3</span> Probability axioms and their reasonableness &#x2026; 488</h4>
+</div>
+</div>
+<div id="outline-container-sec-13-3" class="outline-3">
+<h3 id="sec-13-3"><span class="section-number-3">13.3</span> Inference Using Full Joint Distributions &#x2026; 490</h3>
+</div>
+<div id="outline-container-sec-13-4" class="outline-3">
+<h3 id="sec-13-4"><span class="section-number-3">13.4</span> Independence &#x2026; 494</h3>
+</div>
+<div id="outline-container-sec-13-5" class="outline-3">
+<h3 id="sec-13-5"><span class="section-number-3">13.5</span> Bayes' Rule and Its Use &#x2026; 495</h3>
+<div class="outline-text-3" id="text-13-5">
+</div><div id="outline-container-sec-13-5-1" class="outline-4">
+<h4 id="sec-13-5-1"><span class="section-number-4">13.5.1</span> Applying Bayes' rule: The simple case &#x2026; 496</h4>
+</div>
+<div id="outline-container-sec-13-5-2" class="outline-4">
+<h4 id="sec-13-5-2"><span class="section-number-4">13.5.2</span> Using Bayes' rule: Combining evidence &#x2026; 497</h4>
+</div>
+</div>
+<div id="outline-container-sec-13-6" class="outline-3">
+<h3 id="sec-13-6"><span class="section-number-3">13.6</span> The Wumpus World Revisited &#x2026; 499</h3>
+</div>
+<div id="outline-container-sec-13-7" class="outline-3">
+<h3 id="sec-13-7"><span class="section-number-3">13.7</span> Summary &#x2026; 503</h3>
+</div>
+<div id="outline-container-sec-13-8" class="outline-3">
+<h3 id="sec-13-8"><span class="section-number-3">13.8</span> Bibliographical and Historical Notes &#x2026; 503</h3>
+</div>
+<div id="outline-container-sec-13-9" class="outline-3">
+<h3 id="sec-13-9"><span class="section-number-3">13.9</span> Exercises &#x2026; 506</h3>
+</div>
+</div>
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14"><span class="section-number-2">14</span> Probabilistic Reasoning &#x2026; 510</h2>
+<div class="outline-text-2" id="text-14">
+</div><div id="outline-container-sec-14-1" class="outline-3">
+<h3 id="sec-14-1"><span class="section-number-3">14.1</span> Representing Knowledge in an Uncertain Domain &#x2026; 510</h3>
+</div>
+<div id="outline-container-sec-14-2" class="outline-3">
+<h3 id="sec-14-2"><span class="section-number-3">14.2</span> The Semantics of Bayesian Networks &#x2026; 513</h3>
+<div class="outline-text-3" id="text-14-2">
+</div><div id="outline-container-sec-14-2-1" class="outline-4">
+<h4 id="sec-14-2-1"><span class="section-number-4">14.2.1</span> Representing the full joint distribution &#x2026; 513</h4>
+<div class="outline-text-4" id="text-14-2-1">
+<p>
+A method for constructing Bayesian networks &#x2026; 514 
+Compactness and node ordering &#x2026; 515 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-14-2-2" class="outline-4">
+<h4 id="sec-14-2-2"><span class="section-number-4">14.2.2</span> Conditional independence relations in Bayesian networks &#x2026; 517</h4>
+</div>
+</div>
+<div id="outline-container-sec-14-3" class="outline-3">
+<h3 id="sec-14-3"><span class="section-number-3">14.3</span> Efficient Representation of Conditional Distributions &#x2026; 518</h3>
+<div class="outline-text-3" id="text-14-3">
+<p>
+Bayesian nets with continuous variables &#x2026; 519 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-14-4" class="outline-3">
+<h3 id="sec-14-4"><span class="section-number-3">14.4</span> Exact Inference in Bayesian Networks &#x2026; 522</h3>
+<div class="outline-text-3" id="text-14-4">
+</div><div id="outline-container-sec-14-4-1" class="outline-4">
+<h4 id="sec-14-4-1"><span class="section-number-4">14.4.1</span> Inference by enumeration &#x2026; 523</h4>
+</div>
+<div id="outline-container-sec-14-4-2" class="outline-4">
+<h4 id="sec-14-4-2"><span class="section-number-4">14.4.2</span> The variable elimination algorithm &#x2026; 524</h4>
+<div class="outline-text-4" id="text-14-4-2">
+<p>
+Operations on factors &#x2026; 526 
+Variable ordering and variable relevance &#x2026; 527 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-14-4-3" class="outline-4">
+<h4 id="sec-14-4-3"><span class="section-number-4">14.4.3</span> The complexity of exact inference &#x2026; 528</h4>
+</div>
+<div id="outline-container-sec-14-4-4" class="outline-4">
+<h4 id="sec-14-4-4"><span class="section-number-4">14.4.4</span> Clustering algorithms &#x2026; 529</h4>
+</div>
+</div>
+<div id="outline-container-sec-14-5" class="outline-3">
+<h3 id="sec-14-5"><span class="section-number-3">14.5</span> Approximate Inference in Bayesian Networks &#x2026; 530</h3>
+<div class="outline-text-3" id="text-14-5">
+</div><div id="outline-container-sec-14-5-1" class="outline-4">
+<h4 id="sec-14-5-1"><span class="section-number-4">14.5.1</span> Direct sampling methods &#x2026; 530</h4>
+<div class="outline-text-4" id="text-14-5-1">
+<p>
+Rejection sampling in Bayesian networks &#x2026; 532 
+Likelihood weighting &#x2026; 532 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-14-5-2" class="outline-4">
+<h4 id="sec-14-5-2"><span class="section-number-4">14.5.2</span> Inference by Markov chain simulation &#x2026; 535</h4>
+<div class="outline-text-4" id="text-14-5-2">
+<p>
+Gibbs sampling in Bayesian networks &#x2026; 536 
+Why Gibbs sampling works &#x2026; 536 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-14-6" class="outline-3">
+<h3 id="sec-14-6"><span class="section-number-3">14.6</span> Relational and First-Order Probability Models &#x2026; 539</h3>
+<div class="outline-text-3" id="text-14-6">
+</div><div id="outline-container-sec-14-6-1" class="outline-4">
+<h4 id="sec-14-6-1"><span class="section-number-4">14.6.1</span> Possible worlds &#x2026; 540</h4>
+</div>
+<div id="outline-container-sec-14-6-2" class="outline-4">
+<h4 id="sec-14-6-2"><span class="section-number-4">14.6.2</span> Relational probability models &#x2026; 542</h4>
+</div>
+<div id="outline-container-sec-14-6-3" class="outline-4">
+<h4 id="sec-14-6-3"><span class="section-number-4">14.6.3</span> Open-universe probability models &#x2026; 544</h4>
+</div>
+</div>
+<div id="outline-container-sec-14-7" class="outline-3">
+<h3 id="sec-14-7"><span class="section-number-3">14.7</span> Other Approaches to Uncertain Reasoning &#x2026; 546</h3>
+<div class="outline-text-3" id="text-14-7">
+</div><div id="outline-container-sec-14-7-1" class="outline-4">
+<h4 id="sec-14-7-1"><span class="section-number-4">14.7.1</span> Rule-based methods for uncertain reasoning &#x2026; 547</h4>
+</div>
+<div id="outline-container-sec-14-7-2" class="outline-4">
+<h4 id="sec-14-7-2"><span class="section-number-4">14.7.2</span> Representing ignorance: Dempster&#x2013;Shafer theory &#x2026; 549</h4>
+</div>
+<div id="outline-container-sec-14-7-3" class="outline-4">
+<h4 id="sec-14-7-3"><span class="section-number-4">14.7.3</span> Representing vagueness: Fuzzy sets and fuzzy logic &#x2026; 550</h4>
+</div>
+</div>
+<div id="outline-container-sec-14-8" class="outline-3">
+<h3 id="sec-14-8"><span class="section-number-3">14.8</span> Summary &#x2026; 551</h3>
+</div>
+<div id="outline-container-sec-14-9" class="outline-3">
+<h3 id="sec-14-9"><span class="section-number-3">14.9</span> Bibliographical and Historical Notes &#x2026; 552</h3>
+</div>
+<div id="outline-container-sec-14-10" class="outline-3">
+<h3 id="sec-14-10"><span class="section-number-3">14.10</span> Exercises &#x2026; 558</h3>
+</div>
+</div>
+<div id="outline-container-sec-15" class="outline-2">
+<h2 id="sec-15"><span class="section-number-2">15</span> Probabilistic Reasoning over Time &#x2026; 566</h2>
+<div class="outline-text-2" id="text-15">
+</div><div id="outline-container-sec-15-1" class="outline-3">
+<h3 id="sec-15-1"><span class="section-number-3">15.1</span> Time and Uncertainty &#x2026; 566</h3>
+<div class="outline-text-3" id="text-15-1">
+</div><div id="outline-container-sec-15-1-1" class="outline-4">
+<h4 id="sec-15-1-1"><span class="section-number-4">15.1.1</span> States and observations &#x2026; 567</h4>
+</div>
+<div id="outline-container-sec-15-1-2" class="outline-4">
+<h4 id="sec-15-1-2"><span class="section-number-4">15.1.2</span> Transition and sensor models &#x2026; 568</h4>
+</div>
+</div>
+<div id="outline-container-sec-15-2" class="outline-3">
+<h3 id="sec-15-2"><span class="section-number-3">15.2</span> Inference in Temporal Models &#x2026; 570</h3>
+<div class="outline-text-3" id="text-15-2">
+</div><div id="outline-container-sec-15-2-1" class="outline-4">
+<h4 id="sec-15-2-1"><span class="section-number-4">15.2.1</span> Filtering and prediction &#x2026; 571</h4>
+</div>
+<div id="outline-container-sec-15-2-2" class="outline-4">
+<h4 id="sec-15-2-2"><span class="section-number-4">15.2.2</span> Smoothing &#x2026; 574</h4>
+</div>
+<div id="outline-container-sec-15-2-3" class="outline-4">
+<h4 id="sec-15-2-3"><span class="section-number-4">15.2.3</span> Finding the most likely sequence &#x2026; 576</h4>
+</div>
+</div>
+<div id="outline-container-sec-15-3" class="outline-3">
+<h3 id="sec-15-3"><span class="section-number-3">15.3</span> Hidden Markov Models &#x2026; 578</h3>
+<div class="outline-text-3" id="text-15-3">
+</div><div id="outline-container-sec-15-3-1" class="outline-4">
+<h4 id="sec-15-3-1"><span class="section-number-4">15.3.1</span> Simplified matrix algorithms &#x2026; 579</h4>
+</div>
+<div id="outline-container-sec-15-3-2" class="outline-4">
+<h4 id="sec-15-3-2"><span class="section-number-4">15.3.2</span> Hidden Markov model example: Localization &#x2026; 581</h4>
+</div>
+</div>
+<div id="outline-container-sec-15-4" class="outline-3">
+<h3 id="sec-15-4"><span class="section-number-3">15.4</span> Kalman Filters &#x2026; 584</h3>
+<div class="outline-text-3" id="text-15-4">
+</div><div id="outline-container-sec-15-4-1" class="outline-4">
+<h4 id="sec-15-4-1"><span class="section-number-4">15.4.1</span> Updating Gaussian distributions &#x2026; 584</h4>
+</div>
+<div id="outline-container-sec-15-4-2" class="outline-4">
+<h4 id="sec-15-4-2"><span class="section-number-4">15.4.2</span> A simple one-dimensional example &#x2026; 585</h4>
+</div>
+<div id="outline-container-sec-15-4-3" class="outline-4">
+<h4 id="sec-15-4-3"><span class="section-number-4">15.4.3</span> The general case &#x2026; 587</h4>
+</div>
+<div id="outline-container-sec-15-4-4" class="outline-4">
+<h4 id="sec-15-4-4"><span class="section-number-4">15.4.4</span> Applicability of Kalman filtering &#x2026; 588</h4>
+</div>
+</div>
+<div id="outline-container-sec-15-5" class="outline-3">
+<h3 id="sec-15-5"><span class="section-number-3">15.5</span> Dynamic Bayesian Networks &#x2026; 590</h3>
+<div class="outline-text-3" id="text-15-5">
+</div><div id="outline-container-sec-15-5-1" class="outline-4">
+<h4 id="sec-15-5-1"><span class="section-number-4">15.5.1</span> Constructing DBNs &#x2026; 591</h4>
+</div>
+<div id="outline-container-sec-15-5-2" class="outline-4">
+<h4 id="sec-15-5-2"><span class="section-number-4">15.5.2</span> Exact inference in DBNs &#x2026; 595</h4>
+</div>
+<div id="outline-container-sec-15-5-3" class="outline-4">
+<h4 id="sec-15-5-3"><span class="section-number-4">15.5.3</span> Approximate inference in DBNs &#x2026; 596</h4>
+</div>
+</div>
+<div id="outline-container-sec-15-6" class="outline-3">
+<h3 id="sec-15-6"><span class="section-number-3">15.6</span> Keeping Track of Many Objects &#x2026; 599</h3>
+</div>
+<div id="outline-container-sec-15-7" class="outline-3">
+<h3 id="sec-15-7"><span class="section-number-3">15.7</span> Summary &#x2026; 603</h3>
+</div>
+<div id="outline-container-sec-15-8" class="outline-3">
+<h3 id="sec-15-8"><span class="section-number-3">15.8</span> Bibliographical and Historical Notes &#x2026; 603</h3>
+</div>
+<div id="outline-container-sec-15-9" class="outline-3">
+<h3 id="sec-15-9"><span class="section-number-3">15.9</span> Exercises &#x2026; 606</h3>
+</div>
+</div>
+<div id="outline-container-sec-16" class="outline-2">
+<h2 id="sec-16"><span class="section-number-2">16</span> Making Simple Decisions &#x2026; 610</h2>
+<div class="outline-text-2" id="text-16">
+</div><div id="outline-container-sec-16-1" class="outline-3">
+<h3 id="sec-16-1"><span class="section-number-3">16.1</span> Combining Beliefs and Desires under Uncertainty &#x2026; 610</h3>
+</div>
+<div id="outline-container-sec-16-2" class="outline-3">
+<h3 id="sec-16-2"><span class="section-number-3">16.2</span> The Basis of Utility Theory &#x2026; 611</h3>
+<div class="outline-text-3" id="text-16-2">
+</div><div id="outline-container-sec-16-2-1" class="outline-4">
+<h4 id="sec-16-2-1"><span class="section-number-4">16.2.1</span> Constraints on rational preferences &#x2026; 612</h4>
+</div>
+<div id="outline-container-sec-16-2-2" class="outline-4">
+<h4 id="sec-16-2-2"><span class="section-number-4">16.2.2</span> Preferences lead to utility &#x2026; 613</h4>
+</div>
+</div>
+<div id="outline-container-sec-16-3" class="outline-3">
+<h3 id="sec-16-3"><span class="section-number-3">16.3</span> Utility Functions &#x2026; 615</h3>
+<div class="outline-text-3" id="text-16-3">
+</div><div id="outline-container-sec-16-3-1" class="outline-4">
+<h4 id="sec-16-3-1"><span class="section-number-4">16.3.1</span> Utility assessment and utility scales &#x2026; 615</h4>
+</div>
+<div id="outline-container-sec-16-3-2" class="outline-4">
+<h4 id="sec-16-3-2"><span class="section-number-4">16.3.2</span> The utility of money &#x2026; 616</h4>
+</div>
+<div id="outline-container-sec-16-3-3" class="outline-4">
+<h4 id="sec-16-3-3"><span class="section-number-4">16.3.3</span> Expected utility and post-decision disappointment &#x2026; 618</h4>
+</div>
+<div id="outline-container-sec-16-3-4" class="outline-4">
+<h4 id="sec-16-3-4"><span class="section-number-4">16.3.4</span> Human judgment and irrationality &#x2026; 619</h4>
+</div>
+</div>
+<div id="outline-container-sec-16-4" class="outline-3">
+<h3 id="sec-16-4"><span class="section-number-3">16.4</span> Multiattribute Utility Functions &#x2026; 622</h3>
+<div class="outline-text-3" id="text-16-4">
+</div><div id="outline-container-sec-16-4-1" class="outline-4">
+<h4 id="sec-16-4-1"><span class="section-number-4">16.4.1</span> Dominance &#x2026; 622</h4>
+</div>
+<div id="outline-container-sec-16-4-2" class="outline-4">
+<h4 id="sec-16-4-2"><span class="section-number-4">16.4.2</span> Preference structure and multiattribute utility &#x2026; 624</h4>
+<div class="outline-text-4" id="text-16-4-2">
+<p>
+Preferences without uncertainty &#x2026; 624 
+Preferences with uncertainty &#x2026; 625 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-16-5" class="outline-3">
+<h3 id="sec-16-5"><span class="section-number-3">16.5</span> Decision Networks &#x2026; 626</h3>
+<div class="outline-text-3" id="text-16-5">
+</div><div id="outline-container-sec-16-5-1" class="outline-4">
+<h4 id="sec-16-5-1"><span class="section-number-4">16.5.1</span> Representing a decision problem with a decision network &#x2026; 626</h4>
+</div>
+<div id="outline-container-sec-16-5-2" class="outline-4">
+<h4 id="sec-16-5-2"><span class="section-number-4">16.5.2</span> Evaluating decision networks &#x2026; 628</h4>
+</div>
+</div>
+<div id="outline-container-sec-16-6" class="outline-3">
+<h3 id="sec-16-6"><span class="section-number-3">16.6</span> The Value of Information &#x2026; 628</h3>
+<div class="outline-text-3" id="text-16-6">
+</div><div id="outline-container-sec-16-6-1" class="outline-4">
+<h4 id="sec-16-6-1"><span class="section-number-4">16.6.1</span> A simple example &#x2026; 629</h4>
+</div>
+<div id="outline-container-sec-16-6-2" class="outline-4">
+<h4 id="sec-16-6-2"><span class="section-number-4">16.6.2</span> A general formula for perfect information &#x2026; 630</h4>
+</div>
+<div id="outline-container-sec-16-6-3" class="outline-4">
+<h4 id="sec-16-6-3"><span class="section-number-4">16.6.3</span> Properties of the value of information &#x2026; 631</h4>
+</div>
+<div id="outline-container-sec-16-6-4" class="outline-4">
+<h4 id="sec-16-6-4"><span class="section-number-4">16.6.4</span> Implementation of an information-gathering agent &#x2026; 632</h4>
+</div>
+</div>
+<div id="outline-container-sec-16-7" class="outline-3">
+<h3 id="sec-16-7"><span class="section-number-3">16.7</span> Decision-Theoretic Expert Systems &#x2026; 633</h3>
+</div>
+<div id="outline-container-sec-16-8" class="outline-3">
+<h3 id="sec-16-8"><span class="section-number-3">16.8</span> Summary &#x2026; 636</h3>
+</div>
+<div id="outline-container-sec-16-9" class="outline-3">
+<h3 id="sec-16-9"><span class="section-number-3">16.9</span> Bibliographical and Historical Notes &#x2026; 636</h3>
+</div>
+<div id="outline-container-sec-16-10" class="outline-3">
+<h3 id="sec-16-10"><span class="section-number-3">16.10</span> Exercises &#x2026; 640</h3>
+</div>
+</div>
+<div id="outline-container-sec-17" class="outline-2">
+<h2 id="sec-17"><span class="section-number-2">17</span> Making Complex Decisions &#x2026; 645</h2>
+<div class="outline-text-2" id="text-17">
+</div><div id="outline-container-sec-17-1" class="outline-3">
+<h3 id="sec-17-1"><span class="section-number-3">17.1</span> Sequential Decision Problems &#x2026; 645</h3>
+<div class="outline-text-3" id="text-17-1">
+</div><div id="outline-container-sec-17-1-1" class="outline-4">
+<h4 id="sec-17-1-1"><span class="section-number-4">17.1.1</span> Utilities over time &#x2026; 648</h4>
+</div>
+<div id="outline-container-sec-17-1-2" class="outline-4">
+<h4 id="sec-17-1-2"><span class="section-number-4">17.1.2</span> Optimal policies and the utilities of states &#x2026; 650</h4>
+</div>
+</div>
+<div id="outline-container-sec-17-2" class="outline-3">
+<h3 id="sec-17-2"><span class="section-number-3">17.2</span> Value Iteration &#x2026; 652</h3>
+<div class="outline-text-3" id="text-17-2">
+</div><div id="outline-container-sec-17-2-1" class="outline-4">
+<h4 id="sec-17-2-1"><span class="section-number-4">17.2.1</span> The Bellman equation for utilities &#x2026; 652</h4>
+</div>
+<div id="outline-container-sec-17-2-2" class="outline-4">
+<h4 id="sec-17-2-2"><span class="section-number-4">17.2.2</span> The value iteration algorithm &#x2026; 652</h4>
+</div>
+<div id="outline-container-sec-17-2-3" class="outline-4">
+<h4 id="sec-17-2-3"><span class="section-number-4">17.2.3</span> Convergence of value iteration &#x2026; 654</h4>
+</div>
+</div>
+<div id="outline-container-sec-17-3" class="outline-3">
+<h3 id="sec-17-3"><span class="section-number-3">17.3</span> Policy Iteration &#x2026; 656</h3>
+</div>
+<div id="outline-container-sec-17-4" class="outline-3">
+<h3 id="sec-17-4"><span class="section-number-3">17.4</span> Partially Observable MDPs &#x2026; 658</h3>
+<div class="outline-text-3" id="text-17-4">
+</div><div id="outline-container-sec-17-4-1" class="outline-4">
+<h4 id="sec-17-4-1"><span class="section-number-4">17.4.1</span> Definition of POMDPs &#x2026; 658</h4>
+</div>
+<div id="outline-container-sec-17-4-2" class="outline-4">
+<h4 id="sec-17-4-2"><span class="section-number-4">17.4.2</span> Value iteration for POMDPs &#x2026; 660</h4>
+</div>
+<div id="outline-container-sec-17-4-3" class="outline-4">
+<h4 id="sec-17-4-3"><span class="section-number-4">17.4.3</span> Online agents for POMDPs &#x2026; 664</h4>
+</div>
+</div>
+<div id="outline-container-sec-17-5" class="outline-3">
+<h3 id="sec-17-5"><span class="section-number-3">17.5</span> Decisions with Multiple Agents: Game Theory &#x2026; 666</h3>
+<div class="outline-text-3" id="text-17-5">
+</div><div id="outline-container-sec-17-5-1" class="outline-4">
+<h4 id="sec-17-5-1"><span class="section-number-4">17.5.1</span> Single-move games &#x2026; 667</h4>
+</div>
+<div id="outline-container-sec-17-5-2" class="outline-4">
+<h4 id="sec-17-5-2"><span class="section-number-4">17.5.2</span> Repeated games &#x2026; 673</h4>
+</div>
+<div id="outline-container-sec-17-5-3" class="outline-4">
+<h4 id="sec-17-5-3"><span class="section-number-4">17.5.3</span> Sequential games &#x2026; 674</h4>
+</div>
+</div>
+<div id="outline-container-sec-17-6" class="outline-3">
+<h3 id="sec-17-6"><span class="section-number-3">17.6</span> Mechanism Design &#x2026; 679</h3>
+<div class="outline-text-3" id="text-17-6">
+</div><div id="outline-container-sec-17-6-1" class="outline-4">
+<h4 id="sec-17-6-1"><span class="section-number-4">17.6.1</span> Auctions &#x2026; 679</h4>
+</div>
+<div id="outline-container-sec-17-6-2" class="outline-4">
+<h4 id="sec-17-6-2"><span class="section-number-4">17.6.2</span> Common goods &#x2026; 683</h4>
+</div>
+</div>
+<div id="outline-container-sec-17-7" class="outline-3">
+<h3 id="sec-17-7"><span class="section-number-3">17.7</span> Summary &#x2026; 684</h3>
+</div>
+<div id="outline-container-sec-17-8" class="outline-3">
+<h3 id="sec-17-8"><span class="section-number-3">17.8</span> Bibliographical and Historical Notes &#x2026; 685</h3>
+</div>
+<div id="outline-container-sec-17-9" class="outline-3">
+<h3 id="sec-17-9"><span class="section-number-3">17.9</span> Exercises &#x2026; 688</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-18" class="outline-2">
+<h2 id="sec-18"><span class="section-number-2">18</span> Learning from Examples &#x2026; 693</h2>
+<div class="outline-text-2" id="text-18">
+</div><div id="outline-container-sec-18-1" class="outline-3">
+<h3 id="sec-18-1"><span class="section-number-3">18.1</span> Forms of Learning &#x2026; 693</h3>
+<div class="outline-text-3" id="text-18-1">
+<p>
+Components to be learned &#x2026; 694 
+Representation and prior knowledge &#x2026; 694 
+Feedback to learn from &#x2026; 694 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-18-2" class="outline-3">
+<h3 id="sec-18-2"><span class="section-number-3">18.2</span> Supervised Learning &#x2026; 695</h3>
+</div>
+<div id="outline-container-sec-18-3" class="outline-3">
+<h3 id="sec-18-3"><span class="section-number-3">18.3</span> Learning Decision Trees &#x2026; 697</h3>
+<div class="outline-text-3" id="text-18-3">
+</div><div id="outline-container-sec-18-3-1" class="outline-4">
+<h4 id="sec-18-3-1"><span class="section-number-4">18.3.1</span> The decision tree representation &#x2026; 698</h4>
+</div>
+<div id="outline-container-sec-18-3-2" class="outline-4">
+<h4 id="sec-18-3-2"><span class="section-number-4">18.3.2</span> Expressiveness of decision trees &#x2026; 698</h4>
+</div>
+<div id="outline-container-sec-18-3-3" class="outline-4">
+<h4 id="sec-18-3-3"><span class="section-number-4">18.3.3</span> Inducing decision trees from examples &#x2026; 699</h4>
+</div>
+<div id="outline-container-sec-18-3-4" class="outline-4">
+<h4 id="sec-18-3-4"><span class="section-number-4">18.3.4</span> Choosing attribute tests &#x2026; 703</h4>
+</div>
+<div id="outline-container-sec-18-3-5" class="outline-4">
+<h4 id="sec-18-3-5"><span class="section-number-4">18.3.5</span> Generalization and overfitting &#x2026; 705</h4>
+</div>
+<div id="outline-container-sec-18-3-6" class="outline-4">
+<h4 id="sec-18-3-6"><span class="section-number-4">18.3.6</span> Broadening the applicability of decision trees &#x2026; 706</h4>
+</div>
+</div>
+<div id="outline-container-sec-18-4" class="outline-3">
+<h3 id="sec-18-4"><span class="section-number-3">18.4</span> Evaluating and Choosing the Best Hypothesis &#x2026; 708</h3>
+<div class="outline-text-3" id="text-18-4">
+</div><div id="outline-container-sec-18-4-1" class="outline-4">
+<h4 id="sec-18-4-1"><span class="section-number-4">18.4.1</span> Model selection: Complexity versus goodness of fit &#x2026; 709</h4>
+</div>
+<div id="outline-container-sec-18-4-2" class="outline-4">
+<h4 id="sec-18-4-2"><span class="section-number-4">18.4.2</span> From error rates to loss &#x2026; 710</h4>
+</div>
+<div id="outline-container-sec-18-4-3" class="outline-4">
+<h4 id="sec-18-4-3"><span class="section-number-4">18.4.3</span> Regularization &#x2026; 712</h4>
+</div>
+</div>
+<div id="outline-container-sec-18-5" class="outline-3">
+<h3 id="sec-18-5"><span class="section-number-3">18.5</span> The Theory of Learning &#x2026; 713</h3>
+<div class="outline-text-3" id="text-18-5">
+</div><div id="outline-container-sec-18-5-1" class="outline-4">
+<h4 id="sec-18-5-1"><span class="section-number-4">18.5.1</span> PAC learning example: Learning decision lists &#x2026; 715</h4>
+</div>
+</div>
+<div id="outline-container-sec-18-6" class="outline-3">
+<h3 id="sec-18-6"><span class="section-number-3">18.6</span> Regression and Classification with Linear Models &#x2026; 717</h3>
+<div class="outline-text-3" id="text-18-6">
+</div><div id="outline-container-sec-18-6-1" class="outline-4">
+<h4 id="sec-18-6-1"><span class="section-number-4">18.6.1</span> Univariate linear regression &#x2026; 718</h4>
+</div>
+<div id="outline-container-sec-18-6-2" class="outline-4">
+<h4 id="sec-18-6-2"><span class="section-number-4">18.6.2</span> Multivariate linear regression &#x2026; 720</h4>
+</div>
+<div id="outline-container-sec-18-6-3" class="outline-4">
+<h4 id="sec-18-6-3"><span class="section-number-4">18.6.3</span> Linear classifiers with a hard threshold &#x2026; 723</h4>
+</div>
+<div id="outline-container-sec-18-6-4" class="outline-4">
+<h4 id="sec-18-6-4"><span class="section-number-4">18.6.4</span> Linear classification with logistic regression &#x2026; 725</h4>
+</div>
+</div>
+<div id="outline-container-sec-18-7" class="outline-3">
+<h3 id="sec-18-7"><span class="section-number-3">18.7</span> Artificial Neural Networks &#x2026; 727</h3>
+<div class="outline-text-3" id="text-18-7">
+</div><div id="outline-container-sec-18-7-1" class="outline-4">
+<h4 id="sec-18-7-1"><span class="section-number-4">18.7.1</span> Neural network structures &#x2026; 728</h4>
+</div>
+<div id="outline-container-sec-18-7-2" class="outline-4">
+<h4 id="sec-18-7-2"><span class="section-number-4">18.7.2</span> Single-layer feed-forward neural networks (perceptrons) &#x2026; 729</h4>
+</div>
+<div id="outline-container-sec-18-7-3" class="outline-4">
+<h4 id="sec-18-7-3"><span class="section-number-4">18.7.3</span> Multilayer feed-forward neural networks &#x2026; 731</h4>
+</div>
+<div id="outline-container-sec-18-7-4" class="outline-4">
+<h4 id="sec-18-7-4"><span class="section-number-4">18.7.4</span> Learning in multilayer networks &#x2026; 733</h4>
+</div>
+<div id="outline-container-sec-18-7-5" class="outline-4">
+<h4 id="sec-18-7-5"><span class="section-number-4">18.7.5</span> Learning neural network structures &#x2026; 736</h4>
+</div>
+</div>
+<div id="outline-container-sec-18-8" class="outline-3">
+<h3 id="sec-18-8"><span class="section-number-3">18.8</span> Nonparametric Models &#x2026; 737</h3>
+<div class="outline-text-3" id="text-18-8">
+</div><div id="outline-container-sec-18-8-1" class="outline-4">
+<h4 id="sec-18-8-1"><span class="section-number-4">18.8.1</span> Nearest neighbor models &#x2026; 738</h4>
+</div>
+<div id="outline-container-sec-18-8-2" class="outline-4">
+<h4 id="sec-18-8-2"><span class="section-number-4">18.8.2</span> Finding nearest neighbors with k-d trees &#x2026; 739</h4>
+</div>
+<div id="outline-container-sec-18-8-3" class="outline-4">
+<h4 id="sec-18-8-3"><span class="section-number-4">18.8.3</span> Locality-sensitive hashing &#x2026; 740</h4>
+</div>
+<div id="outline-container-sec-18-8-4" class="outline-4">
+<h4 id="sec-18-8-4"><span class="section-number-4">18.8.4</span> Nonparametric regression &#x2026; 741</h4>
+</div>
+</div>
+<div id="outline-container-sec-18-9" class="outline-3">
+<h3 id="sec-18-9"><span class="section-number-3">18.9</span> Support Vector Machines &#x2026; 744</h3>
+<div class="outline-text-3" id="text-18-9">
+<p>
+18.10. Ensemble Learning &#x2026; 748 
+      18.10.1. Online Learning &#x2026; 752 
+18.11. Practical Machine Learning &#x2026; 753 
+      18.11.1. Case study: Handwritten digit recognition &#x2026; 753 
+      18.11.2. Case study: Word senses and house prices &#x2026; 755 
+18.12. Summary &#x2026; 757 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-18-10" class="outline-3">
+<h3 id="sec-18-10"><span class="section-number-3">18.10</span> Bibliographical and Historical Notes &#x2026; 758</h3>
+</div>
+<div id="outline-container-sec-18-11" class="outline-3">
+<h3 id="sec-18-11"><span class="section-number-3">18.11</span> Exercises &#x2026; 763</h3>
+</div>
+</div>
+<div id="outline-container-sec-19" class="outline-2">
+<h2 id="sec-19"><span class="section-number-2">19</span> Knowledge in Learning &#x2026; 768</h2>
+<div class="outline-text-2" id="text-19">
+</div><div id="outline-container-sec-19-1" class="outline-3">
+<h3 id="sec-19-1"><span class="section-number-3">19.1</span> A Logical Formulation of Learning &#x2026; 768</h3>
+<div class="outline-text-3" id="text-19-1">
+</div><div id="outline-container-sec-19-1-1" class="outline-4">
+<h4 id="sec-19-1-1"><span class="section-number-4">19.1.1</span> Examples and hypotheses &#x2026; 768</h4>
+</div>
+<div id="outline-container-sec-19-1-2" class="outline-4">
+<h4 id="sec-19-1-2"><span class="section-number-4">19.1.2</span> Current-best-hypothesis search &#x2026; 770</h4>
+</div>
+<div id="outline-container-sec-19-1-3" class="outline-4">
+<h4 id="sec-19-1-3"><span class="section-number-4">19.1.3</span> Least-commitment search &#x2026; 773</h4>
+</div>
+</div>
+<div id="outline-container-sec-19-2" class="outline-3">
+<h3 id="sec-19-2"><span class="section-number-3">19.2</span> Knowledge in Learning &#x2026; 777</h3>
+<div class="outline-text-3" id="text-19-2">
+</div><div id="outline-container-sec-19-2-1" class="outline-4">
+<h4 id="sec-19-2-1"><span class="section-number-4">19.2.1</span> Some simple examples &#x2026; 778</h4>
+</div>
+<div id="outline-container-sec-19-2-2" class="outline-4">
+<h4 id="sec-19-2-2"><span class="section-number-4">19.2.2</span> Some general schemes &#x2026; 778</h4>
+</div>
+</div>
+<div id="outline-container-sec-19-3" class="outline-3">
+<h3 id="sec-19-3"><span class="section-number-3">19.3</span> Explanation-Based Learning &#x2026; 780</h3>
+<div class="outline-text-3" id="text-19-3">
+</div><div id="outline-container-sec-19-3-1" class="outline-4">
+<h4 id="sec-19-3-1"><span class="section-number-4">19.3.1</span> Extracting general rules from examples &#x2026; 781</h4>
+</div>
+<div id="outline-container-sec-19-3-2" class="outline-4">
+<h4 id="sec-19-3-2"><span class="section-number-4">19.3.2</span> Improving efficiency &#x2026; 783</h4>
+</div>
+</div>
+<div id="outline-container-sec-19-4" class="outline-3">
+<h3 id="sec-19-4"><span class="section-number-3">19.4</span> Learning Using Relevance Information &#x2026; 784</h3>
+<div class="outline-text-3" id="text-19-4">
+</div><div id="outline-container-sec-19-4-1" class="outline-4">
+<h4 id="sec-19-4-1"><span class="section-number-4">19.4.1</span> Determining the hypothesis space &#x2026; 785</h4>
+</div>
+<div id="outline-container-sec-19-4-2" class="outline-4">
+<h4 id="sec-19-4-2"><span class="section-number-4">19.4.2</span> Learning and using relevance information &#x2026; 785</h4>
+</div>
+</div>
+<div id="outline-container-sec-19-5" class="outline-3">
+<h3 id="sec-19-5"><span class="section-number-3">19.5</span> Inductive Logic Programming &#x2026; 788</h3>
+<div class="outline-text-3" id="text-19-5">
+</div><div id="outline-container-sec-19-5-1" class="outline-4">
+<h4 id="sec-19-5-1"><span class="section-number-4">19.5.1</span> An example &#x2026; 788</h4>
+</div>
+<div id="outline-container-sec-19-5-2" class="outline-4">
+<h4 id="sec-19-5-2"><span class="section-number-4">19.5.2</span> Top-down inductive learning methods &#x2026; 791</h4>
+</div>
+<div id="outline-container-sec-19-5-3" class="outline-4">
+<h4 id="sec-19-5-3"><span class="section-number-4">19.5.3</span> Inductive learning with inverse deduction &#x2026; 794</h4>
+</div>
+<div id="outline-container-sec-19-5-4" class="outline-4">
+<h4 id="sec-19-5-4"><span class="section-number-4">19.5.4</span> Making discoveries with inductive logic programming &#x2026; 796</h4>
+</div>
+</div>
+<div id="outline-container-sec-19-6" class="outline-3">
+<h3 id="sec-19-6"><span class="section-number-3">19.6</span> Summary &#x2026; 797</h3>
+</div>
+<div id="outline-container-sec-19-7" class="outline-3">
+<h3 id="sec-19-7"><span class="section-number-3">19.7</span> Bibliographical and Historical Notes &#x2026; 798</h3>
+</div>
+<div id="outline-container-sec-19-8" class="outline-3">
+<h3 id="sec-19-8"><span class="section-number-3">19.8</span> Exercises &#x2026; 801</h3>
+</div>
+</div>
+<div id="outline-container-sec-20" class="outline-2">
+<h2 id="sec-20"><span class="section-number-2">20</span> Chapter 20: Learning Probabilistic Models &#x2026; 802</h2>
+<div class="outline-text-2" id="text-20">
+</div><div id="outline-container-sec-20-1" class="outline-3">
+<h3 id="sec-20-1"><span class="section-number-3">20.1</span> Statistical Learning &#x2026; 802</h3>
+</div>
+<div id="outline-container-sec-20-2" class="outline-3">
+<h3 id="sec-20-2"><span class="section-number-3">20.2</span> Learning with Complete Data &#x2026; 806</h3>
+<div class="outline-text-3" id="text-20-2">
+</div><div id="outline-container-sec-20-2-1" class="outline-4">
+<h4 id="sec-20-2-1"><span class="section-number-4">20.2.1</span> Maximum-likelihood parameter learning: Discrete models &#x2026; 806</h4>
+</div>
+<div id="outline-container-sec-20-2-2" class="outline-4">
+<h4 id="sec-20-2-2"><span class="section-number-4">20.2.2</span> Naive Bayes models &#x2026; 808</h4>
+</div>
+<div id="outline-container-sec-20-2-3" class="outline-4">
+<h4 id="sec-20-2-3"><span class="section-number-4">20.2.3</span> Maximum-likelihood parameter learning: Continuous models &#x2026; 809</h4>
+</div>
+<div id="outline-container-sec-20-2-4" class="outline-4">
+<h4 id="sec-20-2-4"><span class="section-number-4">20.2.4</span> Bayesian parameter learning &#x2026; 810</h4>
+</div>
+<div id="outline-container-sec-20-2-5" class="outline-4">
+<h4 id="sec-20-2-5"><span class="section-number-4">20.2.5</span> Learning Bayes net structures &#x2026; 813</h4>
+</div>
+<div id="outline-container-sec-20-2-6" class="outline-4">
+<h4 id="sec-20-2-6"><span class="section-number-4">20.2.6</span> Density estimation with nonparametric models &#x2026; 814</h4>
+</div>
+</div>
+<div id="outline-container-sec-20-3" class="outline-3">
+<h3 id="sec-20-3"><span class="section-number-3">20.3</span> Learning with Hidden Variables: The EM Algorithm &#x2026; 816</h3>
+<div class="outline-text-3" id="text-20-3">
+</div><div id="outline-container-sec-20-3-1" class="outline-4">
+<h4 id="sec-20-3-1"><span class="section-number-4">20.3.1</span> Unsupervised clustering: Learning mixtures of Gaussians &#x2026; 817</h4>
+</div>
+<div id="outline-container-sec-20-3-2" class="outline-4">
+<h4 id="sec-20-3-2"><span class="section-number-4">20.3.2</span> Learning Bayesian networks with hidden variables &#x2026; 820</h4>
+</div>
+<div id="outline-container-sec-20-3-3" class="outline-4">
+<h4 id="sec-20-3-3"><span class="section-number-4">20.3.3</span> Learning hidden Markov models &#x2026; 822</h4>
+</div>
+<div id="outline-container-sec-20-3-4" class="outline-4">
+<h4 id="sec-20-3-4"><span class="section-number-4">20.3.4</span> The general form of the EM algorithm &#x2026; 823</h4>
+</div>
+<div id="outline-container-sec-20-3-5" class="outline-4">
+<h4 id="sec-20-3-5"><span class="section-number-4">20.3.5</span> Learning Bayes net structures with hidden variables &#x2026; 824</h4>
+</div>
+</div>
+<div id="outline-container-sec-20-4" class="outline-3">
+<h3 id="sec-20-4"><span class="section-number-3">20.4</span> Summary &#x2026; 825</h3>
+</div>
+<div id="outline-container-sec-20-5" class="outline-3">
+<h3 id="sec-20-5"><span class="section-number-3">20.5</span> Bibliographical and Historical Notes &#x2026; 825</h3>
+</div>
+<div id="outline-container-sec-20-6" class="outline-3">
+<h3 id="sec-20-6"><span class="section-number-3">20.6</span> Exercises &#x2026; 827</h3>
+</div>
+</div>
+<div id="outline-container-sec-21" class="outline-2">
+<h2 id="sec-21"><span class="section-number-2">21</span> Reinforcement Learning &#x2026; 830</h2>
+<div class="outline-text-2" id="text-21">
+</div><div id="outline-container-sec-21-1" class="outline-3">
+<h3 id="sec-21-1"><span class="section-number-3">21.1</span> Introduction &#x2026; 830</h3>
+</div>
+<div id="outline-container-sec-21-2" class="outline-3">
+<h3 id="sec-21-2"><span class="section-number-3">21.2</span> Passive Reinforcement Learning &#x2026; 832</h3>
+<div class="outline-text-3" id="text-21-2">
+</div><div id="outline-container-sec-21-2-1" class="outline-4">
+<h4 id="sec-21-2-1"><span class="section-number-4">21.2.1</span> Direct utility estimation &#x2026; 833</h4>
+</div>
+<div id="outline-container-sec-21-2-2" class="outline-4">
+<h4 id="sec-21-2-2"><span class="section-number-4">21.2.2</span> Adaptive dynamic programming &#x2026; 834</h4>
+</div>
+<div id="outline-container-sec-21-2-3" class="outline-4">
+<h4 id="sec-21-2-3"><span class="section-number-4">21.2.3</span> Temporal-difference learning &#x2026; 836</h4>
+</div>
+</div>
+<div id="outline-container-sec-21-3" class="outline-3">
+<h3 id="sec-21-3"><span class="section-number-3">21.3</span> Active Reinforcement Learning &#x2026; 839</h3>
+<div class="outline-text-3" id="text-21-3">
+</div><div id="outline-container-sec-21-3-1" class="outline-4">
+<h4 id="sec-21-3-1"><span class="section-number-4">21.3.1</span> Exploration &#x2026; 839</h4>
+</div>
+<div id="outline-container-sec-21-3-2" class="outline-4">
+<h4 id="sec-21-3-2"><span class="section-number-4">21.3.2</span> Learning an action-utility function &#x2026; 842</h4>
+</div>
+</div>
+<div id="outline-container-sec-21-4" class="outline-3">
+<h3 id="sec-21-4"><span class="section-number-3">21.4</span> Generalization in Reinforcement Learning &#x2026; 845</h3>
+</div>
+<div id="outline-container-sec-21-5" class="outline-3">
+<h3 id="sec-21-5"><span class="section-number-3">21.5</span> Policy Search &#x2026; 848</h3>
+</div>
+<div id="outline-container-sec-21-6" class="outline-3">
+<h3 id="sec-21-6"><span class="section-number-3">21.6</span> Applications of Reinforcement Learning &#x2026; 850</h3>
+<div class="outline-text-3" id="text-21-6">
+</div><div id="outline-container-sec-21-6-1" class="outline-4">
+<h4 id="sec-21-6-1"><span class="section-number-4">21.6.1</span> Applications to game playing &#x2026; 850</h4>
+</div>
+<div id="outline-container-sec-21-6-2" class="outline-4">
+<h4 id="sec-21-6-2"><span class="section-number-4">21.6.2</span> Application to robot control &#x2026; 851</h4>
+</div>
+</div>
+<div id="outline-container-sec-21-7" class="outline-3">
+<h3 id="sec-21-7"><span class="section-number-3">21.7</span> Summary &#x2026; 853</h3>
+</div>
+<div id="outline-container-sec-21-8" class="outline-3">
+<h3 id="sec-21-8"><span class="section-number-3">21.8</span> Bibliographical and Historical Notes &#x2026; 854</h3>
+</div>
+<div id="outline-container-sec-21-9" class="outline-3">
+<h3 id="sec-21-9"><span class="section-number-3">21.9</span> Exercises &#x2026; 858</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-22" class="outline-2">
+<h2 id="sec-22"><span class="section-number-2">22</span> Natural Language Processing &#x2026; 860</h2>
+<div class="outline-text-2" id="text-22">
+</div><div id="outline-container-sec-22-1" class="outline-3">
+<h3 id="sec-22-1"><span class="section-number-3">22.1</span> Language Models &#x2026; 860</h3>
+<div class="outline-text-3" id="text-22-1">
+<p>
+22.1.1 N-gram character models &#x2026; 861 
+</p>
+</div>
+<div id="outline-container-sec-22-1-1" class="outline-4">
+<h4 id="sec-22-1-1"><span class="section-number-4">22.1.1</span> Smoothing n-gram models &#x2026; 862</h4>
+</div>
+<div id="outline-container-sec-22-1-2" class="outline-4">
+<h4 id="sec-22-1-2"><span class="section-number-4">22.1.2</span> Model evaluation &#x2026; 863</h4>
+<div class="outline-text-4" id="text-22-1-2">
+<p>
+22.1.4 N-gram word models &#x2026; 864 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-22-2" class="outline-3">
+<h3 id="sec-22-2"><span class="section-number-3">22.2</span> Text Classification &#x2026; 865</h3>
+<div class="outline-text-3" id="text-22-2">
+</div><div id="outline-container-sec-22-2-1" class="outline-4">
+<h4 id="sec-22-2-1"><span class="section-number-4">22.2.1</span> Classification by data compression &#x2026; 866</h4>
+</div>
+</div>
+<div id="outline-container-sec-22-3" class="outline-3">
+<h3 id="sec-22-3"><span class="section-number-3">22.3</span> Information Retrieval &#x2026; 867</h3>
+<div class="outline-text-3" id="text-22-3">
+</div><div id="outline-container-sec-22-3-1" class="outline-4">
+<h4 id="sec-22-3-1"><span class="section-number-4">22.3.1</span> IR scoring functions &#x2026; 868</h4>
+</div>
+<div id="outline-container-sec-22-3-2" class="outline-4">
+<h4 id="sec-22-3-2"><span class="section-number-4">22.3.2</span> IR system evaluation &#x2026; 869</h4>
+</div>
+<div id="outline-container-sec-22-3-3" class="outline-4">
+<h4 id="sec-22-3-3"><span class="section-number-4">22.3.3</span> IR refinements &#x2026; 869</h4>
+</div>
+<div id="outline-container-sec-22-3-4" class="outline-4">
+<h4 id="sec-22-3-4"><span class="section-number-4">22.3.4</span> The PageRank algorithm &#x2026; 870</h4>
+</div>
+<div id="outline-container-sec-22-3-5" class="outline-4">
+<h4 id="sec-22-3-5"><span class="section-number-4">22.3.5</span> The HITS algorithm &#x2026; 872</h4>
+</div>
+<div id="outline-container-sec-22-3-6" class="outline-4">
+<h4 id="sec-22-3-6"><span class="section-number-4">22.3.6</span> Question answering &#x2026; 872</h4>
+</div>
+</div>
+<div id="outline-container-sec-22-4" class="outline-3">
+<h3 id="sec-22-4"><span class="section-number-3">22.4</span> Information Extraction &#x2026; 873</h3>
+<div class="outline-text-3" id="text-22-4">
+</div><div id="outline-container-sec-22-4-1" class="outline-4">
+<h4 id="sec-22-4-1"><span class="section-number-4">22.4.1</span> Finite-state automata for information extraction &#x2026; 874</h4>
+</div>
+<div id="outline-container-sec-22-4-2" class="outline-4">
+<h4 id="sec-22-4-2"><span class="section-number-4">22.4.2</span> Probabilistic models for information extraction &#x2026; 876</h4>
+</div>
+<div id="outline-container-sec-22-4-3" class="outline-4">
+<h4 id="sec-22-4-3"><span class="section-number-4">22.4.3</span> Conditional random fields for information extraction &#x2026; 878</h4>
+</div>
+<div id="outline-container-sec-22-4-4" class="outline-4">
+<h4 id="sec-22-4-4"><span class="section-number-4">22.4.4</span> Ontology extraction from large corpora &#x2026; 879</h4>
+</div>
+<div id="outline-container-sec-22-4-5" class="outline-4">
+<h4 id="sec-22-4-5"><span class="section-number-4">22.4.5</span> Automated template construction &#x2026; 880</h4>
+</div>
+<div id="outline-container-sec-22-4-6" class="outline-4">
+<h4 id="sec-22-4-6"><span class="section-number-4">22.4.6</span> Machine reading &#x2026; 881</h4>
+</div>
+</div>
+<div id="outline-container-sec-22-5" class="outline-3">
+<h3 id="sec-22-5"><span class="section-number-3">22.5</span> Summary &#x2026; 882</h3>
+</div>
+<div id="outline-container-sec-22-6" class="outline-3">
+<h3 id="sec-22-6"><span class="section-number-3">22.6</span> Bibliographical and Historical Notes &#x2026; 883</h3>
+</div>
+<div id="outline-container-sec-22-7" class="outline-3">
+<h3 id="sec-22-7"><span class="section-number-3">22.7</span> Exercises &#x2026; 885</h3>
+</div>
+</div>
+<div id="outline-container-sec-23" class="outline-2">
+<h2 id="sec-23"><span class="section-number-2">23</span> Natural Language for Communication &#x2026; 888</h2>
+<div class="outline-text-2" id="text-23">
+</div><div id="outline-container-sec-23-1" class="outline-3">
+<h3 id="sec-23-1"><span class="section-number-3">23.1</span> Phrase Structure Grammars &#x2026; 888</h3>
+<div class="outline-text-3" id="text-23-1">
+</div><div id="outline-container-sec-23-1-1" class="outline-4">
+<h4 id="sec-23-1-1"><span class="section-number-4">23.1.1</span> The lexicon of E0 &#x2026; 890</h4>
+</div>
+<div id="outline-container-sec-23-1-2" class="outline-4">
+<h4 id="sec-23-1-2"><span class="section-number-4">23.1.2</span> The Grammar of E0 &#x2026; 890</h4>
+</div>
+</div>
+<div id="outline-container-sec-23-2" class="outline-3">
+<h3 id="sec-23-2"><span class="section-number-3">23.2</span> Syntactic Analysis (Parsing) &#x2026; 892</h3>
+<div class="outline-text-3" id="text-23-2">
+</div><div id="outline-container-sec-23-2-1" class="outline-4">
+<h4 id="sec-23-2-1"><span class="section-number-4">23.2.1</span> Learning probabilities for PCFGs &#x2026; 895</h4>
+</div>
+<div id="outline-container-sec-23-2-2" class="outline-4">
+<h4 id="sec-23-2-2"><span class="section-number-4">23.2.2</span> Comparing context-free and Markov models &#x2026; 896</h4>
+</div>
+</div>
+<div id="outline-container-sec-23-3" class="outline-3">
+<h3 id="sec-23-3"><span class="section-number-3">23.3</span> Augmented Grammars and Semantic Interpretation &#x2026; 897</h3>
+<div class="outline-text-3" id="text-23-3">
+</div><div id="outline-container-sec-23-3-1" class="outline-4">
+<h4 id="sec-23-3-1"><span class="section-number-4">23.3.1</span> Lexicalized PCFGs &#x2026; 897</h4>
+</div>
+<div id="outline-container-sec-23-3-2" class="outline-4">
+<h4 id="sec-23-3-2"><span class="section-number-4">23.3.2</span> Formal definition of augmented grammar rules &#x2026; 898</h4>
+</div>
+<div id="outline-container-sec-23-3-3" class="outline-4">
+<h4 id="sec-23-3-3"><span class="section-number-4">23.3.3</span> Case agreement and subject&#x2013;verb agreement &#x2026; 899</h4>
+</div>
+<div id="outline-container-sec-23-3-4" class="outline-4">
+<h4 id="sec-23-3-4"><span class="section-number-4">23.3.4</span> Semantic interpretation &#x2026; 900</h4>
+</div>
+<div id="outline-container-sec-23-3-5" class="outline-4">
+<h4 id="sec-23-3-5"><span class="section-number-4">23.3.5</span> Complications &#x2026; 902</h4>
+</div>
+</div>
+<div id="outline-container-sec-23-4" class="outline-3">
+<h3 id="sec-23-4"><span class="section-number-3">23.4</span> Machine Translation &#x2026; 907</h3>
+<div class="outline-text-3" id="text-23-4">
+</div><div id="outline-container-sec-23-4-1" class="outline-4">
+<h4 id="sec-23-4-1"><span class="section-number-4">23.4.1</span> Machine translation systems &#x2026; 908</h4>
+</div>
+<div id="outline-container-sec-23-4-2" class="outline-4">
+<h4 id="sec-23-4-2"><span class="section-number-4">23.4.2</span> Statistical machine translation &#x2026; 909</h4>
+</div>
+</div>
+<div id="outline-container-sec-23-5" class="outline-3">
+<h3 id="sec-23-5"><span class="section-number-3">23.5</span> Speech Recognition &#x2026; 912</h3>
+<div class="outline-text-3" id="text-23-5">
+</div><div id="outline-container-sec-23-5-1" class="outline-4">
+<h4 id="sec-23-5-1"><span class="section-number-4">23.5.1</span> Acoustic model &#x2026; 914</h4>
+</div>
+<div id="outline-container-sec-23-5-2" class="outline-4">
+<h4 id="sec-23-5-2"><span class="section-number-4">23.5.2</span> Language model &#x2026; 917</h4>
+</div>
+<div id="outline-container-sec-23-5-3" class="outline-4">
+<h4 id="sec-23-5-3"><span class="section-number-4">23.5.3</span> Building a speech recognizer &#x2026; 917</h4>
+</div>
+</div>
+<div id="outline-container-sec-23-6" class="outline-3">
+<h3 id="sec-23-6"><span class="section-number-3">23.6</span> Summary &#x2026; 918</h3>
+</div>
+<div id="outline-container-sec-23-7" class="outline-3">
+<h3 id="sec-23-7"><span class="section-number-3">23.7</span> Bibliographical and Historical Notes &#x2026; 919</h3>
+</div>
+<div id="outline-container-sec-23-8" class="outline-3">
+<h3 id="sec-23-8"><span class="section-number-3">23.8</span> Exercises &#x2026; 923</h3>
+</div>
+</div>
+<div id="outline-container-sec-24" class="outline-2">
+<h2 id="sec-24"><span class="section-number-2">24</span> Perception &#x2026; 928</h2>
+<div class="outline-text-2" id="text-24">
+</div><div id="outline-container-sec-24-1" class="outline-3">
+<h3 id="sec-24-1"><span class="section-number-3">24.1</span> Image Formation &#x2026; 929</h3>
+<div class="outline-text-3" id="text-24-1">
+</div><div id="outline-container-sec-24-1-1" class="outline-4">
+<h4 id="sec-24-1-1"><span class="section-number-4">24.1.1</span> Images without lenses: The pinhole camera &#x2026; 929</h4>
+</div>
+<div id="outline-container-sec-24-1-2" class="outline-4">
+<h4 id="sec-24-1-2"><span class="section-number-4">24.1.2</span> Lens systems &#x2026; 931</h4>
+</div>
+<div id="outline-container-sec-24-1-3" class="outline-4">
+<h4 id="sec-24-1-3"><span class="section-number-4">24.1.3</span> Scaled orthographic projection &#x2026; 932</h4>
+</div>
+<div id="outline-container-sec-24-1-4" class="outline-4">
+<h4 id="sec-24-1-4"><span class="section-number-4">24.1.4</span> Light and shading &#x2026; 932</h4>
+</div>
+<div id="outline-container-sec-24-1-5" class="outline-4">
+<h4 id="sec-24-1-5"><span class="section-number-4">24.1.5</span> Color &#x2026; 935</h4>
+</div>
+</div>
+<div id="outline-container-sec-24-2" class="outline-3">
+<h3 id="sec-24-2"><span class="section-number-3">24.2</span> Early Image-Processing Operations &#x2026; 935</h3>
+<div class="outline-text-3" id="text-24-2">
+</div><div id="outline-container-sec-24-2-1" class="outline-4">
+<h4 id="sec-24-2-1"><span class="section-number-4">24.2.1</span> Edge detection &#x2026; 936</h4>
+</div>
+<div id="outline-container-sec-24-2-2" class="outline-4">
+<h4 id="sec-24-2-2"><span class="section-number-4">24.2.2</span> Texture &#x2026; 939</h4>
+</div>
+<div id="outline-container-sec-24-2-3" class="outline-4">
+<h4 id="sec-24-2-3"><span class="section-number-4">24.2.3</span> Optical flow &#x2026; 939</h4>
+</div>
+<div id="outline-container-sec-24-2-4" class="outline-4">
+<h4 id="sec-24-2-4"><span class="section-number-4">24.2.4</span> Segmentation of images &#x2026; 941</h4>
+</div>
+</div>
+<div id="outline-container-sec-24-3" class="outline-3">
+<h3 id="sec-24-3"><span class="section-number-3">24.3</span> Object Recognition by Appearance &#x2026; 942</h3>
+<div class="outline-text-3" id="text-24-3">
+</div><div id="outline-container-sec-24-3-1" class="outline-4">
+<h4 id="sec-24-3-1"><span class="section-number-4">24.3.1</span> Complex appearance and pattern elements &#x2026; 944</h4>
+</div>
+<div id="outline-container-sec-24-3-2" class="outline-4">
+<h4 id="sec-24-3-2"><span class="section-number-4">24.3.2</span> Pedestrian detection with HOG features &#x2026; 945</h4>
+</div>
+</div>
+<div id="outline-container-sec-24-4" class="outline-3">
+<h3 id="sec-24-4"><span class="section-number-3">24.4</span> Reconstructing the 3D World &#x2026; 947</h3>
+<div class="outline-text-3" id="text-24-4">
+</div><div id="outline-container-sec-24-4-1" class="outline-4">
+<h4 id="sec-24-4-1"><span class="section-number-4">24.4.1</span> Motion parallax &#x2026; 948</h4>
+</div>
+<div id="outline-container-sec-24-4-2" class="outline-4">
+<h4 id="sec-24-4-2"><span class="section-number-4">24.4.2</span> Binocular stereopsis &#x2026; 949</h4>
+</div>
+<div id="outline-container-sec-24-4-3" class="outline-4">
+<h4 id="sec-24-4-3"><span class="section-number-4">24.4.3</span> Multiple views &#x2026; 951</h4>
+</div>
+<div id="outline-container-sec-24-4-4" class="outline-4">
+<h4 id="sec-24-4-4"><span class="section-number-4">24.4.4</span> Texture &#x2026; 951</h4>
+</div>
+<div id="outline-container-sec-24-4-5" class="outline-4">
+<h4 id="sec-24-4-5"><span class="section-number-4">24.4.5</span> Shading &#x2026; 952</h4>
+</div>
+<div id="outline-container-sec-24-4-6" class="outline-4">
+<h4 id="sec-24-4-6"><span class="section-number-4">24.4.6</span> Contour &#x2026; 953</h4>
+</div>
+<div id="outline-container-sec-24-4-7" class="outline-4">
+<h4 id="sec-24-4-7"><span class="section-number-4">24.4.7</span> Objects and the geometric structure of scenes &#x2026; 954</h4>
+</div>
+</div>
+<div id="outline-container-sec-24-5" class="outline-3">
+<h3 id="sec-24-5"><span class="section-number-3">24.5</span> Object Recognition from Structural Information &#x2026; 957</h3>
+<div class="outline-text-3" id="text-24-5">
+</div><div id="outline-container-sec-24-5-1" class="outline-4">
+<h4 id="sec-24-5-1"><span class="section-number-4">24.5.1</span> The geometry of bodies: Finding arms and legs &#x2026; 958</h4>
+</div>
+<div id="outline-container-sec-24-5-2" class="outline-4">
+<h4 id="sec-24-5-2"><span class="section-number-4">24.5.2</span> Coherent appearance: Tracking people in video &#x2026; 959</h4>
+</div>
+</div>
+<div id="outline-container-sec-24-6" class="outline-3">
+<h3 id="sec-24-6"><span class="section-number-3">24.6</span> Using Vision &#x2026; 961</h3>
+<div class="outline-text-3" id="text-24-6">
+</div><div id="outline-container-sec-24-6-1" class="outline-4">
+<h4 id="sec-24-6-1"><span class="section-number-4">24.6.1</span> Words and pictures &#x2026; 962</h4>
+</div>
+<div id="outline-container-sec-24-6-2" class="outline-4">
+<h4 id="sec-24-6-2"><span class="section-number-4">24.6.2</span> Reconstruction from many views &#x2026; 962</h4>
+</div>
+<div id="outline-container-sec-24-6-3" class="outline-4">
+<h4 id="sec-24-6-3"><span class="section-number-4">24.6.3</span> Using vision for controlling movement &#x2026; 963</h4>
+</div>
+</div>
+<div id="outline-container-sec-24-7" class="outline-3">
+<h3 id="sec-24-7"><span class="section-number-3">24.7</span> Summary &#x2026; 965</h3>
+</div>
+<div id="outline-container-sec-24-8" class="outline-3">
+<h3 id="sec-24-8"><span class="section-number-3">24.8</span> Bibliographical and Historical Notes &#x2026; 966</h3>
+</div>
+<div id="outline-container-sec-24-9" class="outline-3">
+<h3 id="sec-24-9"><span class="section-number-3">24.9</span> Exercises &#x2026; 969</h3>
+</div>
+</div>
+<div id="outline-container-sec-25" class="outline-2">
+<h2 id="sec-25"><span class="section-number-2">25</span> Robotics &#x2026; 971</h2>
+<div class="outline-text-2" id="text-25">
+</div><div id="outline-container-sec-25-1" class="outline-3">
+<h3 id="sec-25-1"><span class="section-number-3">25.1</span> Introduction &#x2026; 971</h3>
+</div>
+<div id="outline-container-sec-25-2" class="outline-3">
+<h3 id="sec-25-2"><span class="section-number-3">25.2</span> Robot Hardware &#x2026; 973</h3>
+<div class="outline-text-3" id="text-25-2">
+</div><div id="outline-container-sec-25-2-1" class="outline-4">
+<h4 id="sec-25-2-1"><span class="section-number-4">25.2.1</span> Sensors &#x2026; 973</h4>
+</div>
+<div id="outline-container-sec-25-2-2" class="outline-4">
+<h4 id="sec-25-2-2"><span class="section-number-4">25.2.2</span> Effectors &#x2026; 975</h4>
+</div>
+</div>
+<div id="outline-container-sec-25-3" class="outline-3">
+<h3 id="sec-25-3"><span class="section-number-3">25.3</span> Robotic Perception &#x2026; 978</h3>
+<div class="outline-text-3" id="text-25-3">
+</div><div id="outline-container-sec-25-3-1" class="outline-4">
+<h4 id="sec-25-3-1"><span class="section-number-4">25.3.1</span> Localization and mapping &#x2026; 979</h4>
+</div>
+<div id="outline-container-sec-25-3-2" class="outline-4">
+<h4 id="sec-25-3-2"><span class="section-number-4">25.3.2</span> Other types of perception &#x2026; 984</h4>
+</div>
+<div id="outline-container-sec-25-3-3" class="outline-4">
+<h4 id="sec-25-3-3"><span class="section-number-4">25.3.3</span> Machine learning in robot perception &#x2026; 985</h4>
+</div>
+</div>
+<div id="outline-container-sec-25-4" class="outline-3">
+<h3 id="sec-25-4"><span class="section-number-3">25.4</span> Planning to Move &#x2026; 986</h3>
+<div class="outline-text-3" id="text-25-4">
+</div><div id="outline-container-sec-25-4-1" class="outline-4">
+<h4 id="sec-25-4-1"><span class="section-number-4">25.4.1</span> Configuration space &#x2026; 986</h4>
+</div>
+<div id="outline-container-sec-25-4-2" class="outline-4">
+<h4 id="sec-25-4-2"><span class="section-number-4">25.4.2</span> Cell decomposition methods &#x2026; 989</h4>
+</div>
+<div id="outline-container-sec-25-4-3" class="outline-4">
+<h4 id="sec-25-4-3"><span class="section-number-4">25.4.3</span> Modified cost functions &#x2026; 991</h4>
+</div>
+<div id="outline-container-sec-25-4-4" class="outline-4">
+<h4 id="sec-25-4-4"><span class="section-number-4">25.4.4</span> Skeletonization methods &#x2026; 991</h4>
+</div>
+</div>
+<div id="outline-container-sec-25-5" class="outline-3">
+<h3 id="sec-25-5"><span class="section-number-3">25.5</span> Planning Uncertain Movements &#x2026; 993</h3>
+<div class="outline-text-3" id="text-25-5">
+</div><div id="outline-container-sec-25-5-1" class="outline-4">
+<h4 id="sec-25-5-1"><span class="section-number-4">25.5.1</span> Robust methods &#x2026; 994</h4>
+</div>
+</div>
+<div id="outline-container-sec-25-6" class="outline-3">
+<h3 id="sec-25-6"><span class="section-number-3">25.6</span> Moving &#x2026; 997</h3>
+<div class="outline-text-3" id="text-25-6">
+</div><div id="outline-container-sec-25-6-1" class="outline-4">
+<h4 id="sec-25-6-1"><span class="section-number-4">25.6.1</span> Dynamics and control &#x2026; 997</h4>
+</div>
+<div id="outline-container-sec-25-6-2" class="outline-4">
+<h4 id="sec-25-6-2"><span class="section-number-4">25.6.2</span> Potential-field control &#x2026; 999</h4>
+</div>
+<div id="outline-container-sec-25-6-3" class="outline-4">
+<h4 id="sec-25-6-3"><span class="section-number-4">25.6.3</span> Reactive control &#x2026; 1001</h4>
+</div>
+<div id="outline-container-sec-25-6-4" class="outline-4">
+<h4 id="sec-25-6-4"><span class="section-number-4">25.6.4</span> Reinforcement learning control &#x2026; 1002</h4>
+</div>
+</div>
+<div id="outline-container-sec-25-7" class="outline-3">
+<h3 id="sec-25-7"><span class="section-number-3">25.7</span> Robotic Software Architectures &#x2026; 1003</h3>
+<div class="outline-text-3" id="text-25-7">
+</div><div id="outline-container-sec-25-7-1" class="outline-4">
+<h4 id="sec-25-7-1"><span class="section-number-4">25.7.1</span> Subsumption architecture &#x2026; 1003</h4>
+</div>
+<div id="outline-container-sec-25-7-2" class="outline-4">
+<h4 id="sec-25-7-2"><span class="section-number-4">25.7.2</span> Three-layer architecture &#x2026; 1004</h4>
+</div>
+<div id="outline-container-sec-25-7-3" class="outline-4">
+<h4 id="sec-25-7-3"><span class="section-number-4">25.7.3</span> Pipeline architecture &#x2026; 1005</h4>
+</div>
+</div>
+<div id="outline-container-sec-25-8" class="outline-3">
+<h3 id="sec-25-8"><span class="section-number-3">25.8</span> Application Domains &#x2026; 1006</h3>
+</div>
+<div id="outline-container-sec-25-9" class="outline-3">
+<h3 id="sec-25-9"><span class="section-number-3">25.9</span> Summary &#x2026; 1010</h3>
+</div>
+<div id="outline-container-sec-25-10" class="outline-3">
+<h3 id="sec-25-10"><span class="section-number-3">25.10</span> Bibliographical and Historical Notes &#x2026; 1011</h3>
+</div>
+<div id="outline-container-sec-25-11" class="outline-3">
+<h3 id="sec-25-11"><span class="section-number-3">25.11</span> Exercises &#x2026; 1014</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-26" class="outline-2">
+<h2 id="sec-26"><span class="section-number-2">26</span> Philosophical Foundations &#x2026; 1020</h2>
+<div class="outline-text-2" id="text-26">
+</div><div id="outline-container-sec-26-1" class="outline-3">
+<h3 id="sec-26-1"><span class="section-number-3">26.1</span> Weak AI: Can Machines Act Intelligently? &#x2026; 1020</h3>
+<div class="outline-text-3" id="text-26-1">
+</div><div id="outline-container-sec-26-1-1" class="outline-4">
+<h4 id="sec-26-1-1"><span class="section-number-4">26.1.1</span> The argument from disability &#x2026; 1021</h4>
+</div>
+<div id="outline-container-sec-26-1-2" class="outline-4">
+<h4 id="sec-26-1-2"><span class="section-number-4">26.1.2</span> The mathematical objection &#x2026; 1022</h4>
+</div>
+<div id="outline-container-sec-26-1-3" class="outline-4">
+<h4 id="sec-26-1-3"><span class="section-number-4">26.1.3</span> The argument from informality &#x2026; 1024</h4>
+</div>
+</div>
+<div id="outline-container-sec-26-2" class="outline-3">
+<h3 id="sec-26-2"><span class="section-number-3">26.2</span> Strong AI: Can Machines Really Think? &#x2026; 1026</h3>
+<div class="outline-text-3" id="text-26-2">
+</div><div id="outline-container-sec-26-2-1" class="outline-4">
+<h4 id="sec-26-2-1"><span class="section-number-4">26.2.1</span> Mental states and the brain in a vat &#x2026; 1028</h4>
+</div>
+<div id="outline-container-sec-26-2-2" class="outline-4">
+<h4 id="sec-26-2-2"><span class="section-number-4">26.2.2</span> Functionalism and the brain replacement experiment &#x2026; 1029</h4>
+</div>
+<div id="outline-container-sec-26-2-3" class="outline-4">
+<h4 id="sec-26-2-3"><span class="section-number-4">26.2.3</span> Biological naturalism and the Chinese Room &#x2026; 1031</h4>
+</div>
+<div id="outline-container-sec-26-2-4" class="outline-4">
+<h4 id="sec-26-2-4"><span class="section-number-4">26.2.4</span> Consciousness, qualia, and the explanatory gap &#x2026; 1033</h4>
+</div>
+</div>
+<div id="outline-container-sec-26-3" class="outline-3">
+<h3 id="sec-26-3"><span class="section-number-3">26.3</span> The Ethics and Risks of Developing Artificial Intelligence &#x2026; 1034</h3>
+</div>
+<div id="outline-container-sec-26-4" class="outline-3">
+<h3 id="sec-26-4"><span class="section-number-3">26.4</span> Summary &#x2026; 1040</h3>
+</div>
+<div id="outline-container-sec-26-5" class="outline-3">
+<h3 id="sec-26-5"><span class="section-number-3">26.5</span> Bibliographical and Historical Notes &#x2026; 1040</h3>
+</div>
+<div id="outline-container-sec-26-6" class="outline-3">
+<h3 id="sec-26-6"><span class="section-number-3">26.6</span> Exercises &#x2026; 1043</h3>
+</div>
+</div>
+<div id="outline-container-sec-27" class="outline-2">
+<h2 id="sec-27"><span class="section-number-2">27</span> AI: The Present and Future &#x2026; 1044</h2>
+<div class="outline-text-2" id="text-27">
+</div><div id="outline-container-sec-27-1" class="outline-3">
+<h3 id="sec-27-1"><span class="section-number-3">27.1</span> Agent Components &#x2026; 1044</h3>
+</div>
+<div id="outline-container-sec-27-2" class="outline-3">
+<h3 id="sec-27-2"><span class="section-number-3">27.2</span> Agent Architectures &#x2026; 1047</h3>
+</div>
+<div id="outline-container-sec-27-3" class="outline-3">
+<h3 id="sec-27-3"><span class="section-number-3">27.3</span> Are We Going in the Right Direction? &#x2026; 1049</h3>
+</div>
+<div id="outline-container-sec-27-4" class="outline-3">
+<h3 id="sec-27-4"><span class="section-number-3">27.4</span> What If AI Does Succeed? &#x2026; 1051</h3>
+<div class="outline-text-3" id="text-27-4">
+<p>
+Chapter A: Mathematical background &#x2026; 1053
+</p>
+
+
+<p>
+A.1. Complexity Analysis and O() Notation &#x2026; 1053 
+      A.1.1. Asymptotic analysis &#x2026; 1053 
+      A.1.2. NP and inherently hard problems &#x2026; 1054 
+A.2. Vectors, Matrices, and Linear Algebra &#x2026; 1055 
+A.3. Probability Distributions &#x2026; 1057 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-27-5" class="outline-3">
+<h3 id="sec-27-5"><span class="section-number-3">27.5</span> Bibliographical and Historical Notes &#x2026; 1059</h3>
+<div class="outline-text-3" id="text-27-5">
+<p>
+Chapter B: Notes on Languages and Algorithms &#x2026; 1060
+</p>
+
+
+<p>
+B.1. Defining Languages with Backus&#x2013;Naur Form (BNF) &#x2026; 1060 
+B.2. Describing Algorithms with Pseudocode &#x2026; 1061 
+B.3. Online Help &#x2026; 1062
+Bibliography &#x2026; 1063
+</p>
+
+<p>
+Index &#x2026; 1109
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Soichi Ishida (<a href="mailto:soichi@soichi-2.local">soichi@soichi-2.local</a>)</p>
+<p class="date">Date: </p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.6)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
