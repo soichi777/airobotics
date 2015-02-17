@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Artificial Intelligence robot 内部仕様</title>
-<!-- 2014-11-08 Sat 13:38 -->
+<title>AI robot 内部仕様</title>
+<!-- 2015-02-07 Sat 23:40 -->
 <meta  charset="utf-8">
 <meta  name="generator" content="Org-mode">
-<meta  name="author" content="Soichi Ishida">
+<meta  name="author" content="soichi">
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -89,7 +89,7 @@
 </head>
 <body>
 <div id="content">
-<h1 class="title">Artificial Intelligence robot 内部仕様</h1>
+<h1 class="title">AI robot 内部仕様</h1>
 <nav id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
@@ -136,21 +136,33 @@
 </li>
 <li><a href="#sec-5">5. ソフトウエア</a>
 <ul>
-<li><a href="#sec-5-1">5.1. レイヤー構造</a>
+<li><a href="#sec-5-1">5.1. レイヤー構造</a></li>
+<li><a href="#sec-5-2">5.2. モニタリングとマニュアル操作コンポーネント</a></li>
+<li><a href="#sec-5-3">5.3. ロボット状態シーケンス</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6. モジュール別詳細</a>
 <ul>
-<li><a href="#sec-5-1-1">5.1.1. UI層</a></li>
-<li><a href="#sec-5-1-2">5.1.2. サービス層</a></li>
-<li><a href="#sec-5-1-3">5.1.3. AI層</a></li>
-<li><a href="#sec-5-1-4">5.1.4. モニターとマニュアルコントロール</a></li>
-<li><a href="#sec-5-1-5">5.1.5. シミュレータ</a></li>
-<li><a href="#sec-5-1-6">5.1.6. 等価Pythonコード</a></li>
-<li><a href="#sec-5-1-7">5.1.7. ロボット本体側：モジュール別</a></li>
-<li><a href="#sec-5-1-8">5.1.8. PC側</a></li>
+<li><a href="#sec-6-1">6.1. 役割別モジュール例</a>
+<ul>
+<li><a href="#sec-6-1-1">6.1.1. ワイヤレスシステム</a></li>
+<li><a href="#sec-6-1-2">6.1.2. モニターとマニュアルコントロール</a></li>
+</ul>
+</li>
+<li><a href="#sec-6-2">6.2. 実装</a>
+<ul>
+<li><a href="#sec-6-2-1">6.2.1. ロボット本体側：モジュール別</a></li>
+<li><a href="#sec-6-2-2">6.2.2. PC側</a></li>
+</ul>
+</li>
+<li><a href="#sec-6-3">6.3. 学習用拡張</a>
+<ul>
+<li><a href="#sec-6-3-1">6.3.1. シミュレータ</a></li>
+<li><a href="#sec-6-3-2">6.3.2. 等価Pythonコード</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#sec-6">6. diagram example</a></li>
 </ul>
 </div>
 </nav>
@@ -179,15 +191,7 @@
 <div class="outline-text-2" id="text-2">
 </div><div id="outline-container-sec-2-1" class="outline-3">
 <h3 id="sec-2-1"><span class="section-number-3">2.1</span> ドメインロジック</h3>
-<div class="outline-text-3" id="text-2-1">
-
-<figure>
-<p><img src="./images/domain_logic.png" alt="domain_logic.png">
-</p>
-</figure>
 </div>
-</div>
-
 <div id="outline-container-sec-2-2" class="outline-3">
 <h3 id="sec-2-2"><span class="section-number-3">2.2</span> ロボット本体</h3>
 <div class="outline-text-3" id="text-2-2">
@@ -198,20 +202,8 @@
 <li>main関数に無限ループを置き、システムに異常が起こらない限り、その無限ループを抜けることはない
 </li>
 </ul>
-
-<figure>
-<p><img src="./images/main_activity-flow_chart.png" alt="main_activity-flow_chart.png">
-</p>
-</figure>
-
-
-<figure>
-<p><img src="./images/action-flow.png" alt="action-flow.png">
-</p>
-</figure>
 </div>
 </div>
-
 <div id="outline-container-sec-2-2-2" class="outline-4">
 <h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> 状態表示</h4>
 <div class="outline-text-4" id="text-2-2-2">
@@ -277,18 +269,22 @@ Particle Filter（<a href="http://ja.wikipedia.org/wiki/%E7%B2%92%E5%AD%90%E3%83
 </div><div id="outline-container-sec-4-2-1" class="outline-4">
 <h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> マイコン</h4>
 <div class="outline-text-4" id="text-4-2-1">
-<ul class="org-ul">
-<li><a href="https://mbed.org">mbed</a> を使用する
-</li>
-</ul>
 <p>
-mbed <a href="http://developer.mbed.org/platforms/mbed-LPC1768/">LP1768</a> を使用
+mbed <a href="http://developer.mbed.org/platforms/mbed-LPC1768/">LPC1768</a> を使用
+<img src="./images/lpc1768.jpg" alt="lpc1768.jpg">
 </p>
 </div>
-<ol class="org-ol"><li><span class="todo TODO">TODO</span> 特徴<br ></li>
-<li><span class="todo TODO">TODO</span> スペック<br ></li></ol>
-</div>
+<ol class="org-ol"><li><a id="sec-4-2-1-1"></a><span class="todo TODO">TODO</span> 特徴<br ></li>
+<li><a id="sec-4-2-1-2"></a><span class="todo TODO">TODO</span> スペック<br ><ol class="org-ol"><li><a id="sec-4-2-1-2-1"></a>pin配置<br ><div class="outline-text-6" id="text-4-2-1-2-1">
 
+<figure>
+<p><img src="./images/lpc1768-pin_configuration.jpg" alt="lpc1768-pin_configuration.jpg">
+</p>
+</figure>
+</div>
+</li></ol>
+</li></ol>
+</div>
 <div id="outline-container-sec-4-2-2" class="outline-4">
 <h4 id="sec-4-2-2"><span class="section-number-4">4.2.2</span> バッテリー</h4>
 </div>
@@ -299,29 +295,44 @@ mbed <a href="http://developer.mbed.org/platforms/mbed-LPC1768/">LP1768</a> を�
 <h4 id="sec-4-2-4"><span class="section-number-4">4.2.4</span> モータードライバ</h4>
 <div class="outline-text-4" id="text-4-2-4">
 <p>
-<a href="http://akizukidenshi.com/catalog/g/gI-05087/">フルブリッジドライバ 7V BD6211F-E2</a>
-<img src="http://akizukidenshi.com/img/goods/C/I-05087.jpg" alt="I-05087.jpg">
+<a href="http://jp.rs-online.com/web/p/motor-driver-ics/7703797/">TB6612FNG</a>
+<a href="http://docs-asia.electrocomponents.com/webdocs/1159/0900766b8115965f.pdf">データシート</a>
 </p>
 </div>
 </div>
+
 <div id="outline-container-sec-4-2-5" class="outline-4">
 <h4 id="sec-4-2-5"><span class="section-number-4">4.2.5</span> 超音波距離センサ</h4>
 <div class="outline-text-4" id="text-4-2-5">
 <p>
 <a href="http://akizukidenshi.com/catalog/g/gM-05400/">パララックス社超音波距離センサーモジュール</a>
-<img src="http://akizukidenshi.com/img/goods/C/M-05400.jpg" alt="M-05400.jpg">
+</p>
+<p>
+<img src="http://akizukidenshi.com/img/goods/C/M-05400.jpg" alt="M-05400.jpg" width="200px">
+<a href="http://akizukidenshi.com/download/ds/parallax/28015-PING-Sensor-Product-Guide-v2.0.pdf">データシート</a>
 </p>
 </div>
 </div>
+
 <div id="outline-container-sec-4-2-6" class="outline-4">
 <h4 id="sec-4-2-6"><span class="section-number-4">4.2.6</span> 無線モジュール</h4>
 <div class="outline-text-4" id="text-4-2-6">
 <p>
 <a href="http://akizukidenshi.com/catalog/g/gM-06195/">XBee series2</a>
-<img src="http://akizukidenshi.com/img/goods/C/M-06195.jpg" alt="M-06195.jpg">
-<a href="http://akizukidenshi.com/catalog/g/gK-06188/">XBee USBインターフェースボード</a>
-<img src="http://akizukidenshi.com/img/goods/C/K-06188.jpg" alt="K-06188.jpg">
 </p>
+<p>
+<img src="http://akizukidenshi.com/img/goods/C/M-06195.jpg" alt="M-06195.jpg" width="200px">
+<a href="http://akizukidenshi.com/catalog/g/gK-06188/">XBee USBインターフェースボード</a>
+</p>
+<p>
+<img src="http://akizukidenshi.com/img/goods/C/K-06188.jpg" alt="K-06188.jpg" width="200px">
+<a href="https://www.switch-science.com/catalog/1793/">XStick ZB</a>
+</p>
+
+<figure>
+<p><img src="https://docid81hrs3j1.cloudfront.net/imagecontent/1793_002.jpg" alt="1793_002.jpg" width="200px">
+</p>
+</figure>
 </div>
 </div>
 </div>
@@ -340,7 +351,6 @@ mbed <a href="http://developer.mbed.org/platforms/mbed-LPC1768/">LP1768</a> を�
 </div>
 </div>
 
-
 <div id="outline-container-sec-5" class="outline-2">
 <h2 id="sec-5"><span class="section-number-2">5</span> ソフトウエア</h2>
 <div class="outline-text-2" id="text-5">
@@ -349,41 +359,230 @@ mbed <a href="http://developer.mbed.org/platforms/mbed-LPC1768/">LP1768</a> を�
 <div class="outline-text-3" id="text-5-1">
 
 <figure>
-<p><img src="./images/layered-architecture.png" alt="layered-architecture.png">
+<p><img src="./images/entire-layered-architecture.png" alt="entire-layered-architecture.png">
 </p>
 </figure>
 </div>
-
-<div id="outline-container-sec-5-1-1" class="outline-4">
-<h4 id="sec-5-1-1"><span class="section-number-4">5.1.1</span> UI層</h4>
-</div>
-<div id="outline-container-sec-5-1-2" class="outline-4">
-<h4 id="sec-5-1-2"><span class="section-number-4">5.1.2</span> サービス層</h4>
-</div>
-<div id="outline-container-sec-5-1-3" class="outline-4">
-<h4 id="sec-5-1-3"><span class="section-number-4">5.1.3</span> AI層</h4>
 </div>
 
-<div id="outline-container-sec-5-1-4" class="outline-4">
-<h4 id="sec-5-1-4"><span class="section-number-4">5.1.4</span> モニターとマニュアルコントロール</h4>
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> モニタリングとマニュアル操作コンポーネント</h3>
+<div class="outline-text-3" id="text-5-2">
+
+<figure>
+<p><img src="./images/monitoring-manual_controling.png" alt="monitoring-manual_controling.png">
+</p>
+</figure>
 </div>
-<div id="outline-container-sec-5-1-5" class="outline-4">
-<h4 id="sec-5-1-5"><span class="section-number-4">5.1.5</span> シミュレータ</h4>
 </div>
-<div id="outline-container-sec-5-1-6" class="outline-4">
-<h4 id="sec-5-1-6"><span class="section-number-4">5.1.6</span> 等価Pythonコード</h4>
-<div class="outline-text-4" id="text-5-1-6">
+
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> ロボット状態シーケンス</h3>
+<div class="outline-text-3" id="text-5-3">
+
+<figure>
+<p><img src="./images/robot-state-sequence.png" alt="robot-state-sequence.png">
+</p>
+</figure>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> モジュール別詳細</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> 役割別モジュール例</h3>
+<div class="outline-text-3" id="text-6-1">
+</div><div id="outline-container-sec-6-1-1" class="outline-4">
+<h4 id="sec-6-1-1"><span class="section-number-4">6.1.1</span> ワイヤレスシステム</h4>
+<div class="outline-text-4" id="text-6-1-1">
+</div><ol class="org-ol"><li><a id="sec-6-1-1-1"></a>通信API: XBeeAPI - Communicationマッピング<br ><div class="outline-text-5" id="text-6-1-1-1">
+<p>
+XBeeAPIをベースに、ロボット本体とコントロールPCとの間のAPIを定義する。
+XBeeAPIは、複数のXBeeモジュール間での通信APIだが、ここで定義するのは、ロボットとコントロールPCとの間でのデータAPIである。
+</p>
+</div>
+
+<ol class="org-ol"><li><a id="sec-6-1-1-1-1"></a>通信レイヤー<br ><div class="outline-text-6" id="text-6-1-1-1-1">
+
+<figure>
+<p><img src="./images/wireless-api-layer.png" alt="wireless-api-layer.png">
+</p>
+</figure>
+</div>
+</li>
+
+<li><a id="sec-6-1-1-1-2"></a><span class="todo TODO">TODO</span> アプリケーションレイヤーAPI定義<br ></li></ol>
+</li>
+
+
+
+<li><a id="sec-6-1-1-2"></a>マニュアルモード<br ><ol class="org-ol"><li><a id="sec-6-1-1-2-1"></a>シーケンス<br ><ol class="org-ol"><li><a id="sec-6-1-1-2-1-1"></a><span class="todo TODO">TODO</span> シーケンスのレベル<br ><div class="outline-text-7" id="text-6-1-1-2-1-1">
+<p>
+各種シーケンス図間の関係を説明する
+</p>
+</div>
+</li>
+<li><a id="sec-6-1-1-2-1-2"></a>プログラム単位のシーケンス<br ><ol class="org-ol"><li><a id="sec-6-1-1-2-1-2-1"></a>データ受信(ZigBee Receive Packet)<br ><div class="outline-text-8" id="text-6-1-1-2-1-2-1">
+
+<figure>
+<p><img src="./images/wireless-data-receive.png" alt="wireless-data-receive.png">
+</p>
+</figure>
+</div>
+</li></ol>
+</li>
+
+<li><a id="sec-6-1-1-2-1-3"></a>最大シーケンスレベル（？）<br ><div class="outline-text-7" id="text-6-1-1-2-1-3">
 <ul class="org-ul">
-<li>同じAIロジックをPythonコードで実現する
+<li>CommandLine
 </li>
 </ul>
+<p>
+コマンドラインツール
+</p>
+<ul class="org-ul">
+<li>CommandMapper
+</li>
+</ul>
+<p>
+エンコーダーとデコーダーの2つで構成される。
+コマンドに入力したコマンドシークエンスをXBee APIフォームに変換し、その逆も。
+</p>
+<ul class="org-ul">
+<li>StateMapper
+</li>
+</ul>
+<p>
+エンコーダーとデコーダーの2つで構成される。
+XBee APIフォームデータをコマンドラインに表示できるように変換し、その逆も。
+</p>
+
+<ul class="org-ul">
+<li>XBeeCoodinator
+</li>
+</ul>
+<p>
+XBee API Coodinator と設定されたXBeeハードモジュール
+</p>
+<ul class="org-ul">
+<li>XBeeRouter
+</li>
+</ul>
+<p>
+XBee API Router と設定されたXBeeハードモジュール
+</p>
+<ul class="org-ul">
+<li>Robot
+</li>
+</ul>
+<p>
+ロボット本体（mbedがコントロール部）
+</p>
+
+
+<figure>
+<p><img src="./images/wireless-manual-control.png" alt="wireless-manual-control.png">
+</p>
+</figure>
 </div>
+</li></ol>
+</li>
+
+<li><a id="sec-6-1-1-2-2"></a>アクティビティ<br ><div class="outline-text-6" id="text-6-1-1-2-2">
+
+<figure>
+<p><img src="./images/wireless-manual-activity.png" alt="wireless-manual-activity.png">
+</p>
+</figure>
+</div>
+</li>
+
+<li><a id="sec-6-1-1-2-3"></a>クラス構成<br ><div class="outline-text-6" id="text-6-1-1-2-3">
+
+<figure>
+<p><img src="./images/wireless-manual-classes.png" alt="wireless-manual-classes.png">
+</p>
+</figure>
+</div>
+</li>
+
+<li><a id="sec-6-1-1-2-4"></a>main psuedocode<br ><div class="outline-text-6" id="text-6-1-1-2-4">
+<div class="org-src-container">
+
+<pre class="src src-c++">void showStatus()
+{
+  printf('showing status');
+}
+
+void listCommands();
+{
+}
+
+void run(CommandSequence sequence)
+{
+  encoder = CommandEncoder();
+
+  encoded = encoder.encode(sequence);
+
+
+}
+
+int main()
+{
+  string command = '';
+
+  sequence = CommandSequence();
+
+  while (command !== QUIT) {
+
+    printf('enter a command');
+
+    listCommands();
+
+    showStatus();
+
+    if (command === RUN) {
+      run(CommandSequence);
+    } else if (/* command is valid */) {
+      sequence.addCommand(command);
+    }
+  }
+
+  printf('exiting program');
+
+  return 0;
+}
+</pre>
+</div>
+</div>
+</li></ol>
+</li>
+
+
+<li><a id="sec-6-1-1-3"></a>オートーモード<br ><div class="outline-text-5" id="text-6-1-1-3">
+
+<figure>
+<p><img src="./images/wireless-auto-mode.png" alt="wireless-auto-mode.png">
+</p>
+</figure>
+</div>
+</li></ol>
 </div>
 
-<div id="outline-container-sec-5-1-7" class="outline-4">
-<h4 id="sec-5-1-7"><span class="section-number-4">5.1.7</span> ロボット本体側：モジュール別</h4>
-<div class="outline-text-4" id="text-5-1-7">
-</div><ol class="org-ol"><li>XBee 無線制御部<br ><ol class="org-ol"><li>XBee API mode<br ><div class="outline-text-6" id="text-5-1-7-1-1">
+<div id="outline-container-sec-6-1-2" class="outline-4">
+<h4 id="sec-6-1-2"><span class="section-number-4">6.1.2</span> モニターとマニュアルコントロール</h4>
+</div>
+</div>
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> 実装</h3>
+<div class="outline-text-3" id="text-6-2">
+</div><div id="outline-container-sec-6-2-1" class="outline-4">
+<h4 id="sec-6-2-1"><span class="section-number-4">6.2.1</span> ロボット本体側：モジュール別</h4>
+<div class="outline-text-4" id="text-6-2-1">
+</div><ol class="org-ol"><li><a id="sec-6-2-1-1"></a>XBee 無線制御部<br ><ol class="org-ol"><li><a id="sec-6-2-1-1-1"></a>XBee API mode<br ><div class="outline-text-6" id="text-6-2-1-1-1">
 <ul class="org-ul">
 <li>0x10=パケット送信
 </li>
@@ -395,235 +594,62 @@ mbed <a href="http://developer.mbed.org/platforms/mbed-LPC1768/">LP1768</a> を�
 </div>
 </li>
 
-<li>無線通信フロー<br ><ol class="org-ol"><li>障害物センサーデータ<br ><div class="outline-text-7" id="text-5-1-7-1-2-1">
+<li><a id="sec-6-2-1-1-2"></a>無線通信フロー<br ><ol class="org-ol"><li><a id="sec-6-2-1-1-2-1"></a>障害物センサーデータ<br ><div class="outline-text-7" id="text-6-2-1-1-2-1">
 <p>
 ロボット本体が回転し、同時にデータを収集しながら送信する。
 </p>
 <ul class="org-ul">
 <li>通常時
 </li>
-</ul>
-
-<figure>
-<p><img src="./images/wireless_communication-flow_chart.png" alt="wireless_communication-flow_chart.png">
-</p>
-</figure>
-
-<ul class="org-ul">
 <li>エラー時
 </li>
 </ul>
-
-<figure>
-<p><img src="./images/wireless_communication-flow_chart-error.png" alt="wireless_communication-flow_chart-error.png">
-</p>
-</figure>
 </div>
+</li></ol>
 </li>
-
-<li><span class="todo TODO">TODO</span> マニュアルコントロール<br ></li></ol>
-</li>
-
-<li>libxbee<br ><div class="outline-text-6" id="text-5-1-7-1-3">
+<li><a id="sec-6-2-1-1-3"></a>libxbee<br ><div class="outline-text-6" id="text-6-2-1-1-3">
 <p>
 PC側（?）ライブラリ
 <a href="https://github.com/thomasgubler/libxbee">https://github.com/thomasgubler/libxbee</a>
 </p>
-
-<pre class="example">
-#include &lt;iostream&gt;
-#include &lt;string.h&gt;
-#include &lt;unistd.h&gt;
-
-#include &lt;xbeep.h&gt;
-
-#define LOCAL_CONNECTION
-#define USE_CALLBACKS
-
-#ifdef USE_CALLBACKS
-
-/* ========================================================================== */
-
-class myConnection: public libxbee::ConCallback {
-	public:
-		explicit myConnection(libxbee::XBee &amp;parent, std::string type, struct xbee_conAddress *address = NULL): libxbee::ConCallback(parent, type, address) {};
-		void xbee_conCallback(libxbee::Pkt **pkt);
-		std::string myData;
-};
-
-void myConnection::xbee_conCallback(libxbee::Pkt **pkt) {
-	std::cout &lt;&lt; "Callback!!\n";
-	int i;
-	for (i = 0; i &lt; (*pkt)-&gt;size(); i++) {
-		std::cout &lt;&lt; (**pkt)[i];
-	}
-	std::cout &lt;&lt; "\n";
-
-	std::cout &lt;&lt; myData;
-
-	/* if you want to keep the packet, then you MUST do the following:
-	      libxbee::Pkt *myhandle = *pkt;
-	      *pkt = NULL;
-	   and then later, you MUST delete the packet to free up the memory:
-	      delete myhandle;
-
-	   if you do not want to keep the packet, then just leave everything as-is, and it will be free'd for you */
-}
-#endif /* USE_CALLBACKS */
-
-/* ========================================================================== */
-
-int main(int argc, char *argv[]) {
-	int i;
-
-	/* get available libxbee modes */
-	try {
-		std::list&lt;std::string&gt; modes = libxbee::getModes();
-		std::list&lt;std::string&gt;::iterator i;
-		
-		std::cout &lt;&lt; "Available libxbee modes:\n";
-		for (i = modes.begin(); i != modes.end(); i++) {
-			std::cout &lt;&lt; "  " &lt;&lt; *i;
-		}
-		std::cout &lt;&lt; "\n";
-	} catch (xbee_err ret) {
-		std::cout &lt;&lt; "Error while retrieving libxbee modes...\n";
-	}
-
-
-	try {
-
-		/* setup libxbee */
-		libxbee::XBee xbee("xbee1", "/dev/ttyUSB0", 57600);
-		std::cout &lt;&lt; "Running libxbee in mode '" &lt;&lt; xbee.mode() &lt;&lt; "'\n";
-
-		
-		/* get available connection types */
-		try {
-			std::list&lt;std::string&gt; types = xbee.getConTypes();
-			std::list&lt;std::string&gt;::iterator i;
-			
-			std::cout &lt;&lt; "Available connection types:\n";
-			for (i = types.begin(); i != types.end(); i++) {
-				std::cout &lt;&lt; "  " &lt;&lt; *i;
-			}
-			std::cout &lt;&lt; "\n";
-		} catch (xbee_err ret) {
-			std::cout &lt;&lt; "Error while retrieving connection types...\n";
-		}
-
-		
-		/* make a connection */
-#ifdef LOCAL_CONNECTION
-  #ifdef USE_CALLBACKS
-		myConnection con(xbee, "Local AT"); /* with a callback */
-		con.myData = "Testing, 1... 2... 3...\n";
-  #else
-		libxbee::Con con(xbee, "Local AT"); /* without a callback */
-  #endif
-#else /* LOCAL_CONNECTION */
-		struct xbee_conAddress addr;
-		memset(&amp;addr, 0, sizeof(addr));
-		addr.addr64_enabled = 1;
-		addr.addr64[0] = 0x00;
-		addr.addr64[1] = 0x13;
-		addr.addr64[2] = 0xA2;
-		addr.addr64[3] = 0x00;
-		addr.addr64[4] = 0x40;
-		addr.addr64[5] = 0x33;
-		addr.addr64[6] = 0xCA;
-		addr.addr64[7] = 0xCB;
-  #ifdef USE_CALLBACKS
-		myConnection con(xbee, "Remote AT", &amp;addr); /* with a callback */
-		con.myData = "Testing, 1... 2... 3...\n";
-  #else
-		libxbee::Con con(xbee, "Remote AT", &amp;addr); /* without a callback */
-  #endif
-#endif /* LOCAL_CONNECTION */
-
-
-		/* send data */
-		//con.Tx("NI"); /* like this */
-		con &lt;&lt; "NI";    /* or like this */
-		usleep(1000000);
-
-
-#ifndef USE_CALLBACKS
-		libxbee::Pkt pkt;
-
-		try {
-			//con &gt;&gt; pkt; /* like this */
-			pkt &lt;&lt; con;   /* or this */
-		} catch (xbee_err err) {
-			std::cout &lt;&lt; "Error on Rx! " &lt;&lt; err &lt;&lt; "\n";
-			return 1;
-		}
-
-		try {
-			std::cout &lt;&lt; "Packet length: " &lt;&lt; pkt.size() &lt;&lt; "\n";
-			for (i = 0; i &lt; pkt.size(); i++) {
-				std::cout &lt;&lt; "  " &lt;&lt; i &lt;&lt; " " &lt;&lt; pkt[i] &lt;&lt; "\n";
-			}
-		} catch (xbee_err err) {
-			std::cout &lt;&lt; "Error accessing packet! " &lt;&lt; err &lt;&lt; "\n";
-			return 1;
-		}
-
-		usleep(1000000);
-#endif /* !USE_CALLBACKS */
-	} catch (xbee_err err) {
-		std::cout &lt;&lt; "Error " &lt;&lt; err &lt;&lt; "\n";
-	}
-	
-	return 0;
-}
-</pre>
-
-
-<figure>
-<p><img src="./images/libxbee_class_diagram.png" alt="libxbee_class_diagram.png">
-</p>
-</figure>
 
 <p>
 大きすぎるため、これを参考にし自作を心がける。
 </p>
 </div>
 </li>
-<li>XBee SmartLabXBeeAPI library<br ><div class="outline-text-6" id="text-5-1-7-1-4">
+<li><a id="sec-6-2-1-1-4"></a>XBee SmartLabXBeeAPI library<br ><div class="outline-text-6" id="text-6-2-1-1-4">
 <p>
 mbed側のライブラリ。必要でないものも多いので、自作を心がける。
 </p>
 </div>
-<ol class="org-ol"><li>Class diagram<br ><div class="outline-text-7" id="text-5-1-7-1-4-1">
-
-<figure>
-<p><img src="./images/smart_lab_xbee_api_class_diagram.png" alt="smart_lab_xbee_api_class_diagram.png">
-</p>
-</figure>
-</div>
-</li></ol>
+<ol class="org-ol"><li><a id="sec-6-2-1-1-4-1"></a>Class diagram<br ></li></ol>
 </li></ol>
 </li>
-
-<li>Ping 超音波センサー部<br ></li>
-<li>状態インジケータ部<br ></li>
-<li>モータードライバ部<br ></li></ol>
+<li><a id="sec-6-2-1-2"></a>Ping 超音波センサー部<br ></li>
+<li><a id="sec-6-2-1-3"></a>状態インジケータ部<br ></li>
+<li><a id="sec-6-2-1-4"></a>モータードライバ部<br ></li></ol>
 </div>
-<div id="outline-container-sec-5-1-8" class="outline-4">
-<h4 id="sec-5-1-8"><span class="section-number-4">5.1.8</span> PC側</h4>
-</div>
+<div id="outline-container-sec-6-2-2" class="outline-4">
+<h4 id="sec-6-2-2"><span class="section-number-4">6.2.2</span> PC側</h4>
 </div>
 </div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> diagram example</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3"><span class="section-number-3">6.3</span> 学習用拡張</h3>
+<div class="outline-text-3" id="text-6-3">
+</div><div id="outline-container-sec-6-3-1" class="outline-4">
+<h4 id="sec-6-3-1"><span class="section-number-4">6.3.1</span> シミュレータ</h4>
+</div>
+<div id="outline-container-sec-6-3-2" class="outline-4">
+<h4 id="sec-6-3-2"><span class="section-number-4">6.3.2</span> 等価Pythonコード</h4>
+<div class="outline-text-4" id="text-6-3-2">
+<ul class="org-ul">
+<li>同じAIロジックをPythonコードで実現する
+</li>
+</ul>
 
-<figure>
-<p><img src="./images/class_diagram.png" alt="class_diagram.png">
-</p>
-</figure>
+
 
 <style>
 @import url(http://fonts.googleapis.com/css?family=Inconsolata);
@@ -932,10 +958,12 @@ h6 {
 </div>
 </div>
 </div>
+</div>
+</div>
 <div id="postamble" class="status">
-<p class="author">Author: Soichi Ishida (<a href="mailto:soichi@soichi-2.local">soichi@soichi-2.local</a>)</p>
-<p class="date">Date: 2014-10-27 20:45:22 Monday</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.6)</p>
+<p class="author">Author: soichi (<a href="mailto:soichi@soichi-2.local">soichi@soichi-2.local</a>)</p>
+<p class="date">Date: 2015-01-12 15:55:37 Monday</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

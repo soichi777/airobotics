@@ -1,15 +1,15 @@
-#+title: Artificial Intelligence robot 内部仕様
-#+date: 2014-10-27 20:45:22 Monday
+#+TITLE: AI robot 内部仕様
+#+DATE: 2015-01-12 15:55:37 Monday
 
 #+OPTIONS: ^:{}
 #+LINK_HOME: http://home.fnal.gov/~neilsen
 #+LINK_UP: http://home.fnal.gov/~neilsen/notebook
-#+bind: org-export-publishing-directory "./tmp"
+#+BIND: org-export-publishing-directory "./tmp"
 
 #+INFOJS_OPT: view:t toc:t ltoc:t mouse:underline buttons:0 path:http://thomasf.github.io/solarized-css/org-info.min.js
 
 #+BEGIN_COMMENT
-[[http://asciiflow.com/#Draw]]
+http://asciiflow.com/
 #+END_COMMENT
 
 * 概要
@@ -21,8 +21,7 @@
 - ハードウエアのロボットの代わりに、ソフトウエアシミュレーターに置き換えることができ、サービス層以下のロジックはそのまま使用できる
 * 動作とUI
 ** ドメインロジック
-#+BEGIN_SRC plantuml :file ./images/domain_logic.png
-
+#+BEGIN_SRC plantuml :file ./images/domain_logic.png :exports none
 package "Robot" {
   node "State" {
     [Communication]
@@ -44,7 +43,7 @@ package "PC" {
 
 *** TODO 基本動作
 - main関数に無限ループを置き、システムに異常が起こらない限り、その無限ループを抜けることはない
-#+BEGIN_SRC plantuml :file ./images/main_activity-flow_chart.png :export none
+#+BEGIN_SRC plantuml :file ./images/main_activity-flow_chart.png :exports none
 (*) --> "Initialization"
 
 if "Some Test" then
@@ -57,7 +56,7 @@ else
 endif
 #+END_SRC
 
-#+begin_src ditaa :file ./images/action-flow.png :export none
+#+begin_src ditaa :file ./images/action-flow.png :exports none
                     +------------------------+            
                     |                        |            
                     |  System setup          |            
@@ -159,66 +158,357 @@ Particle Filter（[[http://ja.wikipedia.org/wiki/%E7%B2%92%E5%AD%90%E3%83%95%E3%
 ** 物理的サイズ
 ** モジュール
 *** マイコン
-- [[https://mbed.org][mbed]] を使用する
-mbed [[http://developer.mbed.org/platforms/mbed-LPC1768/][LP1768]] を使用
+mbed [[http://developer.mbed.org/platforms/mbed-LPC1768/][LPC1768]] を使用
+[[file:./images/lpc1768.jpg]]
 **** TODO 特徴
 **** TODO スペック
-
+***** pin配置
+[[file:./images/lpc1768-pin_configuration.jpg]]
 *** バッテリー
 *** モーター
 *** モータードライバ
+[[http://jp.rs-online.com/web/p/motor-driver-ics/7703797/][TB6612FNG]]
+[[http://docs-asia.electrocomponents.com/webdocs/1159/0900766b8115965f.pdf][データシート]]
+
+#+BEGIN_COMMENT
+以前の使用予定
 [[http://akizukidenshi.com/catalog/g/gI-05087/][フルブリッジドライバ 7V BD6211F-E2]]
 [[file:http://akizukidenshi.com/img/goods/C/I-05087.jpg]]
+#+END_COMMENT
+
 *** 超音波距離センサ
 [[http://akizukidenshi.com/catalog/g/gM-05400/][パララックス社超音波距離センサーモジュール]]
+#+attr_html: :width 200px
 [[file:http://akizukidenshi.com/img/goods/C/M-05400.jpg]]
+[[http://akizukidenshi.com/download/ds/parallax/28015-PING-Sensor-Product-Guide-v2.0.pdf][データシート]]
+
 *** 無線モジュール
 [[http://akizukidenshi.com/catalog/g/gM-06195/][XBee series2]]
+#+attr_html: :width 200px
 [[file:http://akizukidenshi.com/img/goods/C/M-06195.jpg]]
 [[http://akizukidenshi.com/catalog/g/gK-06188/][XBee USBインターフェースボード]]
+#+attr_html: :width 200px
 [[file:http://akizukidenshi.com/img/goods/C/K-06188.jpg]]
+[[https://www.switch-science.com/catalog/1793/][XStick ZB]]
+#+attr_html: :width 200px
+[[file:https://docid81hrs3j1.cloudfront.net/imagecontent/1793_002.jpg]]
 ** 回路
 *** 電源回路
 *** モーター回路
 *** 無線回路
 
-
 * ソフトウエア
-
 ** レイヤー構造
 
-#+begin_src ditaa :file ./images/layered-architecture.png :export none
-+-------------+ +----------+----------+---------------+ +-----------+ +-------------+
-|             | |          |          |               | |           | |             |
-| UI          | |  motor   | range    | wireless      | | software  | | Control     |
-|             | |          | sensor   | communication | | simulator | | Application |
-|             | |          |          |               | |           | |             |
-+-------------+ +----------+----------+---------------+ +-----------+ +-------------+
+#+BEGIN_SRC plantuml :file ./images/entire-layered-architecture.png 
+package "Presentation (hardware dependent)" {
+  [XBee controller]
+  [Wheels]
+  [Sensor]
+}
 
-+-------------+ +----------+----------+----------+ 
-|             | |          |          |          | 
-| service     | |  motion  | sense    | map      | 
-|             | |          |          |          | 
-|             | |          |          |          | 
-+-------------+ +----------+----------+----------+ 
+package "Domain (hardware independent)" {
+  [Communication]
+  [World]
+  [Brain]
+}
 
-+-------------+ +----------------------------------+ 
-|             | |                                  |
-| Artificial  | |                                  |
-| Intelligence| |                                  |
-|             | |                                  |
-+-------------+ +----------------------------------+ 
-#+end_src
+database "micro SD" {
+  [Communication log]
+  [World log]
+  [brain state]
+}
 
-*** UI層
-*** サービス層
-*** AI層
+[XBee controller] --> [Communication]
+[Communication] --> [Communication log]
+#+END_SRC
+
+** モニタリングとマニュアル操作コンポーネント
+#+BEGIN_SRC plantuml :file ./images/monitoring-manual_controling.png
+node "PC(Mac)" {
+  [World monitoring] - [Wireless coordinator]
+}
+
+node "Robot" {
+  [World] - [Wireless router]
+}
+
+[Wireless coordinator] - [Wireless router]
+#+END_SRC
+
+** ロボット状態シーケンス
+
+#+BEGIN_SRC plantuml :file ./images/robot-state-sequence.png
+
+box "Presentation"
+participant Sensor
+participant ObstacleDataProcessor
+participant MapGenerator
+participant WorldUpdater
+end box
+
+box "Domain"
+participant World
+participant Brain
+end box
+
+Sensor -> Sensor: accumulate data
+Sensor -> ObstacleDataProcessor
+ObstacleDataProcessor -> MapGenerator
+MapGenerator -> WorldUpdater
+
+WorldUpdater -> World
+World -> Brain
+Brain -> Brain
+Brain -> World
+#+END_SRC
+
+
+* モジュール別詳細
+** 役割別モジュール例
+*** ワイヤレスシステム
+**** 通信API: XBeeAPI - Communicationマッピング
+XBeeAPIをベースに、ロボット本体とコントロールPCとの間のAPIを定義する。
+XBeeAPIは、複数のXBeeモジュール間での通信APIだが、ここで定義するのは、ロボットとコントロールPCとの間でのデータAPIである。
+
+***** 通信レイヤー
+#+BEGIN_SRC ditaa :file ./images/wireless-api-layer.png
++---------------------+
+|                     |
+|                     |
+|    Application      |
+|                     |
+|                     |
++---------------------+
+                       
++---------------------+
+|                     |
+|                     |
+|    XBee API         |
+|                     |
+|                     |
++---------------------+
+                       
++---------------------+
+|                     |
+|                     |
+|    ZigBee protocol  |
+|                     |
+|                     |
++---------------------+
+#+END_SRC
+
+***** TODO アプリケーションレイヤーAPI定義
+
+
+
+**** マニュアルモード
+***** シーケンス
+****** TODO シーケンスのレベル
+各種シーケンス図間の関係を説明する
+****** プログラム単位のシーケンス
+******* データ受信(ZigBee Receive Packet)
+#+BEGIN_SRC plantuml :file ./images/wireless-data-receive.png
+hide footbox
+
+participant USBSerialPort
+participant view
+participant XBee
+participant Decoder
+participant Monitor
+
+USBSerialPort -> USBSerialPort: open
+XBee -> view: register (listener)
+USBSerialPort -> view: Data frame
+view -> XBee: notify
+XBee -> Decoder: Data frame
+Decoder -> Monitor: result
+#+END_SRC
+
+****** 最大シーケンスレベル（？）
+- CommandLine
+コマンドラインツール
+- CommandMapper
+エンコーダーとデコーダーの2つで構成される。
+コマンドに入力したコマンドシークエンスをXBee APIフォームに変換し、その逆も。
+- StateMapper
+エンコーダーとデコーダーの2つで構成される。
+XBee APIフォームデータをコマンドラインに表示できるように変換し、その逆も。
+
+- XBeeCoodinator
+XBee API Coodinator と設定されたXBeeハードモジュール
+- XBeeRouter
+XBee API Router と設定されたXBeeハードモジュール
+- Robot
+ロボット本体（mbedがコントロール部）
+
+#+BEGIN_SRC plantuml :file ./images/wireless-manual-control.png
+CommandLine -> CommandLine: rotate 33 degree
+CommandLine -> CommandLine: move forward 30 mm
+
+CommandLine -> CommandMapper: command packet
+CommandMapper -> XBeeCoodinator: XBee API data frame
+
+XBeeCoodinator -> XBeeRouter: IEEE802.15.4
+XBeeRouter -> StateMapper: XBee API data frame
+
+StateMapper -> Robot: command packet
+
+Robot -> StateMapper: status response
+StateMapper -> XBeeRouter: XBee API data frame
+XBeeRouter -> XBeeCoodinator: IEEE802.15.4
+
+XBeeCoodinator -> CommandMapper: XBee API data frame
+CommandMapper -> CommandLine: status response
+
+#+END_SRC
+
+***** アクティビティ
+
+#+BEGIN_SRC plantuml :file ./images/wireless-manual-activity.png
+title Command line control activity flow
+
+start
+
+repeat
+
+  :show Status;
+  
+  :enter a command;
+
+  if (command is "quit"?) then (true)
+    :exiting application;
+    stop
+  endif
+
+  if (command is "run"?) then (true)
+    :run(CommandSequence);
+  elseif (command is valid) then (true)
+    :add command to CommandSequence;
+  endif
+repeat while
+
+stop
+
+#+END_SRC
+
+***** クラス構成
+
+#+BEGIN_SRC plantuml :file ./images/wireless-manual-classes.png
+
+package "RobotPresentation" {
+
+}
+
+package "ControllerPresentation" {
+
+  class State {
+
+  }
+
+  class CommandEncoder {
+
+  }
+
+  class CommandDecoder {
+
+  }
+
+  class CommandSequence {
+    -id
+    -commands
+  }
+
+  class Command {
+    -name
+    +normalize()
+  }
+
+  class DataFrame {
+
+  }
+}
+#+END_SRC
+
+***** main psuedocode
+#+BEGIN_SRC c++
+
+void showStatus()
+{
+  printf('showing status');
+}
+
+void listCommands();
+{
+}
+
+void run(CommandSequence sequence)
+{
+  encoder = CommandEncoder();
+
+  encoded = encoder.encode(sequence);
+
+  
+}
+
+int main()
+{
+  string command = '';
+
+  sequence = CommandSequence();
+
+  while (command !== QUIT) {
+
+    printf('enter a command');
+
+    listCommands();
+
+    showStatus();
+
+    if (command === RUN) {
+      run(CommandSequence);
+    } else if (/* command is valid */) {
+      sequence.addCommand(command);
+    }
+  }
+
+  printf('exiting program');
+
+  return 0;
+}
+#+END_SRC
+
+
+**** オートーモード
+#+BEGIN_SRC plantuml :file ./images/wireless-auto-mode.png
+CommandLine -> CommandMapper: command packet(enable-auto-mode)
+CommandMapper -> XBeeCoodinator: XBee API data frame command packet
+XBeeCoodinator -> XBeeRouter: IEEE802.15.4
+XBeeRouter -> StateMapper: XBee API data frame command
+StateMapper -> Robot: command packet
+
+Robot -> Robot: AI action1
+
+Robot -> StateMapper: action1 result
+StateMapper -> XBeeRouter: XBee API data frame action1 result
+XBeeRouter -> XBeeCoodinator: IEEE802.15.4
+XBeeCoodinator -> CommandMapper: XBee API data frame action1 result
+CommandMapper -> CommandLine: action1 result
+
+Robot -> Robot: AI action2
+
+Robot -> StateMapper: action2 result
+StateMapper -> XBeeRouter: XBee API data frame action2 result
+XBeeRouter -> XBeeCoodinator: IEEE802.15.4
+XBeeCoodinator -> CommandMapper: XBee API data frame action2 result
+CommandMapper -> CommandLine: action2 result
+
+Robot -> Robot: AI action3
+
+#+END_SRC
 
 *** モニターとマニュアルコントロール
-*** シミュレータ
-*** 等価Pythonコード
-- 同じAIロジックをPythonコードで実現する
-
+** 実装
 *** ロボット本体側：モジュール別
 **** XBee 無線制御部
 ***** XBee API mode
@@ -230,7 +520,7 @@ mbed [[http://developer.mbed.org/platforms/mbed-LPC1768/][LP1768]] を使用
 ****** 障害物センサーデータ
 ロボット本体が回転し、同時にデータを収集しながら送信する。
 - 通常時
-#+BEGIN_SRC plantuml :file ./images/wireless_communication-flow_chart.png
+#+BEGIN_SRC plantuml :file ./images/wireless_communication-flow_chart.png :exports none
 Robot -> PC: Start signal
 Robot -> PC: Sensed data 1 (角度 x0)
 Robot -> PC: Sensed data 2 (角度 x1)
@@ -242,7 +532,7 @@ Robot <-- PC: Confirmed reponse
 #+END_SRC
 
 - エラー時
-#+BEGIN_SRC plantuml :file ./images/wireless_communication-flow_chart-error.png
+#+BEGIN_SRC plantuml :file ./images/wireless_communication-flow_chart-error.png :exports none
 Robot -> PC: Sensed data 1 (角度 x0)
 Robot -> PC: Sensed data 2 (角度 x1)
 Robot -> PC: Sensed data 3 (角度 x2)
@@ -251,162 +541,11 @@ Robot -> Robot: error occurred
 PC <-- PC: Time out : Error confirmation
 #+END_SRC
 
-****** TODO マニュアルコントロール
-
 ***** libxbee
 PC側（?）ライブラリ
 [[https://github.com/thomasgubler/libxbee]]
 
-#+BEGIN_SRC 
-#include <iostream>
-#include <string.h>
-#include <unistd.h>
-
-#include <xbeep.h>
-
-#define LOCAL_CONNECTION
-#define USE_CALLBACKS
-
-#ifdef USE_CALLBACKS
-
-/* ========================================================================== */
-
-class myConnection: public libxbee::ConCallback {
-	public:
-		explicit myConnection(libxbee::XBee &parent, std::string type, struct xbee_conAddress *address = NULL): libxbee::ConCallback(parent, type, address) {};
-		void xbee_conCallback(libxbee::Pkt **pkt);
-		std::string myData;
-};
-
-void myConnection::xbee_conCallback(libxbee::Pkt **pkt) {
-	std::cout << "Callback!!\n";
-	int i;
-	for (i = 0; i < (*pkt)->size(); i++) {
-		std::cout << (**pkt)[i];
-	}
-	std::cout << "\n";
-
-	std::cout << myData;
-
-	/* if you want to keep the packet, then you MUST do the following:
-	      libxbee::Pkt *myhandle = *pkt;
-	      *pkt = NULL;
-	   and then later, you MUST delete the packet to free up the memory:
-	      delete myhandle;
-
-	   if you do not want to keep the packet, then just leave everything as-is, and it will be free'd for you */
-}
-#endif /* USE_CALLBACKS */
-
-/* ========================================================================== */
-
-int main(int argc, char *argv[]) {
-	int i;
-
-	/* get available libxbee modes */
-	try {
-		std::list<std::string> modes = libxbee::getModes();
-		std::list<std::string>::iterator i;
-		
-		std::cout << "Available libxbee modes:\n";
-		for (i = modes.begin(); i != modes.end(); i++) {
-			std::cout << "  " << *i;
-		}
-		std::cout << "\n";
-	} catch (xbee_err ret) {
-		std::cout << "Error while retrieving libxbee modes...\n";
-	}
-
-
-	try {
-
-		/* setup libxbee */
-		libxbee::XBee xbee("xbee1", "/dev/ttyUSB0", 57600);
-		std::cout << "Running libxbee in mode '" << xbee.mode() << "'\n";
-
-		
-		/* get available connection types */
-		try {
-			std::list<std::string> types = xbee.getConTypes();
-			std::list<std::string>::iterator i;
-			
-			std::cout << "Available connection types:\n";
-			for (i = types.begin(); i != types.end(); i++) {
-				std::cout << "  " << *i;
-			}
-			std::cout << "\n";
-		} catch (xbee_err ret) {
-			std::cout << "Error while retrieving connection types...\n";
-		}
-
-		
-		/* make a connection */
-#ifdef LOCAL_CONNECTION
-  #ifdef USE_CALLBACKS
-		myConnection con(xbee, "Local AT"); /* with a callback */
-		con.myData = "Testing, 1... 2... 3...\n";
-  #else
-		libxbee::Con con(xbee, "Local AT"); /* without a callback */
-  #endif
-#else /* LOCAL_CONNECTION */
-		struct xbee_conAddress addr;
-		memset(&addr, 0, sizeof(addr));
-		addr.addr64_enabled = 1;
-		addr.addr64[0] = 0x00;
-		addr.addr64[1] = 0x13;
-		addr.addr64[2] = 0xA2;
-		addr.addr64[3] = 0x00;
-		addr.addr64[4] = 0x40;
-		addr.addr64[5] = 0x33;
-		addr.addr64[6] = 0xCA;
-		addr.addr64[7] = 0xCB;
-  #ifdef USE_CALLBACKS
-		myConnection con(xbee, "Remote AT", &addr); /* with a callback */
-		con.myData = "Testing, 1... 2... 3...\n";
-  #else
-		libxbee::Con con(xbee, "Remote AT", &addr); /* without a callback */
-  #endif
-#endif /* LOCAL_CONNECTION */
-
-
-		/* send data */
-		//con.Tx("NI"); /* like this */
-		con << "NI";    /* or like this */
-		usleep(1000000);
-
-
-#ifndef USE_CALLBACKS
-		libxbee::Pkt pkt;
-
-		try {
-			//con >> pkt; /* like this */
-			pkt << con;   /* or this */
-		} catch (xbee_err err) {
-			std::cout << "Error on Rx! " << err << "\n";
-			return 1;
-		}
-
-		try {
-			std::cout << "Packet length: " << pkt.size() << "\n";
-			for (i = 0; i < pkt.size(); i++) {
-				std::cout << "  " << i << " " << pkt[i] << "\n";
-			}
-		} catch (xbee_err err) {
-			std::cout << "Error accessing packet! " << err << "\n";
-			return 1;
-		}
-
-		usleep(1000000);
-#endif /* !USE_CALLBACKS */
-	} catch (xbee_err err) {
-		std::cout << "Error " << err << "\n";
-	}
-	
-	return 0;
-}
-#+END_SRC
-
-#+BEGIN_SRC plantuml :file ./images/libxbee_class_diagram.png
+#+BEGIN_SRC plantuml :file ./images/libxbee_class_diagram.png :exports none
 xbee <|-- xbeep
 systemtime <|-- xbee
 #+END_SRC
@@ -415,7 +554,7 @@ systemtime <|-- xbee
 ***** XBee SmartLabXBeeAPI library
 mbed側のライブラリ。必要でないものも多いので、自作を心がける。
 ****** Class diagram
-#+BEGIN_SRC plantuml :file ./images/smart_lab_xbee_api_class_diagram.png :export none
+#+BEGIN_SRC plantuml :file ./images/smart_lab_xbee_api_class_diagram.png :exports none
 XBeeTx64Request <|-- XBeeAPI
 XBeeTx16Request <|-- XBeeAPI
 ZigBeeTxRequest <|-- XBeeAPI
@@ -512,25 +651,12 @@ DeviceAddress <|-- ZigBeeDiscoverAddress
 **** モータードライバ部
 *** PC側
 
-* diagram example
+** 学習用拡張
+*** シミュレータ
+*** 等価Pythonコード
+- 同じAIロジックをPythonコードで実現する
 
-#+begin_src plantuml :file ./images/class_diagram.png :export none
-skinparam monochrome true
-FitsHdu <|-- PrimaryHdu
-FitsHdu <|-- ExtensionHdu
 
-FitsHdu : header
-FitsHdu : getHeaderKeyword()
-
-ExtensionHdu <|-- ImageHdu
-ImageHdu : image
-ImageHdu : getPixel(row, column)
-
-ExtensionHdu <|-- BinaryTableHdu
-BinaryTableHdu : table
-BinaryTableHdu : getRow(row)
-BinaryTableHdu : getColumn(column)
-#+end_src
 
 #+BEGIN_HTML
 <style>

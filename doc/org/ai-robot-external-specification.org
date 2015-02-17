@@ -1,7 +1,5 @@
 #+title: AI robot 外部仕様
-#+date: 2014-10-18 11:47:58 Saturday
-
-#+bind: org-export-publishing-directory "../"
+#+date: 2015-01-24 12:23:35 Saturday
 
 #+INFOJS_OPT: view:t toc:t ltoc:t mouse:underline buttons:0 path:http://thomasf.github.io/solarized-css/org-info.min.js
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://thomasf.github.io/solarized-css/solarized-light.min.css" />
@@ -37,87 +35,20 @@
 
 * 機能
 ** 一連の動作
-#+begin_src ditaa :file ../images/external-action-flow.png
-                    +------------------------+            
-                    |                        |            
-                    |  電源オン               | 
-                    |                        |            
-                    |                        |            
-                    +-----------+------------+            
-                                |                         
-                                |                         
-                                |                         
-                                |                         
-                                +------------------------+
-                                |                        |
-           +--------------------------------+            |
-           |                                |            |
-           |                                |            |
-           |  Check state                   |            |
-           |                                |            |
-           |                                |            |
-           |  There things to do            |            |
-           |     +                      +   |            |
-           +--------------------------------+            |
-                 |                      |                |
-               true                    false             |
-                 |                      |                |
-                 |                      |                |
-                 |               +------+-------------+  |
-                 |               |                    |  |
-                 |               |  Wait for manual   |  |
-                 |               |  operation         |  |
-                 |               |                    |  |
-                 |               |                    |  |
-                 |               +--------------------+  |
-                 |                                       |
-                 |                                       |
-                 |                                       |
-                 |                                       |
-                 v                                       |
-     +------------------------+                          |
-     |                        |                          |
-     |   Sense obstacles      |                          |
-     |                        |                          |
-     |                        |                          |
-     +-----------+------------+                          |
-                 |                                       |
-                 v                                       |
-     +------------------------+                          |
-     |                        |                          |
-     |   Update map           |                          |
-     |                        |                          |
-     |                        |                          |
-     +-----------+------------+                          |
-                 |                                       |
-                 v                                       |
-     +------------------------+                          |
-     |                        |                          |
-     |   Find the next place  |                          |
-     |   to explore           |                          |
-     |                        |                          |
-     +-----------+------------+                          |
-                 |                                       |
-                 v                                       |
-     +------------------------+                          |
-     |                        |                          |
-     |   Calculate the ideal  |                          |
-     |   path to that place   |                          |
-     |                        |                          |
-     +-----------+------------+                          |
-                 |                                       |
-                 v                                       |
-     +------------------------+                          |
-     |  Move                  |                          |
-     |                        |                          |
-     |                        |                          |
-     |                        |                          |
-     +-----------+------------+                          |
-                 |                                       |
-                 |                                       |
-                 |                                       |
-                 +---------------------------------------+
-#+end_src 
+#+BEGIN_SRC plantuml :file ./images/external-action-flow.png :cmdline -charset UTF-8
+start
+
+:源源オン;
+
+repeat
+  :sense;
+  :update state;
+repeat while(異常なし?)
+
+stop
+#+END_SRC
+
+
 *** 動作条件
 - 平らな場所
 - PC(Mac)でモニターアプリケーションをインストール
@@ -125,35 +56,25 @@
 *** 動作状態の確認
 Robotに状態を視覚的に確認するLED
 
-状態とは
+- 青（電源） 点灯時：電源オン、点滅時：バッテリー低下
+- 緑（AI）  点灯時：AIモードオン、点滅時：マニュアル操作を待っている （消灯時：マニュアルモード）
+- 黄（通信） 点灯時：コントロールと無線確率、ゆっくり点滅時：通信確立中、早く点滅：通信実行中
+- 赤（エラー）点灯時：深刻なエラー発生によりシステム停止（要再設定or再起動）、点滅時：エラー発生（マニュアルで回復可能）
 
-- Ready : 準備OK （PCコントローラとの通信確立）
-青点灯
-- Waiting : マニュアル操作待ち （できることはすべて完了し、次の動作指示を待つ）
-青点滅
-- Disconnected : 通信に異常
-赤点灯
-- Low Battery : 要充電
-赤点滅（?）
-- System Error : システムに異常
-赤点滅
+*** マニュアルモード
+**** コマンドによる操作
+***** モード変換
+***** 動作シークエンス
+前進（+値）・回転（+値）のコマンドの連続を入力。最後に「実行」を入力することで命令が実行される。
+- 前進
+- 回転
+- 実行
 
-
+**** GUI操作
+- Qt
+*** オートモード
+**** 人工知能
 ** 設定
 
 ** シミュレーション
 
-#+RESULTS:
-[[file:ditaa-seqboxes.png]]
-
-#+RESULTS:
-[[file:sequence_diagram.png]]
-
-#+begin_src plantuml :file ../images/somefile.png
-Object1 <|-- Object2
-Object1: someVar
-Object1: execute()
-Object2: getState()
-Object2: setState()
-Object2: state
-#+end_src
