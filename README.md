@@ -10,6 +10,13 @@ This projects requires cmake and CppUTest.
 
 In order to compile specifically for mbed, you need to go to [mbed platform](https://mbed.org).
 
+## CMake
+add
+```sh
+export CPPUTEST_HOME=/usr/local/Cellar/cpputest/3.6
+```
+to .bash_profile or .bashrc
+
 ## Build
 ```sh
 $ mkdir build

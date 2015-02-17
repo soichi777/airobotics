@@ -1,3 +1,9 @@
-cmake_minimum_required(VERSION 2.8)
-add_definitions("-Wall -std=c++11")
-add_executable(Main main.cpp)
+project(AIRobotics)
+
+include_directories(${PROJECT_SOURCE_DIR}/../include)
+include_directories(${PROJECT_SOURCE_DIR}/../include/WirelessCommunication/)
+
+add_executable(Main
+  main.cpp
+  WirelessCommunication/XBeeDataFrameEncoder.cpp
+)
