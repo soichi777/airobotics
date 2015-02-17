@@ -10,10 +10,10 @@ This projects requires cmake and CppUTest.
 
 In order to compile specifically for mbed, you need to go to [mbed platform](https://mbed.org).
 
-## Execution
-mkdir build
-cd build
-cmake ..
-make
-./Main
-
+## Build
+```sh
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+```
