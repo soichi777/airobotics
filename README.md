@@ -9,3 +9,11 @@ Although this software was originally designed for mbed, most of its libraries i
 This projects requires cmake and CppUTest. 
 
 In order to compile specifically for mbed, you need to go to [mbed platform](https://mbed.org).
+
+## Execution
+mkdir build
+cd build
+cmake ..
+make
+./Main
+
