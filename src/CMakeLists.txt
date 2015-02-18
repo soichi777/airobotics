@@ -5,5 +5,5 @@ include_directories(${PROJECT_SOURCE_DIR}/../include/WirelessCommunication/)
 
 add_executable(Main
   main.cpp
-  WirelessCommunication/XBeeDataFrameEncoder.cpp
+  WirelessCommunication/XBeeDataFrameBuilder.cpp
 )

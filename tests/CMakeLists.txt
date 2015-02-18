@@ -10,10 +10,10 @@ add_library(imp_cpputest STATIC IMPORTED)
 set_property(TARGET imp_cpputest PROPERTY
   IMPORTED_LOCATION $ENV{CPPUTEST_HOME}/lib/libCppUTest.a)
 
-add_library(XBeeDataFrameEncoderTest ./WirelessCommunication/XBeeDataFrameEncoderTest.cpp)
+add_library(XBeeDataFrameBuilderTest ./WirelessCommunication/XBeeDataFrameBuilderTest.cpp)
 
 add_executable(RunAllTests RunAllTests.cpp)
 
 target_link_libraries(RunAllTests
   imp_cpputest
-  XBeeDataFrameEncoderTest)
+  XBeeDataFrameBuilderTest)
