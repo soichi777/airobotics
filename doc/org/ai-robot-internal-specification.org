@@ -1,5 +1,5 @@
 #+TITLE: AI robot 内部仕様
-#+DATE: 2015-01-12 15:55:37 Monday
+#+DATE: 2015-02-18 20:27:05 Wednesday
 
 #+OPTIONS: ^:{}
 #+LINK_HOME: http://home.fnal.gov/~neilsen
