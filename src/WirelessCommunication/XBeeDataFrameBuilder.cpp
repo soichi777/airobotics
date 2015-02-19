@@ -1,4 +1,4 @@
-#include "../../include/WirelessCommunication/XBeeDataFrameBuilder.h"
+#include "XBeeDataFrameBuilder.h"
 
 XBeeDataFrameBuilder::XBeeDataFrameBuilder() {}
 

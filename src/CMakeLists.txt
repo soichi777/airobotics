@@ -7,3 +7,4 @@ add_executable(Main
   main.cpp
   WirelessCommunication/XBeeDataFrameBuilder.cpp
 )
+add_library(XBeeDataFrameBuilder ./WirelessCommunication/XBeeDataFrameBuilder.cpp)

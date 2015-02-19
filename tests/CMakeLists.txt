@@ -16,4 +16,5 @@ add_executable(RunAllTests RunAllTests.cpp)
 
 target_link_libraries(RunAllTests
   imp_cpputest
-  XBeeDataFrameBuilderTest)
+  XBeeDataFrameBuilderTest
+  XBeeDataFrameBuilder)
