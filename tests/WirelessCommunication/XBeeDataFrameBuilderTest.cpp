@@ -8,8 +8,14 @@ TEST_GROUP(WirelessCommunication)
 {
   XBeeDataFrameBuilder* data;
 
-  TEST_SETUP() {
+  void setup()
+  {
     data = new XBeeDataFrameBuilder();
+  }
+
+  void teardown()
+  {
+    delete data;
   }
 };
 

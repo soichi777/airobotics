@@ -4,6 +4,6 @@ class XBeeDataFrameBuilder {
  public:
   //int index;
   XBeeDataFrameBuilder();
-  //virtual ~XBeeDataFrameBuilder();
+  ~XBeeDataFrameBuilder();
   std::string echo();
 };
