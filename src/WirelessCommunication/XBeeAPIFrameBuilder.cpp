@@ -1,11 +1,15 @@
 #include "XBeeAPIFrameBuilder.h"
-#include "APIFrame.h"
 
-XBeeAPIFrameBuilder::XBeeAPIFrameBuilder() {}
+//TODO change input to Command object
+XBeeAPIFrameBuilder::XBeeAPIFrameBuilder()
+{
+}
 
 XBeeAPIFrameBuilder::~XBeeAPIFrameBuilder() {}
 
-XBeeAPIFrameBuilder::build()
+APIFrame XBeeAPIFrameBuilder::build(char *command)
 {
-  return new APIFrame(uint8_t *frameData, int &Length);
+  uint8_t *frameData;
+  int length;
+  return new APIFrame(frameData, length);
 }

@@ -3,7 +3,7 @@
 
 /**
  * @file APIFrame.h
- * @brief API frame value object
+ * @brief API frame value object, which is design to be immutable
  * @author Soichi
  * @date 2015-03-15 08:55:24 Sunday
  * reference: https://developer.mbed.org/users/yangcq88517/code/SmartLabXBeeAPI/file/e863071f1c9e/Type/APIFrame.h

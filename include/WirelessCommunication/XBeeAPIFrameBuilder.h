@@ -1,4 +1,5 @@
 #include <string>
+#include "APIFrame.h"
 
 /**
  * @file XBeeAPIFrameBuilder.h
@@ -8,11 +9,11 @@
  */
 class XBeeAPIFrameBuilder {
  public:
-  XBeeAPIFrameBuilder(uint8_t FrameID, const );
+  XBeeAPIFrameBuilder();
   ~XBeeAPIFrameBuilder();
 
   /**
    * 
    */
-  APIFrame XBeeAPIFrameBuilder::build();
+  APIFrame build(char *command);
 };

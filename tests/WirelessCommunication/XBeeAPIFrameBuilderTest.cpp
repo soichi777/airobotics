@@ -6,27 +6,22 @@
 
 TEST_GROUP(WirelessCommunication)
 {
-  XBeeAPIFrameBuilder* API;
+  XBeeAPIFrameBuilder* builder;
 
   void setup()
   {
-    API = new XBeeAPIFrameBuilder();
+    builder = new XBeeAPIFrameBuilder();
   }
 
   void teardown()
   {
-    delete API;
+    delete builder;
   }
 };
 
-TEST(WirelessCommunication, EchoTestSuccess)
+TEST(WirelessCommunication, buildSuccess)
 {
-  STRCMP_EQUAL("xbee API frame built", API->echo().c_str());
-}
-
-TEST(WirelessCommunication, EchoTestFail)
-{
-  STRCMP_EQUAL("xbee API frame not built", API->echo().c_str());
+  CHECK_EQUAL("run", builder->build('run')->GetFrameData());
 }
 
 TEST(WirelessCommunication, HelloWorld)

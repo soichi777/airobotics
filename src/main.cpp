@@ -1,15 +1,17 @@
 #include <iostream>
-#include "../include/WirelessCommunication/XBeeDataFrameBuilder.h"
+#include "../include/WirelessCommunication/XBeeAPIFrameBuilder.h"
 
 using namespace std;
 
 int main()
 {
-  XBeeDataFrameBuilder* data;
-  data = new XBeeDataFrameBuilder();
+  XBeeAPIFrameBuilder* builder;
+  builder = new XBeeAPIFrameBuilder();
+
+  char *command = "run";
   
   cout << "Hello World" << endl;
-  cout << data->echo() << endl;
+  cout << builder->build(command).GetFrameData() << endl;
+  
   return 0;
 }
-

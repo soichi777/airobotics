@@ -5,6 +5,6 @@ include_directories(${PROJECT_SOURCE_DIR}/../include/WirelessCommunication/)
 
 add_executable(Main
   main.cpp
-  WirelessCommunication/XBeeDataFrameBuilder.cpp
+  WirelessCommunication/XBeeAPIFrameBuilder.cpp
 )
-add_library(XBeeDataFrameBuilder ./WirelessCommunication/XBeeDataFrameBuilder.cpp)
+add_library(XBeeAPIFrameBuilder ./WirelessCommunication/XBeeAPIFrameBuilder.cpp)
