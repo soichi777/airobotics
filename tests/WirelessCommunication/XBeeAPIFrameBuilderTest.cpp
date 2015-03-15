@@ -2,31 +2,31 @@
  * 
  */
 #include "CppUTest/TestHarness.h"
-#include "XBeeDataFrameBuilder.h"
+#include "XBeeAPIFrameBuilder.h"
 
 TEST_GROUP(WirelessCommunication)
 {
-  XBeeDataFrameBuilder* data;
+  XBeeAPIFrameBuilder* API;
 
   void setup()
   {
-    data = new XBeeDataFrameBuilder();
+    API = new XBeeAPIFrameBuilder();
   }
 
   void teardown()
   {
-    delete data;
+    delete API;
   }
 };
 
 TEST(WirelessCommunication, EchoTestSuccess)
 {
-  STRCMP_EQUAL("xbee data frame built", data->echo().c_str());
+  STRCMP_EQUAL("xbee API frame built", API->echo().c_str());
 }
 
 TEST(WirelessCommunication, EchoTestFail)
 {
-  STRCMP_EQUAL("xbee data frame not built", data->echo().c_str());
+  STRCMP_EQUAL("xbee API frame not built", API->echo().c_str());
 }
 
 TEST(WirelessCommunication, HelloWorld)

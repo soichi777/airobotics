@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.9.1"/>
-<title>AI Robot with mbed: WirelessCommunication/DeviceAddress.h File Reference</title>
+<title>AI Robot with mbed: WirelessCommunication/APIFrame.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,38 +83,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
-<div class="title">DeviceAddress.h File Reference</div>  </div>
+<div class="title">APIFrame.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>64byte XBee address  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;vector&gt;</code><br />
-<code>#include &quot;stdint.h&quot;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for DeviceAddress.h:</div>
-<div class="dyncontent">
-<div class="center"><img src="_device_address_8h__incl.png" border="0" usemap="#_wireless_communication_2_device_address_8h" alt=""/></div>
-<map name="_wireless_communication_2_device_address_8h" id="_wireless_communication_2_device_address_8h">
-</map>
-</div>
-</div>
-<p><a href="_device_address_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_device_address.html">DeviceAddress</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>64byte XBee address </p>
-<p>XBee device address reference: <a href="https://developer.mbed.org/users/yangcq88517/code/SmartLabXBeeAPI/file/e863071f1c9e/Type/DeviceAddress.h">https://developer.mbed.org/users/yangcq88517/code/SmartLabXBeeAPI/file/e863071f1c9e/Type/DeviceAddress.h</a></p>
-<dl class="section author"><dt>Author</dt><dd>Soichi </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2015-03-15 08:06:39 Sunday </dd></dl>
-</div></div><!-- contents -->
+<a href="_a_p_i_frame_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;stdint.h&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_a_p_i_frame.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_a_p_i_frame.html">APIFrame</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">int</span> FrameDataLength;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  std::vector&lt;uint8_t&gt; FrameData;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <a class="code" href="class_a_p_i_frame.html">APIFrame</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <a class="code" href="class_a_p_i_frame.html">APIFrame</a>(uint8_t *frameData, <span class="keywordtype">int</span> &amp;Length);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  uint8_t GetFrameDataLength() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keyword">const</span> uint8_t* GetFrameData() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
+<div class="ttc" id="class_a_p_i_frame_html"><div class="ttname"><a href="class_a_p_i_frame.html">APIFrame</a></div><div class="ttdef"><b>Definition:</b> APIFrame.h:11</div></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Sun Mar 15 2015 08:56:09 for AI Robot with mbed by &#160;<a href="http://www.doxygen.org/index.html">
