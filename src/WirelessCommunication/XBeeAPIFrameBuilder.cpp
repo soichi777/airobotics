@@ -7,9 +7,10 @@ XBeeAPIFrameBuilder::XBeeAPIFrameBuilder()
 
 XBeeAPIFrameBuilder::~XBeeAPIFrameBuilder() {}
 
-APIFrame XBeeAPIFrameBuilder::build(char *command)
+uint8_t XBeeAPIFrameBuilder::build(uint8_t *command)
 {
   uint8_t *frameData;
-  int length;
+  *frameData = 'run';
+  int length = 2;
   return new APIFrame(frameData, length);
 }
