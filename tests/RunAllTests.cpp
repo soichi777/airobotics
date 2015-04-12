@@ -7,5 +7,5 @@ IMPORT_TEST_GROUP(WirelessCommunication);
 
 int main(int argc, char** argv)
 {
-    return RUN_ALL_TESTS(argc, argv);
+  return RUN_ALL_TESTS(argc, argv);
 }

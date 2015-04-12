@@ -1,3 +1,7 @@
+/**
+ * APIFrame for XBee communication
+ * this object is designed to be immutable
+ */
 #include "APIFrame.h"
  
 APIFrame::APIFrame() {}

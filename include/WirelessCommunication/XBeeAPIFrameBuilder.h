@@ -15,5 +15,5 @@ class XBeeAPIFrameBuilder {
   /**
    * 
    */
-  uint8_t build(uint8_t *command);
+  int build(int command);
 };

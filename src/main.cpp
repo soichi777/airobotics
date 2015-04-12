@@ -2,7 +2,7 @@
  * TODO namespace
  */
 #include <iostream>
-#include "../include/WirelessCommunication/XBeeAPIFrameBuilder.h"
+#include "XBeeAPIFrameBuilder.h"
 
 using namespace std;
 
@@ -51,9 +51,10 @@ int main()
     }
   } while (selected != Invalid);
   
-  // XBeeAPIFrameBuilder* builder;
-  // builder = new XBeeAPIFrameBuilder();
-  // cout << builder->build(command).GetFrameData() << endl;
+  XBeeAPIFrameBuilder* builder;
+  builder = new XBeeAPIFrameBuilder();
+
+  cout << builder->build(selected) << endl;
   
   return 0;
 }

@@ -21,7 +21,7 @@ TEST_GROUP(WirelessCommunication)
 
 TEST(WirelessCommunication, buildSuccess)
 {
-  CHECK_EQUAL("run", builder->build('run')->GetFrameData());
+  CHECK_EQUAL(100, builder->build(100));
 }
 
 TEST(WirelessCommunication, HelloWorld)
