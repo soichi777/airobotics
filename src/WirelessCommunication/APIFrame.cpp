@@ -1,22 +1,22 @@
 /**
- * APIFrame for XBee communication
- * this object is designed to be immutable
+ * 
  */
 #include "APIFrame.h"
  
 APIFrame::APIFrame() {}
+APIFrame::~APIFrame() {}
  
-APIFrame::APIFrame(uint8_t *frameData, int &Length)
+APIFrame::APIFrame(uint8_t *dataString, int &Length)
 {
-  FrameData.assign(frameData, frameData + Length);
+  frameData.assign(dataString, dataString + Length);
 }
  
-uint8_t APIFrame::GetFrameDataLength() const
+uint8_t APIFrame::getFrameDataLength() const
 {
-  return FrameDataLength;
+  return frameDataLength;
 }
  
-const uint8_t* APIFrame::GetFrameData() const
+const uint8_t* APIFrame::getFrameData() const
 {
-  return &FrameData[0];
+  return &frameData[0];
 }
