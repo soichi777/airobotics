@@ -24,9 +24,7 @@ TEST_GROUP(WirelessCommunication)
   }
 };
 
-//TODO use operator '==' instead
-TEST(WirelessCommunication, buildSuccess)
+TEST(WirelessCommunication, immutabilyEqual)
 {
-  CHECK_EQUAL(frame1->getFrameData(), frame2->getFrameData());
+  CHECK(*frame1 == *frame2);
 }
-
