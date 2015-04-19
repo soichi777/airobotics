@@ -6,9 +6,9 @@
 APIFrame::APIFrame() {}
 APIFrame::~APIFrame() {}
  
-APIFrame::APIFrame(uint8_t *dataString, int &Length)
+APIFrame::APIFrame(uint8_t *dataString, int &length)
 {
-  frameData.assign(dataString, dataString + Length);
+  frameData.assign(dataString, dataString + length);
 }
  
 uint8_t APIFrame::getFrameDataLength() const

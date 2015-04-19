@@ -6,13 +6,15 @@
 
 TEST_GROUP(WirelessCommunication)
 {
-  APIFrame* frame1;
-  APIFrame* frame2;
+  APIFrame *frame1;
+  APIFrame *frame2;
+  uint8_t tmp = 5;
+  int length = 1;
 
   void setup()
   {
-    frame1 = new APIFrame('x', 1);
-    frame2 = new APIFrame('x', 1);
+    frame1 = new APIFrame(&tmp, length);
+    frame2 = new APIFrame(&tmp, length);
   }
 
   void teardown()
@@ -22,6 +24,7 @@ TEST_GROUP(WirelessCommunication)
   }
 };
 
+//TODO use operator '==' instead
 TEST(WirelessCommunication, buildSuccess)
 {
   CHECK_EQUAL(frame1->getFrameData(), frame2->getFrameData());
