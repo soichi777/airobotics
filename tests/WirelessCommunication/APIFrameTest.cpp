@@ -24,7 +24,7 @@ TEST_GROUP(WirelessCommunication)
   }
 };
 
-TEST(WirelessCommunication, immutabilyEqual)
+TEST(WirelessCommunication, immutablyEqual)
 {
   CHECK(*frame1 == *frame2);
 }
